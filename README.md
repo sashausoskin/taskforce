@@ -1,3 +1,9 @@
-#TaskForce
+# TaskForce
 
-Tähän olisi tarkoitus tehdä sellainen **erittäin** hieno ohjelma, jolla pystyy *antamaan samassa organisaatiossa oleville ihmisille tehtäviä*
+## Tehtävät
+
+### Viikko 1
+
+[gitlog.txt](https://github.com/sonicsasha/taskforce/blob/master/laskarit/viikko1/gitlog.txt)
+
+[komentorivi.txt](https://github.com/sonicsasha/taskforce/blob/master/laskarit/viikko1/komentorivi.txt)
