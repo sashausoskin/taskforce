@@ -1,0 +1,105 @@
+commit c7ac93979e7b9f9c35d9b7b357c0cca19c2412b2
+Author: Sasha Usoskin <sashausoskin@live.com>
+Date:   Thu Mar 10 13:36:49 2022 +0200
+
+    REMOVE file1 and rename file2 -> file22
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit f15bb9b0c16b87cde73bdbb86f22175d8da47b93
+Author: Sasha Usoskin <sashausoskin@live.com>
+Date:   Thu Mar 10 13:33:10 2022 +0200
+
+    ADD file1, file2, file3
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 56fb40b5f9865ced8282bd1201397df3139ef1dd
+Author: Sasha Usoskin <sashausoskin@live.com>
+Date:   Thu Mar 10 13:27:38 2022 +0200
+
+    EDIT eka.txt and kolmas.txt
+
+ eka.txt    | 4 +++-
+ kolmas.txt | 4 +++-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
+
+commit 7ccd5fc76edb142ea0f6aa09983c4bfbe228fef1
+Author: Sasha Usoskin <sashausoskin@live.com>
+Date:   Thu Mar 10 13:24:17 2022 +0200
+
+    Rename tiedosto.txt -> eka.txt
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit a88d6c03dc81b34d63c4e76e370f4e809dba1f8b
+Author: Sasha Usoskin <sashausoskin@live.com>
+Date:   Thu Mar 10 13:23:06 2022 +0200
+
+    Remove toinen.txt
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 033833f170e275b777389302ae61dce4d82c3afc
+Author: Sasha Usoskin <sashausoskin@live.com>
+Date:   Tue Mar 8 11:02:56 2022 +0200
+
+    Muokattu tiedoston sisältöä
+
+ tiedosto.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 3a08ddd497b53148808fd555bd8bd1d4376e09b4
+Author: Sasha Usoskin <sashausoskin@live.com>
+Date:   Tue Mar 8 11:01:39 2022 +0200
+
+    Paljon tekstiä tiedostoon
+
+ tiedosto.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 0a642dfbf816f25b5709784d96e9dc2d74a78f0d
+Author: Sasha Usoskin <sashausoskin@live.com>
+Date:   Tue Mar 8 10:56:47 2022 +0200
+
+    Muokattu ja lisätty tiedostoja
+
+ kolmas.txt            | 1 +
+ stuff/tax_evasion.dll | 0
+ toinen.txt            | 1 +
+ 3 files changed, 2 insertions(+)
+
+commit f2258df5a90fc66bc5db3bd92dc37bb5b66659fe
+Author: Sasha Usoskin <sashausoskin@live.com>
+Date:   Tue Mar 8 10:53:50 2022 +0200
+
+    lisätty kolmas.txt
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 863615817f85d18805facdb3290d94eff10674be
+Author: Sasha Usoskin <sashausoskin@live.com>
+Date:   Tue Mar 8 10:51:52 2022 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 7837ec8e2733535a482acc958f64be05eb5dd314
+Author: Sasha Usoskin <sashausoskin@live.com>
+Date:   Tue Mar 8 10:49:31 2022 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
