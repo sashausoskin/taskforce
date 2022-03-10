@@ -103,3 +103,5 @@ Date:   Tue Mar 8 10:49:31 2022 +0200
 
  tiedosto.txt | 0
  1 file changed, 0 insertions(+), 0 deletions(-)
+
+Onko kaikki ok? :)
