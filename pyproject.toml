@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "taskforce"
+version = "0.1.0"
+description = "An app that allows users to create projects and to share tasks within said project"
+authors = ["Sasha Usoskin <sashausoskin@live.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+PyQt5 = "^5.15.6"
+plyer = "^2.0.0"
+dbus-python = "^1.2.18"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.1.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
