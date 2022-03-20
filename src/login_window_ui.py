@@ -120,10 +120,10 @@ class Ui_LoginScreen(object):
         self.taskforceLogo.setObjectName("taskforceLogo")
         self.widget = QtWidgets.QWidget(self.centralwidget)
         self.widget.setEnabled(True)
-        self.widget.setGeometry(QtCore.QRect(10, 240, 341, 111))
+        self.widget.setGeometry(QtCore.QRect(0, 240, 351, 111))
         self.widget.setObjectName("widget")
         self.formLayoutWidget = QtWidgets.QWidget(self.widget)
-        self.formLayoutWidget.setGeometry(QtCore.QRect(10, 20, 311, 81))
+        self.formLayoutWidget.setGeometry(QtCore.QRect(20, 10, 311, 81))
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
         self.formLayout.setContentsMargins(0, 0, 0, 0)
@@ -157,8 +157,6 @@ class Ui_LoginScreen(object):
         self.actionlogin.setObjectName("actionlogin")
 
         self.retranslateUi(LoginScreen)
-        self.loginButton.released.connect(LoginScreen.login) # type: ignore
-        self.signupButton.released.connect(LoginScreen.signup) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(LoginScreen)
 
     def retranslateUi(self, LoginScreen):

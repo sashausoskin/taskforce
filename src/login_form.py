@@ -2,6 +2,7 @@ import sys
 
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtGui import QIcon
+from PyQt5.QtCore import pyqtSlot
 import plyer
 
 from login_window_ui import Ui_LoginScreen
@@ -16,9 +17,10 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
 
     
     def connectSignalSlots(self):
-        self.loginButton.released.connect(self.login)
-        self.signupButton.released.connect(self.signup)
+        self.loginButton.pressed.connect(self.login)
+        self.signupButton.pressed.connect(self.signup)
 
+    @pyqtSlot()
     def login(self):
         print(f"Logging in as {self.usernameFill.text()}")
         plyer.notification.notify(title="Logged in", message=f"Welcome {self.usernameFill.text()}")

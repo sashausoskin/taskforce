@@ -334,17 +334,17 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>0</x>
       <y>240</y>
-      <width>341</width>
+      <width>351</width>
       <height>111</height>
      </rect>
     </property>
     <widget class="QWidget" name="formLayoutWidget">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>20</y>
+       <x>20</x>
+       <y>10</y>
        <width>311</width>
        <height>81</height>
       </rect>
@@ -408,40 +408,7 @@
   </action>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>loginButton</sender>
-   <signal>released()</signal>
-   <receiver>LoginScreen</receiver>
-   <slot>login()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>110</x>
-     <y>461</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>67</x>
-     <y>377</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>signupButton</sender>
-   <signal>released()</signal>
-   <receiver>LoginScreen</receiver>
-   <slot>signup()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>189</x>
-     <y>500</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>262</x>
-     <y>408</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
  <slots>
   <slot>login()</slot>
   <slot>signup()</slot>
