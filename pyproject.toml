@@ -5,13 +5,19 @@ description = "An app that allows users to create projects and to share tasks wi
 authors = ["Sasha Usoskin <sashausoskin@live.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = ">=3.8,<3.11"
 PyQt5 = "^5.15.6"
 plyer = "^2.0.0"
 dbus-python = "^1.2.18"
+pymongo = "^4.0.2"
+dnspython = "^2.2.1"
+python-dotenv = "^0.19.2"
+psycopg2-binary = "^2.9.3"
+invoke = "^1.7.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.1"
+pyinstaller = "^4.10"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

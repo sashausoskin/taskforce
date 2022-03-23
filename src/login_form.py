@@ -14,6 +14,7 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
         self.connectSignalSlots()
         self.setWindowTitle("TaskForce")
         self.setWindowIcon(QIcon("img/check-svgrepo-com.svg"))
+        
 
     
     def connectSignalSlots(self):
