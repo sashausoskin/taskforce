@@ -12,4 +12,4 @@ def init_db(ctx):
 @task
 def start(ctx):
     os.chdir(f'{os.getcwd()}/src') #Change the current working directory so that the UI elements are loaded correctly
-    ctx.run("python3 login_form.py", pty=True)
+    ctx.run("python3 index.py", pty=True)

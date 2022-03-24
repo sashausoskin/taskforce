@@ -6,3 +6,7 @@ dist/
 build/
 
 login_form.spec
+
+src/entities/__pycache__/
+
+src/ui/__pycache__/
