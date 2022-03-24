@@ -10,3 +10,9 @@ login_form.spec
 src/entities/__pycache__/
 
 src/ui/__pycache__/
+
+*.spec
+
+*.pyo
+
+src/repositories/__pycache__/

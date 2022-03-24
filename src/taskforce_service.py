@@ -29,6 +29,10 @@ class TaskforceService:
         if self._user_repository.user_exists(username):
             raise UsernameExists()
         
-        self._user = self.user_repository.signup(User(name, username, password))
+        self._user = self._user_repository.signup(User(name, username, password))
+        return self._user
+    
+    def get_username(self):
+        return self._user.username
 
 taskforce_service = TaskforceService()

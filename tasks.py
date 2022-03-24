@@ -1,5 +1,6 @@
 from invoke import task
 import os
+import PyInstaller.__main__
 
 @task
 def test(ctx):
@@ -13,3 +14,15 @@ def init_db(ctx):
 def start(ctx):
     os.chdir(f'{os.getcwd()}/src') #Change the current working directory so that the UI elements are loaded correctly
     ctx.run("python3 index.py", pty=True)
+
+@task
+def compile_ui(ctx):
+    ctx.run('pyuic5 -o ui/login_window_ui.py ui/login_window.ui')
+    ctx.run('pyuic5 -o ui/signup_form_ui.py ui/signup_form.ui')
+    ctx.run('pyuic5 -o ui/main_window_ui.py ui/main_window.ui')
+
+@task
+def build(ctx):
+    PyInstaller.__main__.run([
+        'src/index.py',
+    ])

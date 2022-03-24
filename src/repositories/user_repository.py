@@ -18,11 +18,12 @@ class UserRepository:
             return None
 
     def user_exists(self, username):
-        self.conn.cursor().execute("SELECT username FROM Users WHERE username=%s",(username))
-        return self.conn.cursor().fetchone() != None
+        self._cursor.execute("SELECT username FROM Users WHERE username=%s;",(username,))
+
+        return self._cursor.fetchone() != None
     
     def signup(self, user):
-        self.conn.cursor().execute("INSERT INTO Users VALUES (%s, %s, %s)", (user.name, user.username, user.password))
+        self._cursor.execute("INSERT INTO Users (name, username, password) VALUES (%s, %s, %s)", (user.name, user.username, user.password))
         self.conn.commit()
 
         return user

@@ -6,6 +6,8 @@ from taskforce_service import taskforce_service, WrongCredentials
 import plyer
 
 from ui.login_window_ui import Ui_LoginScreen
+from ui.signup_form import SignupForm
+from ui.main_window import MainWindow
 
 class loginWindow(QMainWindow, Ui_LoginScreen):
     def __init__(self, parent=None) -> None:
@@ -13,18 +15,21 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
         self.setupUi(self)
         self.connectSignalSlots()
         self.setWindowTitle("TaskForce")
-        self.setWindowIcon(QIcon("img/check-svgrepo-com.svg"))
-        
+        self.setWindowIcon(QIcon("img/check-svgrepo-com.svg"))    
 
     
     def connectSignalSlots(self):
         self.loginButton.pressed.connect(self.login)
-        self.signupButton.pressed.connect(self.signup)
-
+        self.signupButton.pressed.connect(self.signupForm)
     def login(self):
         try:
             user = taskforce_service.login(self.usernameFill.text(), self.passwordFill.text())
             plyer.notification.notify(title="Logged in", message=f"Welcome {user.name}")
+
+            win = MainWindow(self)
+            win.show()
+            self.hide()
+
         except WrongCredentials:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
@@ -32,5 +37,7 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
             msg.setWindowTitle("Error")
             msg.exec_()
     
-    def signup(self):
-        print("Signing up")
+    def signupForm(self):
+        win = SignupForm(self)
+        win.exec()
+    
