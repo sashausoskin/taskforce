@@ -34,5 +34,8 @@ class TaskforceService:
     
     def get_username(self):
         return self._user.username
+    
+    def delete_user(self, username):
+        self._user_repository.delete_user(username)
 
 taskforce_service = TaskforceService()

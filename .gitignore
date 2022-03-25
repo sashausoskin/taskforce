@@ -1,18 +1,15 @@
 
-src/__pycache__/
-
 dist/
 
 build/
 
 login_form.spec
 
-src/entities/__pycache__/
-
-src/ui/__pycache__/
 
 *.spec
 
 *.pyo
 
-src/repositories/__pycache__/
+.coverage
+
+__pycache__

@@ -23,18 +23,25 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
         self.signupButton.pressed.connect(self.signupForm)
     def login(self):
         try:
-            user = taskforce_service.login(self.usernameFill.text(), self.passwordFill.text())
-            plyer.notification.notify(title="Logged in", message=f"Welcome {user.name}")
+            if self.usernameFill.text().strip()=="" or self.passwordFill.text().strip()=="":
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Critical)
+                msg.setText("Please fill all the required fields!")
+                msg.setWindowTitle("Error")
+                msg.exec_()
+            else:
+                user = taskforce_service.login(self.usernameFill.text(), self.passwordFill.text())
+                plyer.notification.notify(title="Logged in", message=f"Welcome {user.name}")
 
-            win = MainWindow(self)
-            win.show()
-            self.hide()
+                win = MainWindow(self)
+                win.show()
+                self.hide()
 
         except WrongCredentials:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
             msg.setText("The username couldn't be found or the password is incorrect. Please try again!")
-            msg.setWindowTitle("Error")
+            msg.setWindowTitle("User not found")
             msg.exec_()
     
     def signupForm(self):

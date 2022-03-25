@@ -27,5 +27,9 @@ class UserRepository:
         self.conn.commit()
 
         return user
+    
+    def delete_user(self, username):
+        self._cursor.execute("DELETE FROM Users where username=%s", (username,))
+        self.conn.commit()
         
 user_repository = UserRepository(get_db_connection())

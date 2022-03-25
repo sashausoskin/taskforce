@@ -2,9 +2,6 @@ from invoke import task
 import os
 import PyInstaller.__main__
 
-@task
-def test(ctx):
-    print("This works!")
 
 @task
 def init_db(ctx):
@@ -26,3 +23,15 @@ def build(ctx):
     PyInstaller.__main__.run([
         'src/index.py',
     ])
+
+@task
+def coverage(ctx):
+    ctx.run("coverage run --branch -m pytest src", pty=True)
+
+@task(coverage)
+def coverage_report(ctx):
+    ctx.run("coverage html", pty=True)
+
+@task
+def test(ctx):
+    ctx.run("pytest src", pty=True)
