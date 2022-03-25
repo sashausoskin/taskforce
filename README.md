@@ -68,6 +68,6 @@ Ohjelmasta voi rakentaa itsenäisesti suoritettavan komennon käyttämällä kom
 ```bash
 poetry run invoke build
 ```
-Tämä kompiloi ohjelman dist-kansioon. **Huom! Tämä toiminto ei ole vielä viimeistelty, joten toistaiseksi ohjelma ei välttämättä toimi oikein. Tämä todennäköisesti vaatii myös tietokannan osoitteen kovakoodauksen koodiin.
+Tämä kompiloi ohjelman dist-kansioon. **Huom! Tämä toiminto ei ole vielä viimeistelty, joten toistaiseksi ohjelma ei välttämättä toimi oikein. Tämä todennäköisesti vaatii myös tietokannan osoitteen kovakoodauksen koodiin.**
 
 
