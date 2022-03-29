@@ -1,4 +1,3 @@
-from unittest import result
 from entities.user import User
 from database_con import get_db_connection
 
@@ -9,11 +8,11 @@ class UserRepository:
         self._cursor = self.conn.cursor()
     
     def login(self, username, password):
-        self._cursor.execute("SELECT name, username, password FROM Users WHERE username=%s AND password=%s",(username, password))
+        self._cursor.execute("SELECT name, username, password, id FROM Users WHERE username=%s AND password=%s",(username, password))
 
         try:
             result = self._cursor.fetchone()
-            return User(result[0], result[1], result[2])
+            return User(result[0], result[1], result[2], result[3])
         except:
             return None
 
@@ -26,7 +25,7 @@ class UserRepository:
         self._cursor.execute("INSERT INTO Users (name, username, password) VALUES (%s, %s, %s)", (user.name, user.username, user.password))
         self.conn.commit()
 
-        return user
+        return self.login(user.username, user.password)
     
     def delete_user(self, username):
         self._cursor.execute("DELETE FROM Users where username=%s", (username,))

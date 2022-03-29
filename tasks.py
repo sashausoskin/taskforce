@@ -14,9 +14,12 @@ def start(ctx):
 
 @task
 def compile_ui(ctx):
+    os.chdir(f'{os.getcwd()}/src')
     ctx.run('pyuic5 -o ui/login_window_ui.py ui/login_window.ui')
     ctx.run('pyuic5 -o ui/signup_form_ui.py ui/signup_form.ui')
     ctx.run('pyuic5 -o ui/main_window_ui.py ui/main_window.ui')
+    ctx.run('pyuic5 -o ui/org_join_window_ui.py ui/org_join_window.ui')
+    ctx.run('pyuic5 -o ui/org_create_form_ui.py ui/org_create_form.ui')
 
 @task
 def build(ctx):

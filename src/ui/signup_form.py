@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QMessageBox, QDialog
 from taskforce_service import taskforce_service, UsernameExists
-from ui.main_window import MainWindow
+from ui.org_join import OrgJoinWindow
 
 from ui.signup_form_ui import Ui_signupDialog
 
@@ -30,7 +30,7 @@ class SignupForm(QDialog,Ui_signupDialog):
                 
                 self.hide()
 
-                win = MainWindow(self.parent)
+                win = OrgJoinWindow(self.parent)
                 win.show()
                 self.parent.hide()
 

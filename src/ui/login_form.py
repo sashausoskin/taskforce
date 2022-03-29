@@ -7,7 +7,7 @@ import plyer
 
 from ui.login_window_ui import Ui_LoginScreen
 from ui.signup_form import SignupForm
-from ui.main_window import MainWindow
+from ui.org_join import OrgJoinWindow
 
 class loginWindow(QMainWindow, Ui_LoginScreen):
     def __init__(self, parent=None) -> None:
@@ -33,9 +33,9 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
                 user = taskforce_service.login(self.usernameFill.text(), self.passwordFill.text())
                 plyer.notification.notify(title="Logged in", message=f"Welcome {user.name}")
 
-                win = MainWindow(self)
-                win.show()
+                self._win = OrgJoinWindow()
                 self.hide()
+                self._win.show()
 
         except WrongCredentials:
             msg = QMessageBox()
@@ -45,6 +45,6 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
             msg.exec_()
     
     def signupForm(self):
-        win = SignupForm(self)
-        win.exec()
+        self._win = SignupForm(self)
+        self._win.exec()
     
