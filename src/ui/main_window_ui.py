@@ -25,7 +25,8 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.nameLabel.setFont(font)
-        self.nameLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.nameLabel.setAlignment(
+            QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
         self.nameLabel.setObjectName("nameLabel")
         self.gridLayout.addWidget(self.nameLabel, 0, 0, 1, 1)
         self.orgLabel = QtWidgets.QLabel(self.centralwidget)

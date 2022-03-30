@@ -4,19 +4,20 @@ from ui.org_join import OrgJoinWindow
 
 from ui.signup_form_ui import Ui_signupDialog
 
-class SignupForm(QDialog,Ui_signupDialog):
+
+class SignupForm(QDialog, Ui_signupDialog):
     def __init__(self, parent=None) -> None:
         super().__init__(parent)
         self.setupUi(self)
         self.connectSignalSlots()
         self.setWindowTitle("Sign up")
         self.parent = parent
-    
+
     def connectSignalSlots(self):
         self.buttonBox.accepted.connect(self.signup)
-    
+
     def signup(self):
-        if self.nameFill.text().strip()=="" or self.usernameFill.text().strip()=="" or self.passwordFill.text().strip()=="":
+        if self.nameFill.text().strip() == "" or self.usernameFill.text().strip() == "" or self.passwordFill.text().strip() == "":
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
             msg.setText("Please enter all the required fields!")
@@ -25,15 +26,15 @@ class SignupForm(QDialog,Ui_signupDialog):
 
         else:
             try:
-                user = taskforce_service.signup(self.nameFill.text(), self.usernameFill.text(), self.passwordFill.text())
+                user = taskforce_service.signup(self.nameFill.text(
+                ), self.usernameFill.text(), self.passwordFill.text())
                 taskforce_service.login(user.username, user.password)
-                
+
                 self.hide()
 
                 win = OrgJoinWindow(self.parent)
                 win.show()
                 self.parent.hide()
-
 
             except UsernameExists:
                 msg = QMessageBox()

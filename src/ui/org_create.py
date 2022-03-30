@@ -15,23 +15,25 @@ class OrgCreateForm(QDialog, Ui_CreateOrg):
         self.setWindowTitle("Create organization")
         self.setWindowIcon(QIcon("img/check-svgrepo-com.svg"))
         self.setUpConnection()
-    
+
     def setUpConnection(self):
         self.buttonBox.accepted.connect(self.createOrg)
-    
 
     def createOrg(self):
         try:
-            if self.codeFill.text().strip()=="" or self.nameFill.text().strip()=="":
-                error("Required fields empty", "Please enter all the required fields!")
+            if self.codeFill.text().strip() == "" or self.nameFill.text().strip() == "":
+                error("Required fields empty",
+                      "Please enter all the required fields!")
             else:
-                org = taskforce_service.create_org(self.nameFill.text(), self.codeFill.text())
-                success("Created organization", f"You have succesfully created the organization {org.name}")
+                org = taskforce_service.create_org(
+                    self.nameFill.text(), self.codeFill.text())
+                success("Created organization",
+                        f"You have succesfully created the organization {org.name}")
                 self._parent.hide()
                 self.hide()
                 self._win = MainWindow()
                 self._win.show()
 
-            
         except OrgExists:
-            error("Code already in use", "Another organization is already using this code. Please select another code!")
+            error("Code already in use",
+                  "Another organization is already using this code. Please select another code!")

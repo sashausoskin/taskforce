@@ -5,8 +5,8 @@ Projektin ideana on luoda sovellus, jolla yksi henkilö pystyy jakamaan tiimille
 # Käyttäjät
 
 Kaikki käyttäjät:
-- Voi luoda uuden käyttäjätilin tai kirjautua entiselle tilille.
-- Jos käyttäjä ei ole minkään projektin jäsen, niin hän voi joko luoda uuden projektin tai liittyä olemassaolevaan projektiin syöttämällä projektille annetun avaimen.
+- Voi luoda uuden käyttäjätilin tai kirjautua entiselle tilille. **TEHTY**
+- Jos käyttäjä ei ole minkään projektin jäsen, niin hän voi joko luoda uuden projektin tai liittyä olemassaolevaan projektiin syöttämällä projektille annetun avaimen. **TEHTY, vaikkakin määritelmä on muuttunut projektista organisaatioon.**
 
 
 Projektin luoja:
@@ -23,3 +23,4 @@ Kehitysideat:
 - Sekä käyttäjä että projektin luoja voivat lisätä kommentteja, joista tulee työpöytäilmoituksia.
 - Käyttäjät voivat kuulua useampaan projektiin.
 - Projektilla voi olla useampia ihmisiä, jotka jakavat tehtäviä.
+- Automaattinen kirjautuminen.
