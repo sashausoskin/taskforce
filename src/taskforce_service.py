@@ -27,6 +27,7 @@ class TaskforceService:
         if not user:
             raise WrongCredentials()
         
+        user.organizations = self._org_repository.org_member(user.id)
         self._user=user
         return user
 
@@ -42,6 +43,12 @@ class TaskforceService:
     
     def get_username(self):
         return self._user.username
+    
+    def get_name(self):
+        return self._user.name
+    
+    def get_orgs(self):
+        return self._user.organizations
     
     def delete_user(self, username):
         self._user_repository.delete_user(username)
@@ -59,7 +66,9 @@ class TaskforceService:
         if self._org_repository.fetch_org(code):
             raise OrgExists
         
-        return self._org_repository.create_org(name, code, self._user.id)
+        org = self._org_repository.create_org(name, code, self._user.id)
+        self._user.organizations.append(org)
+        return org
 
 
 taskforce_service = TaskforceService()

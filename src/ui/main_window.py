@@ -14,4 +14,5 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.setWindowTitle("TaskForce")
         self.setWindowIcon(QIcon("img/check-svgrepo-com.svg"))
-        self.Greeting.setText(f"Greetings, {taskforce_service.get_username()}! Hope you enjoy this app!")
+        self.nameLabel.setText(f"{taskforce_service.get_name()}")
+        self.orgLabel.setText(taskforce_service.get_orgs()[0].name)

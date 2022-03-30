@@ -14,6 +14,15 @@ class OrgRepository:
             return None
         return Organization(results[0], results[1], results[2])
     
+    def org_member(self, user_id):
+        self._cursor.execute("SELECT name, code, id FROM Organizations O LEFT JOIN OrgMembers OM ON OM.org=O.id WHERE OM.member=%s", (user_id, ))
+        results = self._cursor.fetchall()
+        orgs = []
+        for result in results:
+            orgs.append(Organization(result[0], result[1], result[2]))
+        
+        return orgs
+    
     def add_to_org(self, user_id, org_id):
         self._cursor.execute("INSERT INTO OrgMembers VALUES (%s, %s, FALSE)", (user_id, org_id))
         self.conn.commit()

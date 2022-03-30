@@ -4,6 +4,7 @@ from taskforce_service import OrgExists, taskforce_service, InvalidCode
 from ui.messages import error, success
 
 from ui.org_create_form_ui import Ui_CreateOrg
+from ui.main_window import MainWindow
 
 
 class OrgCreateForm(QDialog, Ui_CreateOrg):
@@ -28,6 +29,8 @@ class OrgCreateForm(QDialog, Ui_CreateOrg):
                 success("Created organization", f"You have succesfully created the organization {org.name}")
                 self._parent.hide()
                 self.hide()
+                self._win = MainWindow()
+                self._win.show()
 
             
         except OrgExists:

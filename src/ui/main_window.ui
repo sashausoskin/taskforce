@@ -6,263 +6,60 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>768</width>
-    <height>390</height>
+    <width>640</width>
+    <height>478</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout_2">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="nameLabel">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Name</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+      </property>
+     </widget>
+    </item>
     <item row="1" column="0">
-     <widget class="QWidget" name="noOrg" native="true">
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QLabel" name="label">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>2</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>300</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>15</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Hey! Looks like you're not a part of any organization. Would you like to join one or create a new one?</string>
-         </property>
-         <property name="textFormat">
-          <enum>Qt::AutoText</enum>
-         </property>
-         <property name="scaledContents">
-          <bool>true</bool>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_2">
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="frameShadow">
-          <enum>QFrame::Sunken</enum>
-         </property>
-         <property name="text">
-          <string>Organization code:</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item alignment="Qt::AlignHCenter">
-        <widget class="QLineEdit" name="lineEdit">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>500</width>
-           <height>16777215</height>
-          </size>
-         </property>
-         <property name="frame">
-          <bool>true</bool>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item alignment="Qt::AlignHCenter">
-        <widget class="QPushButton" name="pushButton">
-         <property name="minimumSize">
-          <size>
-           <width>250</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="palette">
-          <palette>
-           <active>
-            <colorrole role="Button">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>98</red>
-               <green>160</green>
-               <blue>234</blue>
-              </color>
-             </brush>
-            </colorrole>
-           </active>
-           <inactive>
-            <colorrole role="Button">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>98</red>
-               <green>160</green>
-               <blue>234</blue>
-              </color>
-             </brush>
-            </colorrole>
-           </inactive>
-           <disabled>
-            <colorrole role="Button">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>98</red>
-               <green>160</green>
-               <blue>234</blue>
-              </color>
-             </brush>
-            </colorrole>
-           </disabled>
-          </palette>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Join organization</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>10</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item alignment="Qt::AlignHCenter">
-        <widget class="QPushButton" name="pushButton_2">
-         <property name="minimumSize">
-          <size>
-           <width>250</width>
-           <height>50</height>
-          </size>
-         </property>
-         <property name="palette">
-          <palette>
-           <active>
-            <colorrole role="Button">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>46</red>
-               <green>194</green>
-               <blue>126</blue>
-              </color>
-             </brush>
-            </colorrole>
-           </active>
-           <inactive>
-            <colorrole role="Button">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>46</red>
-               <green>194</green>
-               <blue>126</blue>
-              </color>
-             </brush>
-            </colorrole>
-           </inactive>
-           <disabled>
-            <colorrole role="Button">
-             <brush brushstyle="SolidPattern">
-              <color alpha="255">
-               <red>46</red>
-               <green>194</green>
-               <blue>126</blue>
-              </color>
-             </brush>
-            </colorrole>
-           </disabled>
-          </palette>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Create a new organization</string>
-         </property>
-         <property name="checkable">
-          <bool>false</bool>
-         </property>
-         <property name="checked">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
+     <widget class="QLabel" name="orgLabel">
+      <property name="text">
+       <string>Org</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
      </widget>
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menuBar">
+  <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>768</width>
+     <width>640</width>
      <height>22</height>
     </rect>
    </property>
   </widget>
+  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
