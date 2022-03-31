@@ -74,5 +74,8 @@ class TaskforceService:
         self._user.organizations.append(org)
         return org
 
+    def delete_org(self, org_id):
+        self._org_repository.delete_org(org_id)
+
 
 taskforce_service = TaskforceService()

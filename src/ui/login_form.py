@@ -57,4 +57,3 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
     def signupForm(self):
         self._win = SignupForm(self)
         self._win.exec()
-

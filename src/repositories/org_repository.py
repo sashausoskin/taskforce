@@ -50,5 +50,14 @@ class OrgRepository:
         self.add_as_admin(user_id, org.id)
         return org
 
+    def delete_org(self, org_id):
+        self._cursor.execute(
+            "DELETE FROM OrgMembers WHERE org=%s", (org_id, ))
+
+        self._cursor.execute(
+            "DELETE FROM Organizations WHERE id=%s", (org_id, ))
+
+        self.conn.commit()
+
 
 org_repository = OrgRepository(get_db_connection())

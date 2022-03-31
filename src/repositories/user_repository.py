@@ -1,4 +1,3 @@
-from sqlite3 import ProgrammingError
 from entities.user import User
 from database_con import get_db_connection
 
@@ -17,7 +16,7 @@ class UserRepository:
         try:
             result = self._cursor.fetchone()
             return User(result[0], result[1], result[2], result[3])
-        except ProgrammingError:
+        except TypeError:
             return None
 
     def user_exists(self, username):

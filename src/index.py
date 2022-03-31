@@ -1,8 +1,8 @@
 import sys
-import PyQt5.QtWidgets
+from PyQt5.QtWidgets import QApplication
 from ui.login_form import loginWindow
 
-app = PyQt5.QtWidgets.QApplication(sys.argv)
+app = QApplication(sys.argv)
 
 
 win = loginWindow()
