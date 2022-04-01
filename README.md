@@ -1,17 +1,5 @@
 # TaskForce
 
-## Tehtävät
-
-### Viikko 1
-
-[gitlog.txt](https://github.com/sonicsasha/taskforce/blob/master/laskarit/viikko1/gitlog.txt)
-
-[komentorivi.txt](https://github.com/sonicsasha/taskforce/blob/master/laskarit/viikko1/komentorivi.txt)
-
-### Viikko 2
-[Työaikakirjanpito](https://github.com/sonicsasha/taskforce/blob/master/dokumentaatio/tyoaikakirjanpito.md)
-
-[Vaatimusmäärittely](https://github.com/sonicsasha/taskforce/blob/master/dokumentaatio/vaatimuusmaarittely.md)
 
 ## Projektista
 
@@ -62,6 +50,11 @@ poetry run invoke test
 QtDesignerilla tehdyt .ui-tiedostot voi muuttaa Python-koodiksi alla olevalla komennolla. Joka kerta kun käyttöliittymään tehdään muutoksia QtDesignerilla, niin tämä komento täytyy suorittaa.
 ```bash
 poetry run invoke compile-ui
+```
+
+Pylint-testit pystyy tekemään komennolla
+```bash
+poetry run invoke lint
 ```
 
 Ohjelmasta voi rakentaa itsenäisesti suoritettavan komennon käyttämällä komentoa 
