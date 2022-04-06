@@ -1,6 +1,6 @@
-import sys
-
-from PyQt5.QtWidgets import QApplication, QMainWindow, QErrorMessage, QMessageBox
+from functools import partial
+from PyQt5 import QtWidgets
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
 from PyQt5.QtGui import QIcon
 from taskforce_service import taskforce_service
 import plyer
@@ -11,8 +11,70 @@ from ui.main_window_ui import Ui_MainWindow
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None) -> None:
         super().__init__(parent)
+        self.parent=parent
         self.setupUi(self)
         self.setWindowTitle("TaskForce")
         self.setWindowIcon(QIcon("img/check-svgrepo-com.svg"))
         self.nameLabel.setText(f"{taskforce_service.get_name()}")
         self.orgLabel.setText(taskforce_service.get_orgs()[0].name)
+        self.selectedTaskButton = None
+        self.updateTasks()
+
+
+
+    def updateTasks(self):
+
+        self.taskButtons=[]
+        print(self.verticalLayout.count())
+        while self.verticalLayout.count():
+            self.child = self.verticalLayout.takeAt(0)
+            if self.child.widget():
+                self.child.widget().deleteLater()
+        
+        self.markAsDoneButton.setEnabled(False)
+
+        self.taskTitle.setText("") #In case the user doesn't have any tasks.
+        self.taskDescription.setText("You haven't received any tasks yet. Enjoy it while it still lasts... :)")
+
+        for task in taskforce_service.get_tasks():
+            self.taskButtons.append(QPushButton())
+            newButton = self.taskButtons[-1]
+            newButton.setObjectName(str(task.task_id))
+            newButton.setText(task.title)
+            newButton.setCheckable(True)
+            if task.done:
+                newButton.setStyleSheet("background-color: green")
+            else:
+                newButton.setStyleSheet("background-color: red")
+            newButton.clicked.connect(partial(self.updateTaskInfo,task.task_id, newButton))
+            if self.selectedTaskButton == None or newButton.objectName()==self.selectedTaskButton.objectName():
+                self.selectedTaskButton = newButton
+                self.updateTaskInfo(task.task_id, newButton)
+                newButton.setChecked(True)
+            self.verticalLayout.addWidget(newButton)
+        
+
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.verticalLayout.addItem(spacerItem)
+        
+
+    def updateTaskInfo(self, task_id, clicked_button):
+        self.selectedTaskButton.setChecked(False)
+        clicked_button.setChecked(True)
+        self.selectedTaskButton = clicked_button
+
+        selected_task=taskforce_service.get_task_by_id(task_id)
+        self.taskTitle.setText(selected_task.title)
+        self.taskDescription.setText(selected_task.desc)
+        self.markAsDoneButton.disconnect()
+        self.markAsDoneButton.clicked.connect(partial(self.markAsDone,task_id))
+        if not selected_task.done:
+            self.markAsDoneButton.setEnabled(True)
+        else:
+            self.markAsDoneButton.setEnabled(False)
+
+    
+    def markAsDone(self, task_id):
+        taskforce_service.mark_as_done(task_id)
+        self.updateTasks()
+

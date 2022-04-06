@@ -1,6 +1,7 @@
 from entities.user import User
 from repositories.user_repository import user_repository
 from repositories.org_repository import org_repository
+from repositories.task_repository import task_repository
 
 
 class UsernameExists(Exception):
@@ -22,8 +23,11 @@ class OrgExists(Exception):
 class TaskforceService:
     def __init__(self) -> None:
         self._user = None
+        self._org = None
         self._user_repository = user_repository
         self._org_repository = org_repository
+        self._task_repository = task_repository
+        self._tasks = []
 
     def login(self, username, password):
 
@@ -76,6 +80,17 @@ class TaskforceService:
 
     def delete_org(self, org_id):
         self._org_repository.delete_org(org_id)
-
+    
+    def get_tasks(self):
+        self._tasks = self._task_repository.fetch_tasks(self._user.id, False)
+        return self._tasks
+    
+    def get_task_by_id(self, task_id):
+        for task in self._tasks: #This could be optimized
+            if task.task_id==task_id:
+                return task
+    
+    def mark_as_done(self, task_id):
+        self._task_repository.mark_as_done(task_id)
 
 taskforce_service = TaskforceService()

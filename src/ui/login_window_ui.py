@@ -72,8 +72,7 @@ class Ui_LoginScreen(object):
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(28, 113, 216))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active,
-                         QtGui.QPalette.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(26, 95, 180))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Button, brush)
@@ -82,12 +81,10 @@ class Ui_LoginScreen(object):
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(26, 95, 180, 128))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active,
-                         QtGui.QPalette.PlaceholderText, brush)
+        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.PlaceholderText, brush)
         brush = QtGui.QBrush(QtGui.QColor(28, 113, 216))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive,
-                         QtGui.QPalette.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(26, 95, 180))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Button, brush)
@@ -96,12 +93,10 @@ class Ui_LoginScreen(object):
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(26, 95, 180, 128))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive,
-                         QtGui.QPalette.PlaceholderText, brush)
+        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.PlaceholderText, brush)
         brush = QtGui.QBrush(QtGui.QColor(190, 190, 190))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled,
-                         QtGui.QPalette.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(26, 95, 180))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Button, brush)
@@ -110,8 +105,7 @@ class Ui_LoginScreen(object):
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0, 128))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled,
-                         QtGui.QPalette.PlaceholderText, brush)
+        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.PlaceholderText, brush)
         self.taskforceLogo.setPalette(palette)
         self.taskforceLogo.setFocusPolicy(QtCore.Qt.NoFocus)
         self.taskforceLogo.setLayoutDirection(QtCore.Qt.LeftToRight)
@@ -119,8 +113,7 @@ class Ui_LoginScreen(object):
         self.taskforceLogo.setFrameShadow(QtWidgets.QFrame.Plain)
         self.taskforceLogo.setText("")
         self.taskforceLogo.setTextFormat(QtCore.Qt.RichText)
-        self.taskforceLogo.setPixmap(
-            QtGui.QPixmap("ui/../img/check-svgrepo-com.svg"))
+        self.taskforceLogo.setPixmap(QtGui.QPixmap("ui/../img/check-svgrepo-com.svg"))
         self.taskforceLogo.setScaledContents(True)
         self.taskforceLogo.setAlignment(QtCore.Qt.AlignCenter)
         self.taskforceLogo.setOpenExternalLinks(False)
@@ -143,26 +136,21 @@ class Ui_LoginScreen(object):
         font.setWeight(50)
         self.usernameLabel.setFont(font)
         self.usernameLabel.setObjectName("usernameLabel")
-        self.formLayout.setWidget(
-            0, QtWidgets.QFormLayout.LabelRole, self.usernameLabel)
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.usernameLabel)
         self.usernameFill = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.usernameFill.setObjectName("usernameFill")
-        self.formLayout.setWidget(
-            0, QtWidgets.QFormLayout.FieldRole, self.usernameFill)
+        self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.usernameFill)
         self.label_2 = QtWidgets.QLabel(self.formLayoutWidget)
         font = QtGui.QFont()
         font.setFamily("Fira Sans")
         font.setPointSize(15)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
-        self.formLayout.setWidget(
-            2, QtWidgets.QFormLayout.LabelRole, self.label_2)
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label_2)
         self.passwordFill = QtWidgets.QLineEdit(self.formLayoutWidget)
         self.passwordFill.setObjectName("passwordFill")
-        self.formLayout.setWidget(
-            2, QtWidgets.QFormLayout.FieldRole, self.passwordFill)
-        spacerItem = QtWidgets.QSpacerItem(
-            28, 47, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.passwordFill)
+        spacerItem = QtWidgets.QSpacerItem(28, 47, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.formLayout.setItem(1, QtWidgets.QFormLayout.LabelRole, spacerItem)
         LoginScreen.setCentralWidget(self.centralwidget)
         self.actionlogin = QtWidgets.QAction(LoginScreen)

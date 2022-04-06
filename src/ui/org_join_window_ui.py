@@ -25,12 +25,10 @@ class Ui_OrgJoin(object):
         self.verticalLayout = QtWidgets.QVBoxLayout(self.noOrg)
         self.verticalLayout.setObjectName("verticalLayout")
         self.WindowTitle = QtWidgets.QLabel(self.noOrg)
-        sizePolicy = QtWidgets.QSizePolicy(
-            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(2)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(
-            self.WindowTitle.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(self.WindowTitle.sizePolicy().hasHeightForWidth())
         self.WindowTitle.setSizePolicy(sizePolicy)
         self.WindowTitle.setMaximumSize(QtCore.QSize(16777215, 300))
         font = QtGui.QFont()
@@ -59,8 +57,7 @@ class Ui_OrgJoin(object):
         self.codeFill.setAlignment(QtCore.Qt.AlignCenter)
         self.codeFill.setObjectName("codeFill")
         self.verticalLayout.addWidget(self.codeFill, 0, QtCore.Qt.AlignHCenter)
-        spacerItem = QtWidgets.QSpacerItem(
-            20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        spacerItem = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.verticalLayout.addItem(spacerItem)
         self.joinButton = QtWidgets.QPushButton(self.noOrg)
         self.joinButton.setMinimumSize(QtCore.QSize(250, 50))
@@ -79,10 +76,8 @@ class Ui_OrgJoin(object):
         font.setPointSize(12)
         self.joinButton.setFont(font)
         self.joinButton.setObjectName("joinButton")
-        self.verticalLayout.addWidget(
-            self.joinButton, 0, QtCore.Qt.AlignHCenter)
-        spacerItem1 = QtWidgets.QSpacerItem(
-            20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
+        self.verticalLayout.addWidget(self.joinButton, 0, QtCore.Qt.AlignHCenter)
+        spacerItem1 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
         self.verticalLayout.addItem(spacerItem1)
         self.createButton = QtWidgets.QPushButton(self.noOrg)
         self.createButton.setMinimumSize(QtCore.QSize(250, 50))
@@ -103,8 +98,7 @@ class Ui_OrgJoin(object):
         self.createButton.setCheckable(False)
         self.createButton.setChecked(False)
         self.createButton.setObjectName("createButton")
-        self.verticalLayout.addWidget(
-            self.createButton, 0, QtCore.Qt.AlignHCenter)
+        self.verticalLayout.addWidget(self.createButton, 0, QtCore.Qt.AlignHCenter)
         self.gridLayout_2.addWidget(self.noOrg, 1, 0, 1, 1)
         OrgJoin.setCentralWidget(self.centralwidget)
 
@@ -114,9 +108,7 @@ class Ui_OrgJoin(object):
     def retranslateUi(self, OrgJoin):
         _translate = QtCore.QCoreApplication.translate
         OrgJoin.setWindowTitle(_translate("OrgJoin", "MainWindow"))
-        self.WindowTitle.setText(_translate(
-            "OrgJoin", "Hey! Looks like you\'re not a part of any organization. Would you like to join one or create a new one?"))
+        self.WindowTitle.setText(_translate("OrgJoin", "Hey! Looks like you\'re not a part of any organization. Would you like to join one or create a new one?"))
         self.codeLabel.setText(_translate("OrgJoin", "Organization code:"))
         self.joinButton.setText(_translate("OrgJoin", "Join organization"))
-        self.createButton.setText(_translate(
-            "OrgJoin", "Create a new organization"))
+        self.createButton.setText(_translate("OrgJoin", "Create a new organization"))

@@ -32,50 +32,40 @@ class Ui_signupDialog(object):
         self.formLayout.setObjectName("formLayout")
         self.nameLabel = QtWidgets.QLabel(signupDialog)
         self.nameLabel.setObjectName("nameLabel")
-        self.formLayout.setWidget(
-            1, QtWidgets.QFormLayout.LabelRole, self.nameLabel)
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.nameLabel)
         self.nameFill = QtWidgets.QLineEdit(signupDialog)
         self.nameFill.setObjectName("nameFill")
-        self.formLayout.setWidget(
-            1, QtWidgets.QFormLayout.FieldRole, self.nameFill)
+        self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.nameFill)
         self.usernameLabel = QtWidgets.QLabel(signupDialog)
         self.usernameLabel.setObjectName("usernameLabel")
-        self.formLayout.setWidget(
-            2, QtWidgets.QFormLayout.LabelRole, self.usernameLabel)
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.usernameLabel)
         self.usernameFill = QtWidgets.QLineEdit(signupDialog)
         self.usernameFill.setObjectName("usernameFill")
-        self.formLayout.setWidget(
-            2, QtWidgets.QFormLayout.FieldRole, self.usernameFill)
+        self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.usernameFill)
         self.passwordLabel = QtWidgets.QLabel(signupDialog)
         self.passwordLabel.setObjectName("passwordLabel")
-        self.formLayout.setWidget(
-            3, QtWidgets.QFormLayout.LabelRole, self.passwordLabel)
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.passwordLabel)
         self.passwordFill = QtWidgets.QLineEdit(signupDialog)
         self.passwordFill.setObjectName("passwordFill")
-        self.formLayout.setWidget(
-            3, QtWidgets.QFormLayout.FieldRole, self.passwordFill)
+        self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.passwordFill)
         self.buttonBox = QtWidgets.QDialogButtonBox(signupDialog)
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(
-            QtWidgets.QDialogButtonBox.Cancel | QtWidgets.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.formLayout.setWidget(
-            4, QtWidgets.QFormLayout.FieldRole, self.buttonBox)
-        spacerItem = QtWidgets.QSpacerItem(
-            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
+        self.formLayout.setWidget(4, QtWidgets.QFormLayout.FieldRole, self.buttonBox)
+        spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
         self.formLayout.setItem(0, QtWidgets.QFormLayout.FieldRole, spacerItem)
         self.verticalLayout.addLayout(self.formLayout)
         self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
 
         self.retranslateUi(signupDialog)
-        self.buttonBox.rejected.connect(signupDialog.close)  # type: ignore
+        self.buttonBox.rejected.connect(signupDialog.close) # type: ignore
         QtCore.QMetaObject.connectSlotsByName(signupDialog)
 
     def retranslateUi(self, signupDialog):
         _translate = QtCore.QCoreApplication.translate
         signupDialog.setWindowTitle(_translate("signupDialog", "Dialog"))
-        self.windowTitle.setText(_translate(
-            "signupDialog", "Hey! Let\'s create your account!"))
+        self.windowTitle.setText(_translate("signupDialog", "Hey! Let\'s create your account!"))
         self.nameLabel.setText(_translate("signupDialog", "Name:"))
         self.usernameLabel.setText(_translate("signupDialog", "Username:"))
         self.passwordLabel.setText(_translate("signupDialog", "Password:"))
