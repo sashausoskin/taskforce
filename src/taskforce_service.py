@@ -38,6 +38,8 @@ class TaskforceService:
 
         user.organizations = self._org_repository.org_member(user.id)
         self._user = user
+        if len(user.organizations)>0:
+            self._org = user.organizations[0]
         return user
 
     def signup(self, name, username, password):
@@ -68,6 +70,7 @@ class TaskforceService:
 
         self._org_repository.add_to_org(self._user.id, org.id)
         self._user.organizations.append(org)
+        self._org = org
         return org
 
     def create_org(self, name, code):
@@ -76,13 +79,14 @@ class TaskforceService:
 
         org = self._org_repository.create_org(name, code, self._user.id)
         self._user.organizations.append(org)
+        self._org = org
         return org
 
     def delete_org(self, org_id):
         self._org_repository.delete_org(org_id)
     
-    def get_tasks(self):
-        self._tasks = self._task_repository.fetch_tasks(self._user.id, False)
+    def get_tasks(self, is_admin):
+        self._tasks = self._task_repository.fetch_tasks(self._user.id, is_admin)
         return self._tasks
     
     def get_task_by_id(self, task_id):
@@ -92,5 +96,13 @@ class TaskforceService:
     
     def mark_as_done(self, task_id):
         self._task_repository.mark_as_done(task_id)
+    
+    def is_admin(self):
+        return self._org_repository.is_admin(self._org.id, self._user.id)
+    
+    def signout(self):
+        self._user = None
+        self._org = None
+        self._tasks = []
 
 taskforce_service = TaskforceService()

@@ -22,6 +22,7 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
     def connectSignalSlots(self):
         self.loginButton.pressed.connect(self.login)
         self.signupButton.pressed.connect(self.signupForm)
+        self.actionlogin.triggered.connect(self.login)
 
     def login(self):
         try:

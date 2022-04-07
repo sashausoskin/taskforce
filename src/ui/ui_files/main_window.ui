@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>557</width>
-    <height>438</height>
+    <width>571</width>
+    <height>467</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -59,7 +59,7 @@
          <x>0</x>
          <y>0</y>
          <width>150</width>
-         <height>335</height>
+         <height>364</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -120,7 +120,14 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="1">
+    <item row="1" column="0">
+     <widget class="QLabel" name="orgLabel">
+      <property name="text">
+       <string>Org</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1" rowspan="2">
      <widget class="QScrollArea" name="taskInfoScrollArea">
       <property name="frameShape">
        <enum>QFrame::NoFrame</enum>
@@ -142,8 +149,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>402</width>
-         <height>335</height>
+         <width>416</width>
+         <height>384</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -155,15 +162,73 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>15</pointsize>
+           </font>
+          </property>
           <property name="text">
-           <string>TextLabel</string>
+           <string>TaskTitle</string>
           </property>
          </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Maximum</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>5</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="assignInfo">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+            <horstretch>0</horstretch>
+            <verstretch>50</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>11</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>AssignInfo</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Maximum</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>10</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item>
          <widget class="QLabel" name="taskDescription">
           <property name="text">
            <string>TextLabel</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
           </property>
           <property name="wordWrap">
            <bool>true</bool>
@@ -181,13 +246,6 @@
       </widget>
      </widget>
     </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="orgLabel">
-      <property name="text">
-       <string>Org</string>
-      </property>
-     </widget>
-    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -195,12 +253,45 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>557</width>
+     <width>571</width>
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuAccount">
+    <property name="title">
+     <string>Account</string>
+    </property>
+    <addaction name="actionSign_out"/>
+   </widget>
+   <widget class="QMenu" name="menuTasks">
+    <property name="title">
+     <string>Tasks</string>
+    </property>
+    <addaction name="actionAssign_a_new_task"/>
+   </widget>
+   <addaction name="menuTasks"/>
+   <addaction name="menuAccount"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionSign_out">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Sign out</string>
+   </property>
+  </action>
+  <action name="actionAssign_a_new_task">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Assign a new task</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

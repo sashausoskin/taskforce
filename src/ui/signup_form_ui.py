@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui/signup_form.ui'
+# Form implementation generated from reading ui file 'ui/ui_files/signup_form.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -46,6 +46,8 @@ class Ui_signupDialog(object):
         self.passwordLabel.setObjectName("passwordLabel")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.passwordLabel)
         self.passwordFill = QtWidgets.QLineEdit(signupDialog)
+        self.passwordFill.setInputMethodHints(QtCore.Qt.ImhHiddenText|QtCore.Qt.ImhNoAutoUppercase|QtCore.Qt.ImhNoPredictiveText|QtCore.Qt.ImhSensitiveData)
+        self.passwordFill.setEchoMode(QtWidgets.QLineEdit.Password)
         self.passwordFill.setObjectName("passwordFill")
         self.formLayout.setWidget(3, QtWidgets.QFormLayout.FieldRole, self.passwordFill)
         self.buttonBox = QtWidgets.QDialogButtonBox(signupDialog)

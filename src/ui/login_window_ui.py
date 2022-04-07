@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui/login_window.ui'
+# Form implementation generated from reading ui file 'ui/ui_files/login_window.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -113,7 +113,7 @@ class Ui_LoginScreen(object):
         self.taskforceLogo.setFrameShadow(QtWidgets.QFrame.Plain)
         self.taskforceLogo.setText("")
         self.taskforceLogo.setTextFormat(QtCore.Qt.RichText)
-        self.taskforceLogo.setPixmap(QtGui.QPixmap("ui/../img/check-svgrepo-com.svg"))
+        self.taskforceLogo.setPixmap(QtGui.QPixmap("ui/ui_files/../../img/check-svgrepo-com.svg"))
         self.taskforceLogo.setScaledContents(True)
         self.taskforceLogo.setAlignment(QtCore.Qt.AlignCenter)
         self.taskforceLogo.setOpenExternalLinks(False)
@@ -148,6 +148,11 @@ class Ui_LoginScreen(object):
         self.label_2.setObjectName("label_2")
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.label_2)
         self.passwordFill = QtWidgets.QLineEdit(self.formLayoutWidget)
+        font = QtGui.QFont()
+        font.setKerning(True)
+        self.passwordFill.setFont(font)
+        self.passwordFill.setInputMethodHints(QtCore.Qt.ImhHiddenText|QtCore.Qt.ImhNoAutoUppercase|QtCore.Qt.ImhNoPredictiveText|QtCore.Qt.ImhSensitiveData)
+        self.passwordFill.setEchoMode(QtWidgets.QLineEdit.Password)
         self.passwordFill.setObjectName("passwordFill")
         self.formLayout.setWidget(2, QtWidgets.QFormLayout.FieldRole, self.passwordFill)
         spacerItem = QtWidgets.QSpacerItem(28, 47, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
@@ -163,8 +168,10 @@ class Ui_LoginScreen(object):
         _translate = QtCore.QCoreApplication.translate
         LoginScreen.setWindowTitle(_translate("LoginScreen", "MainWindow"))
         self.loginButton.setText(_translate("LoginScreen", "Log in"))
+        self.loginButton.setShortcut(_translate("LoginScreen", "Return"))
         self.signupButton.setText(_translate("LoginScreen", "Sign up"))
         self.loginTitle.setText(_translate("LoginScreen", "TaskForce"))
         self.usernameLabel.setText(_translate("LoginScreen", "Username:    "))
         self.label_2.setText(_translate("LoginScreen", "Password:"))
         self.actionlogin.setText(_translate("LoginScreen", "login"))
+        self.actionlogin.setShortcut(_translate("LoginScreen", "Return"))

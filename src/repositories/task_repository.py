@@ -13,6 +13,11 @@ class TaskRepository:
             self._cursor.execute("""SELECT T.title, T.description, T.id, T.done, U_by.name, U_By.username, U_By.id, U_To.name, U_To.username, U_To.id 
                 FROM Tasks T LEFT JOIN Users U_To ON T.assigned_to = U_To.id LEFT JOIN Users U_By ON T.assigned_by = U_By.id 
                 WHERE T.assigned_to = %s ORDER BY T.id;""", (user_id, ))
+        else:
+            self._cursor.execute("""SELECT T.title, T.description, T.id, T.done, U_by.name, U_By.username, U_By.id, U_To.name, U_To.username, U_To.id 
+                FROM Tasks T LEFT JOIN Users U_To ON T.assigned_to = U_To.id LEFT JOIN Users U_By ON T.assigned_by = U_By.id 
+                WHERE T.assigned_by = %s ORDER BY T.id;""", (user_id, ))
+
         results = self._cursor.fetchall()
         task_list = []
         for result in results: 

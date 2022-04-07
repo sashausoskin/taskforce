@@ -40,6 +40,7 @@ class OrgRepository:
     def add_as_admin(self, user_id, org_id):
         self._cursor.execute(
             "UPDATE OrgMembers SET admin=TRUE WHERE member=%s AND org=%s", (user_id, org_id))
+        self.conn.commit()
 
     def create_org(self, name, code, user_id):
         self._cursor.execute(
@@ -58,6 +59,13 @@ class OrgRepository:
             "DELETE FROM Organizations WHERE id=%s", (org_id, ))
 
         self.conn.commit()
+    
+    def is_admin(self, org_id, user_id):
+        self._cursor.execute(
+            "SELECT admin FROM OrgMembers WHERE org=%s AND member=%s;", (org_id, user_id)
+        )
+        return self._cursor.fetchone()[0]
+         
 
 
 org_repository = OrgRepository(get_db_connection())

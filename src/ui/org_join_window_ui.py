@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'ui/org_join_window.ui'
+# Form implementation generated from reading ui file 'ui/ui_files/org_join_window.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.6
 #
@@ -111,4 +111,5 @@ class Ui_OrgJoin(object):
         self.WindowTitle.setText(_translate("OrgJoin", "Hey! Looks like you\'re not a part of any organization. Would you like to join one or create a new one?"))
         self.codeLabel.setText(_translate("OrgJoin", "Organization code:"))
         self.joinButton.setText(_translate("OrgJoin", "Join organization"))
+        self.joinButton.setShortcut(_translate("OrgJoin", "Return"))
         self.createButton.setText(_translate("OrgJoin", "Create a new organization"))
