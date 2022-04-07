@@ -6,6 +6,7 @@ import plyer
 
 from ui.org_join_window_ui import Ui_OrgJoin
 from ui.org_create import OrgCreateForm
+from ui.main_window import MainWindow
 
 
 class OrgJoinWindow(QMainWindow, Ui_OrgJoin):
@@ -31,6 +32,8 @@ class OrgJoinWindow(QMainWindow, Ui_OrgJoin):
                 success("Joined organizations",
                         f"You have succesfully joined the organization {org.name}")
                 self.hide()
+                self._win = MainWindow()
+                self._win.show()
 
         except InvalidCode:
             msg = QMessageBox()

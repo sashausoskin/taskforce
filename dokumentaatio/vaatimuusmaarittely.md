@@ -10,13 +10,13 @@ Kaikki käyttäjät:
 
 
 Projektin luoja:
-- Voi luoda ja jakaa uusia tehtäviä, joille on annettu otsikko sekä kuvaus.
-- Saa työpöytäilmoituksen, jos joku on merkannut tehtävän valmiiksi.
+- Voi luoda ja jakaa uusia tehtäviä, joille on annettu otsikko sekä kuvaus. **TEHTY**
+- Saa työpöytäilmoituksen, jos joku on merkannut tehtävän valmiiksi. 
 
 
 Tavallinen käyttäjä:
 - Saa työpöytäilmoituksen, jos käyttäjälle on annettu uusi tehtävä.
-- Voi merkata suoritetun tehtävän valmiiksi.
+- Voi merkata suoritetun tehtävän valmiiksi. **TEHTY**
 
 
 Kehitysideat:

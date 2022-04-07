@@ -10,5 +10,6 @@
 | 29.3. | 6   | Organisaatiojärjestelmän luominen sekä Pylintin käyttöönottoa |
 | 2.4. | 1   | Dokumentaation päivittäminen |
 | 6.4. | 5   | Tehtävienhallinnan lisääminen |
+| 7.4. | 3   | Tehtävänantojen lisääminen |
 
 Yhteensä: 20

@@ -30,5 +30,9 @@ class TaskRepository:
     def mark_as_done(self, task_id):
         self._cursor.execute("UPDATE Tasks SET done=TRUE WHERE id=%s", (task_id, ))
         self.conn.commit()
+    
+    def assign_task(self, task : Task, org_id):
+        self._cursor.execute("INSERT INTO Tasks (title, description, assigned_by, assigned_to, org, done) VALUES (%s, %s, %s, %s, %s, FALSE)", (task.title, task.desc, task.assigned_by.id, task.assigned_to.id, org_id))
+        self.conn.commit()
 
 task_repository = TaskRepository(get_db_connection())

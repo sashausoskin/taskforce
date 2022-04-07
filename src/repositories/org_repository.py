@@ -1,4 +1,5 @@
 from entities.organization import Organization
+from entities.user import User
 from database_con import get_db_connection
 
 
@@ -65,6 +66,18 @@ class OrgRepository:
             "SELECT admin FROM OrgMembers WHERE org=%s AND member=%s;", (org_id, user_id)
         )
         return self._cursor.fetchone()[0]
+    
+    def get_members(self, org_id):
+        self._cursor.execute(
+            "SELECT U.name, U.username, U.id FROM Users U LEFT JOIN OrgMembers OM ON OM.member = U.id WHERE OM.org = %s AND admin=FALSE", (org_id, )
+        )
+
+        member_list=[]
+
+        for result in self._cursor.fetchall():
+            member_list.append(User(result[0], result[1], "", result[2]))
+        
+        return member_list
          
 
 

@@ -1,4 +1,5 @@
 from entities.user import User
+from entities.task import Task
 from repositories.user_repository import user_repository
 from repositories.org_repository import org_repository
 from repositories.task_repository import task_repository
@@ -53,9 +54,15 @@ class TaskforceService:
 
     def get_username(self):
         return self._user.username
+    
+    def get_all_members_in_org(self):
+        return self._org_repository.get_members(self._org.id)
 
     def get_name(self):
         return self._user.name
+    
+    def get_user_by_name(self, name):
+        return self._user_repository.get_user_by_name(name)
 
     def get_orgs(self):
         return self._user.organizations
@@ -99,6 +106,12 @@ class TaskforceService:
     
     def is_admin(self):
         return self._org_repository.is_admin(self._org.id, self._user.id)
+    
+    
+    def assign_task(self, assigned_to_name, title, desc):
+        assigned_to = self.get_user_by_name(assigned_to_name)
+        self._task_repository.assign_task(Task(title, desc, self._user, assigned_to), self._org.id)
+
     
     def signout(self):
         self._user = None

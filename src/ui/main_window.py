@@ -6,6 +6,7 @@ from taskforce_service import taskforce_service
 import plyer
 
 from ui.main_window_ui import Ui_MainWindow
+from ui.new_task import NewTaskForm
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -15,11 +16,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.setWindowTitle("TaskForce")
         self.setWindowIcon(QIcon("img/check-svgrepo-com.svg"))
+        self.isAdmin = taskforce_service.is_admin()
         self.nameLabel.setText(f"{taskforce_service.get_name()}")
-        self.orgLabel.setText(taskforce_service.get_orgs()[0].name)
+        if self.isAdmin:
+            self.orgLabel.setText(f"{taskforce_service.get_orgs()[0].name} (Admin)")
+        else:
+            self.orgLabel.setText(f"{taskforce_service.get_orgs()[0].name} (Member)")
         self.selectedTaskButton = None
         self.actionSign_out.triggered.connect(self.signOut)
-        self.isAdmin = taskforce_service.is_admin()
+        self.actionAssign_a_new_task.triggered.connect(self.assignNewTask)
         if self.isAdmin:
             self.actionAssign_a_new_task.setEnabled(True)
         self.updateTasks()
@@ -27,9 +32,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
 
     def updateTasks(self):
-
-
-
         self.taskButtons=[]
         while self.verticalLayout.count():
             self.child = self.verticalLayout.takeAt(0)
@@ -90,6 +92,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def markAsDone(self, task_id):
         taskforce_service.mark_as_done(task_id)
         self.updateTasks()
+    
+    def assignNewTask(self):
+        win = NewTaskForm(self)
+        win.show()
     
     def signOut(self):
         from ui.login_form import loginWindow
