@@ -8,5 +8,7 @@
 | 24.3. | 5    | Kirjautumisprosessin ohjelmointia ml. käyttöliittymän tekeminen, tietokantaongelmien debugaamista |
 | 25.3. | 2    | Testien kirjoittaminen sekä dokumentaation päivittäminen |
 | 29.3. | 6   | Organisaatiojärjestelmän luominen sekä Pylintin käyttöönottoa |
+| 2.4. | 1   | Dokumentaation päivittäminen |
+| 6.4. | 5   | Tehtävienhallinnan lisääminen |
 
 Yhteensä: 20
