@@ -14,7 +14,7 @@ class OrgJoinWindow(QMainWindow, Ui_OrgJoin):
         super().__init__(parent)
         self.setupUi(self)
         self.setWindowTitle("TaskForce")
-        self.setWindowIcon(QIcon("img/check-svgrepo-com.svg"))
+        self.setWindowIcon(QIcon("img/icon.ico"))
         self.setUpConnection()
 
     def setUpConnection(self):

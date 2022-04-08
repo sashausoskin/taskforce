@@ -30,7 +30,6 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
     def login(self):
         try:
             if self.usernameFill.text().strip() == "" or self.passwordFill.text().strip() == "":
-                notify(Notification("Successfully logged in", "new"))
                 msg = QMessageBox()
                 msg.setIcon(QMessageBox.Critical)
                 msg.setText("Please fill all the required fields!")

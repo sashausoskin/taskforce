@@ -13,7 +13,7 @@ class OrgCreateForm(QDialog, Ui_CreateOrg):
         self._parent = parent
         self.setupUi(self)
         self.setWindowTitle("Create organization")
-        self.setWindowIcon(QIcon("img/check-svgrepo-com.svg"))
+        self.setWindowIcon(QIcon("img/icon.ico"))
         self.setUpConnection()
 
     def setUpConnection(self):

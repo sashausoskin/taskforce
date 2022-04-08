@@ -42,7 +42,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.parent=parent
         self.setupUi(self)
         self.setWindowTitle("TaskForce")
-        self.setWindowIcon(QIcon("img/check-svgrepo-com.svg"))
+        self.setWindowIcon(QIcon("img/icon.ico"))
         self.notificationChecker = NotificationChecker()
         self.notificationChecker.update_signal.connect(self.updateTasks)
         self.thread = QThread(self)

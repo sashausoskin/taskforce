@@ -12,7 +12,7 @@ class NewTaskForm(QDialog, Ui_NewFormDialog):
         self._parent = parent
         self.setupUi(self)
         self.setWindowTitle("New task")
-        self.setWindowIcon(QIcon("img/check-svgrepo-com.svg"))
+        self.setWindowIcon(QIcon("img/icon.ico"))
         self.setUpConnection()
 
         for member in taskforce_service.get_all_members_in_org():
