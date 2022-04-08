@@ -1,3 +1,4 @@
+from entities.notifications import Notification
 from entities.task import Task
 from entities.user import User
 from database_con import get_db_connection
@@ -28,11 +29,28 @@ class TaskRepository:
         return task_list
 
     def mark_as_done(self, task_id):
-        self._cursor.execute("UPDATE Tasks SET done=TRUE WHERE id=%s", (task_id, ))
+        self._cursor.execute("UPDATE Tasks SET done=TRUE WHERE id=%s;", (task_id, ))
         self.conn.commit()
     
     def assign_task(self, task : Task, org_id):
-        self._cursor.execute("INSERT INTO Tasks (title, description, assigned_by, assigned_to, org, done) VALUES (%s, %s, %s, %s, %s, FALSE)", (task.title, task.desc, task.assigned_by.id, task.assigned_to.id, org_id))
+        self._cursor.execute("INSERT INTO Tasks (title, description, assigned_by, assigned_to, org, done) VALUES (%s, %s, %s, %s, %s, FALSE);", (task.title, task.desc, task.assigned_by.id, task.assigned_to.id, org_id))
+        self.conn.commit()
+    
+    def check_notifications(self, user_id):
+        self._cursor.execute("SELECT message, type FROM Notifications WHERE user_id=%s;", (user_id, ))
+        
+        notifications=[]
+
+        for result in self._cursor.fetchall():
+            notifications.append(Notification(result[0], result[1]))
+        
+        self._cursor.execute("DELETE FROM Notifications WHERE user_id=%s;", (user_id, ))
+        self.conn.commit()
+
+        return notifications
+    
+    def send_notification(self, user_id, message, type):
+        self._cursor.execute("INSERT INTO Notifications VALUES (%s, %s, %s);", (user_id, message, type))
         self.conn.commit()
 
 task_repository = TaskRepository(get_db_connection())

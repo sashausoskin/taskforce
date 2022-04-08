@@ -2,6 +2,7 @@ import sys
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QErrorMessage, QMessageBox
 from PyQt5.QtGui import QIcon
+from entities.notifications import Notification
 from taskforce_service import taskforce_service, WrongCredentials
 import plyer
 
@@ -10,6 +11,8 @@ from ui.signup_form import SignupForm
 from ui.org_join import OrgJoinWindow
 from ui.main_window import MainWindow
 
+from ui.messages import notify
+
 
 class loginWindow(QMainWindow, Ui_LoginScreen):
     def __init__(self, parent=None) -> None:
@@ -17,7 +20,7 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
         self.setupUi(self)
         self.connectSignalSlots()
         self.setWindowTitle("TaskForce")
-        self.setWindowIcon(QIcon("img/check-svgrepo-com.svg"))
+        self.setWindowIcon(QIcon("img/icon.ico"))
 
     def connectSignalSlots(self):
         self.loginButton.pressed.connect(self.login)
@@ -27,6 +30,7 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
     def login(self):
         try:
             if self.usernameFill.text().strip() == "" or self.passwordFill.text().strip() == "":
+                notify(Notification("Successfully logged in", "new"))
                 msg = QMessageBox()
                 msg.setIcon(QMessageBox.Critical)
                 msg.setText("Please fill all the required fields!")
@@ -35,8 +39,6 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
             else:
                 user = taskforce_service.login(
                     self.usernameFill.text(), self.passwordFill.text())
-                plyer.notification.notify(
-                    title="Logged in", message=f"Welcome {user.name}")
 
                 if len(user.organizations) == 0:
                     self._win = OrgJoinWindow()

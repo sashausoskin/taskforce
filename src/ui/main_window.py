@@ -1,12 +1,39 @@
 from functools import partial
+from time import sleep
+from typing import Any
 from PyQt5 import QtWidgets
+from PyQt5.QtCore import QObject, QThread, pyqtSlot, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
 from PyQt5.QtGui import QIcon
 from taskforce_service import taskforce_service
-import plyer
+from threading import Thread
+from ui.messages import notify
 
 from ui.main_window_ui import Ui_MainWindow
 from ui.new_task import NewTaskForm
+
+class NotificationChecker(QObject):
+
+    update_signal = pyqtSignal()
+
+    def __init__(self, parent = None) -> None:
+        self.stopNotificationCheck = False
+        super().__init__(parent)
+
+    @pyqtSlot()
+    def run(self):
+
+        while not self.stopNotificationCheck:
+            print("Checking notifications...")
+            notifications=taskforce_service.check_notifications()
+
+            for notification in notifications:
+                notify(notification)
+            
+            if len(notifications)>0:
+                self.update_signal.emit()
+            
+            sleep(2)
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -16,6 +43,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.setWindowTitle("TaskForce")
         self.setWindowIcon(QIcon("img/check-svgrepo-com.svg"))
+        self.notificationChecker = NotificationChecker()
+        self.notificationChecker.update_signal.connect(self.updateTasks)
+        self.thread = QThread(self)
+        self.notificationChecker.moveToThread(self.thread)
+        self.thread.started.connect(self.notificationChecker.run)
+        self.thread.start()
+
         self.isAdmin = taskforce_service.is_admin()
         self.nameLabel.setText(f"{taskforce_service.get_name()}")
         if self.isAdmin:
@@ -30,9 +64,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.updateTasks()
 
 
-
+    pyqtSlot()
     def updateTasks(self):
         self.taskButtons=[]
+        selectedButtonName = None
+
+        if self.selectedTaskButton:
+            selectedButtonName = self.selectedTaskButton.objectName()
         while self.verticalLayout.count():
             self.child = self.verticalLayout.takeAt(0)
             if self.child.widget():
@@ -46,42 +84,42 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         for task in taskforce_service.get_tasks(self.isAdmin):
             self.taskButtons.append(QPushButton())
-            newButton = self.taskButtons[-1]
-            newButton.setObjectName(str(task.task_id))
-            newButton.setText(task.title)
-            newButton.setCheckable(True)
+            self.newButton = self.taskButtons[-1]
+            self.newButton.setObjectName(str(task.task_id))
+            self.newButton.setText(task.title)
+            self.newButton.setCheckable(True)
             if task.done:
-                newButton.setStyleSheet("background-color: green")
+                self.newButton.setStyleSheet("background-color: green")
             else:
-                newButton.setStyleSheet("background-color: red")
-            newButton.clicked.connect(partial(self.updateTaskInfo,task.task_id, newButton))
-            if self.selectedTaskButton == None or newButton.objectName()==self.selectedTaskButton.objectName():
-                self.selectedTaskButton = newButton
-                self.updateTaskInfo(task.task_id, newButton)
-                newButton.setChecked(True)
-            self.verticalLayout.addWidget(newButton)
+                self.newButton.setStyleSheet("background-color: red")
+            self.newButton.clicked.connect(partial(self.updateTaskInfo,task, self.newButton))
+            if self.selectedTaskButton == None or self.newButton.objectName() == selectedButtonName:
+                self.selectedTaskButton = self.newButton
+                self.updateTaskInfo(task, self.newButton)
+                self.newButton.setChecked(True)
+            self.verticalLayout.addWidget(self.newButton)
         
 
         spacerItem = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout.addItem(spacerItem)
         
 
-    def updateTaskInfo(self, task_id, clicked_button):
+    def updateTaskInfo(self, task, clicked_button):
         self.selectedTaskButton.setChecked(False)
         clicked_button.setChecked(True)
         self.selectedTaskButton = clicked_button
 
-        selected_task=taskforce_service.get_task_by_id(task_id)
+        selected_task=taskforce_service.get_task_by_id(task.task_id)
         self.taskTitle.setText(selected_task.title)
         self.taskDescription.setText(selected_task.desc)
         self.markAsDoneButton.disconnect()
-        self.markAsDoneButton.clicked.connect(partial(self.markAsDone,task_id))
+        self.markAsDoneButton.clicked.connect(partial(self.markAsDone,task, task.assigned_by))
 
         if self.isAdmin:
-            self.assignInfo.setText(f"Assigned to: {selected_task.assigned_to.name}")
+            self.assignInfo.setText(f"Assigned to: {task.assigned_to.name}")
         
         else:
-            self.assignInfo.setText(f"Assigned by: {selected_task.assigned_by.name}")
+            self.assignInfo.setText(f"Assigned by: {task.assigned_by.name}")
 
         if not selected_task.done:
             self.markAsDoneButton.setEnabled(True)
@@ -89,8 +127,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.markAsDoneButton.setEnabled(False)
 
     
-    def markAsDone(self, task_id):
-        taskforce_service.mark_as_done(task_id)
+    def markAsDone(self, task, assigned_to):
+        taskforce_service.mark_as_done(task)
+        taskforce_service.send_notification(assigned_to, f"User {taskforce_service.get_name()} has finished a task: {task.title}", "done")
         self.updateTasks()
     
     def assignNewTask(self):
@@ -100,8 +139,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def signOut(self):
         from ui.login_form import loginWindow
 
+        self.notificationChecker.stopNotificationCheck = True
+
         self.win = loginWindow()
         self.win.show()
         self.hide()
-
+    
 

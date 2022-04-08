@@ -10,7 +10,7 @@ class UserRepository:
 
     def login(self, username, password):
         self._cursor.execute(
-            "SELECT name, username, password, id FROM Users WHERE username=%s AND password=%s",
+            "SELECT name, username, password, id FROM Users WHERE username=%s AND password=%s;",
             (username, password))
 
         try:
@@ -26,7 +26,7 @@ class UserRepository:
         return self._cursor.fetchone() is not None
 
     def signup(self, user):
-        self._cursor.execute("INSERT INTO Users (name, username, password) VALUES (%s, %s, %s)",
+        self._cursor.execute("INSERT INTO Users (name, username, password) VALUES (%s, %s, %s);",
                              (user.name, user.username, user.password))
         self.conn.commit()
 
@@ -34,10 +34,11 @@ class UserRepository:
 
     def delete_user(self, username):
         self._cursor.execute(
-            "DELETE FROM Users where username=%s", (username,))
+            "DELETE FROM Users where username=%s;", (username,))
         self.conn.commit()
     
     def get_user_by_name(self, name):
+        print(name)
         self._cursor.execute(
             "SELECT name, username, id FROM Users WHERE name=%s;", (name, ))
         

@@ -113,7 +113,7 @@ class Ui_LoginScreen(object):
         self.taskforceLogo.setFrameShadow(QtWidgets.QFrame.Plain)
         self.taskforceLogo.setText("")
         self.taskforceLogo.setTextFormat(QtCore.Qt.RichText)
-        self.taskforceLogo.setPixmap(QtGui.QPixmap("ui/ui_files/../../img/check-svgrepo-com.svg"))
+        self.taskforceLogo.setPixmap(QtGui.QPixmap("ui/ui_files/../../img/icon.svg"))
         self.taskforceLogo.setScaledContents(True)
         self.taskforceLogo.setAlignment(QtCore.Qt.AlignCenter)
         self.taskforceLogo.setOpenExternalLinks(False)

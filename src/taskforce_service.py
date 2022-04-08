@@ -101,16 +101,23 @@ class TaskforceService:
             if task.task_id==task_id:
                 return task
     
-    def mark_as_done(self, task_id):
-        self._task_repository.mark_as_done(task_id)
+    def mark_as_done(self, task):
+        self._task_repository.mark_as_done(task.task_id)
     
     def is_admin(self):
         return self._org_repository.is_admin(self._org.id, self._user.id)
     
     
-    def assign_task(self, assigned_to_name, title, desc):
-        assigned_to = self.get_user_by_name(assigned_to_name)
-        self._task_repository.assign_task(Task(title, desc, self._user, assigned_to), self._org.id)
+    def assign_task(self, assigned_to, title, desc):
+        task = Task(title, desc, self._user, assigned_to)
+        self._task_repository.assign_task(task, self._org.id)
+        return task
+    
+    def check_notifications(self):
+        return self._task_repository.check_notifications(self._user.id)
+    
+    def send_notification(self, user, message, type):
+        self._task_repository.send_notification(user.id, message, type)
 
     
     def signout(self):

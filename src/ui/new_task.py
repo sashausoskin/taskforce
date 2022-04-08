@@ -26,7 +26,9 @@ class NewTaskForm(QDialog, Ui_NewFormDialog):
             error("Missing information", "Please enter all the required fields!")
             return
         
-        taskforce_service.assign_task(self.assignComboBox.currentText(), self.taskFill.text(), self.descFill.toPlainText())
+        assigned_to = taskforce_service.get_user_by_name(self.assignComboBox.currentText())
+        task = taskforce_service.assign_task(assigned_to, self.taskFill.text(), self.descFill.toPlainText())
+        taskforce_service.send_notification(task.assigned_to, f"A new task is available: {task.title}", "new")
         self._parent.updateTasks()
         self.hide()
 

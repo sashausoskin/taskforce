@@ -11,7 +11,7 @@ class OrgRepository:
 
     def fetch_org(self, code):
         self._cursor.execute(
-            "SELECT name, code, id FROM Organizations WHERE code=%s", (code, ))
+            "SELECT name, code, id FROM Organizations WHERE code=%s;", (code, ))
         results = self._cursor.fetchone()
         if not results:
             return None
@@ -20,7 +20,7 @@ class OrgRepository:
     def org_member(self, user_id):
         self._cursor.execute(
             """SELECT name, code, id FROM Organizations O LEFT JOIN OrgMembers OM ON OM.org=O.id
-            WHERE OM.member=%s""",
+            WHERE OM.member=%s;""",
             (user_id, ))
         results = self._cursor.fetchall()
         orgs = []
@@ -31,21 +31,21 @@ class OrgRepository:
 
     def add_to_org(self, user_id, org_id):
         self._cursor.execute(
-            "INSERT INTO OrgMembers VALUES (%s, %s, FALSE)", (user_id, org_id))
+            "INSERT INTO OrgMembers VALUES (%s, %s, FALSE);", (user_id, org_id))
         self.conn.commit()
         self._cursor.execute(
-            "SELECT name, code, id FROM Organizations WHERE id=%s", (org_id, ))
+            "SELECT name, code, id FROM Organizations WHERE id=%s;", (org_id, ))
         results = self._cursor.fetchone()
         return Organization(results[0], results[1], results[2])
 
     def add_as_admin(self, user_id, org_id):
         self._cursor.execute(
-            "UPDATE OrgMembers SET admin=TRUE WHERE member=%s AND org=%s", (user_id, org_id))
+            "UPDATE OrgMembers SET admin=TRUE WHERE member=%s AND org=%s;", (user_id, org_id))
         self.conn.commit()
 
     def create_org(self, name, code, user_id):
         self._cursor.execute(
-            "INSERT INTO Organizations (name, code) VALUES (%s, %s)", (name, code))
+            "INSERT INTO Organizations (name, code) VALUES (%s, %s);", (name, code))
         self.conn.commit()
         org = self.fetch_org(code)
         self.add_to_org(user_id, org.id)
@@ -54,10 +54,10 @@ class OrgRepository:
 
     def delete_org(self, org_id):
         self._cursor.execute(
-            "DELETE FROM OrgMembers WHERE org=%s", (org_id, ))
+            "DELETE FROM OrgMembers WHERE org=%s;", (org_id, ))
 
         self._cursor.execute(
-            "DELETE FROM Organizations WHERE id=%s", (org_id, ))
+            "DELETE FROM Organizations WHERE id=%s;", (org_id, ))
 
         self.conn.commit()
     
@@ -69,7 +69,7 @@ class OrgRepository:
     
     def get_members(self, org_id):
         self._cursor.execute(
-            "SELECT U.name, U.username, U.id FROM Users U LEFT JOIN OrgMembers OM ON OM.member = U.id WHERE OM.org = %s AND admin=FALSE", (org_id, )
+            "SELECT U.name, U.username, U.id FROM Users U LEFT JOIN OrgMembers OM ON OM.member = U.id WHERE OM.org = %s AND admin=FALSE;", (org_id, )
         )
 
         member_list=[]

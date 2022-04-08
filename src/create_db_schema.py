@@ -9,7 +9,8 @@ commands=[
     """CREATE TABLE OrgMembers
         (member INTEGER REFERENCES Users, org INTEGER REFERENCES Organizations, admin BOOLEAN);""",
     """CREATE TABLE Tasks
-        (id SERIAL PRIMARY KEY, title TEXT, description TEXT, assigned_by INTEGER REFERENCES Users, assigned_to INTEGER REFERENCES Users, org INTEGER REFERENCES Organizations, done BOOLEAN);"""
+        (id SERIAL PRIMARY KEY, title TEXT, description TEXT, assigned_by INTEGER REFERENCES Users, assigned_to INTEGER REFERENCES Users, org INTEGER REFERENCES Organizations, done BOOLEAN);""",
+    """CREATE TABLE Notifications (user_id INTEGER REFERENCES Users, message TEXT, type TEXT);"""
 ]
 
 for command in commands:
