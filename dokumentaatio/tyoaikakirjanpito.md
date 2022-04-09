@@ -11,5 +11,7 @@
 | 2.4. | 1   | Dokumentaation päivittäminen |
 | 6.4. | 5   | Tehtävienhallinnan lisääminen |
 | 7.4. | 3   | Tehtävänantojen lisääminen |
+| 8.4. | 3   | Työpöytäilmoitusten implementointi |
+| 9.4. | 3   | Uusien testien tekeminen, sekä dokumentaation päivittäminen |
 
-Yhteensä: 20
+Yhteensä: 35

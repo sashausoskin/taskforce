@@ -35,12 +35,10 @@ class SignupForm(QDialog, Ui_signupDialog):
                 self.hide()
                 self.win.show()
 
-
-
-
             except UsernameExists:
                 msg = QMessageBox()
                 msg.setIcon(QMessageBox.Critical)
-                msg.setText("The username is already taken. Please try again!")
+                msg.setText(
+                    "The username or name is already taken. Please try again!")
                 msg.setWindowTitle("Error")
                 msg.exec_()

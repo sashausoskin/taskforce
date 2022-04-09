@@ -39,7 +39,7 @@ class TaskforceService:
 
         user.organizations = self._org_repository.org_member(user.id)
         self._user = user
-        if len(user.organizations)>0:
+        if len(user.organizations) > 0:
             self._org = user.organizations[0]
         return user
 
@@ -54,15 +54,12 @@ class TaskforceService:
 
     def get_username(self):
         return self._user.username
-    
+
     def get_all_members_in_org(self):
         return self._org_repository.get_members(self._org.id)
 
     def get_name(self):
         return self._user.name
-    
-    def get_user_by_name(self, name):
-        return self._user_repository.get_user_by_name(name)
 
     def get_orgs(self):
         return self._user.organizations
@@ -91,38 +88,43 @@ class TaskforceService:
 
     def delete_org(self, org_id):
         self._org_repository.delete_org(org_id)
-    
-    def get_tasks(self, is_admin):
-        self._tasks = self._task_repository.fetch_tasks(self._user.id, is_admin)
+
+    def get_tasks(self):
+        self._tasks = self._task_repository.fetch_tasks(
+            self._user.id, self.is_admin())
         return self._tasks
-    
+
     def get_task_by_id(self, task_id):
-        for task in self._tasks: #This could be optimized
-            if task.task_id==task_id:
+        for task in self._tasks:  # This could be optimized
+            if task.task_id == task_id:
                 return task
-    
+        return None
+
     def mark_as_done(self, task):
         self._task_repository.mark_as_done(task.task_id)
-    
+
     def is_admin(self):
         return self._org_repository.is_admin(self._org.id, self._user.id)
-    
-    
+
     def assign_task(self, assigned_to, title, desc):
         task = Task(title, desc, self._user, assigned_to)
         self._task_repository.assign_task(task, self._org.id)
         return task
-    
+
     def check_notifications(self):
         return self._task_repository.check_notifications(self._user.id)
-    
-    def send_notification(self, user, message, type):
-        self._task_repository.send_notification(user.id, message, type)
 
-    
+    def send_notification(self, user, message, notification_type):
+        self._task_repository.send_notification(
+            user.id, message, notification_type)
+
+    def delete_tasks(self):
+        self._task_repository.delete_users_tasks(self._user.id)
+
     def signout(self):
         self._user = None
         self._org = None
         self._tasks = []
+
 
 taskforce_service = TaskforceService()

@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMessageBox
-from entities.notifications import Notification
+from entities.notification import Notification
 import plyer
 import os
 import platform
@@ -20,12 +20,13 @@ def success(title, message):
     msg.setWindowTitle(title)
     msg.exec_()
 
-def notify(notification : Notification):
+
+def notify(notification: Notification):
     img_path = os.getcwd()
 
-    if platform.system()=="Linux":
+    if platform.system() == "Linux":
         img_path = f"{img_path}/img/icon.png"
-    elif platform.system()=="Windows":
+    elif platform.system() == "Windows":
         img_path = f"{img_path}/img/icon.ico"
 
     if notification.type == "new":
@@ -34,9 +35,9 @@ def notify(notification : Notification):
         title = "A task was marked as done"
 
     plyer.notification.notify(
-        title = title,
-        message = notification.message,
-        timeout = 10,
-        app_name = "TaskForce",
-        app_icon = img_path
+        title=title,
+        message=notification.message,
+        timeout=10,
+        app_name="TaskForce",
+        app_icon=img_path
     )

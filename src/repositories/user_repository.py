@@ -21,7 +21,7 @@ class UserRepository:
 
     def user_exists(self, username):
         self._cursor.execute(
-            "SELECT username FROM Users WHERE username=%s;", (username,))
+            "SELECT username FROM Users WHERE username=%s;", (username, ))
 
         return self._cursor.fetchone() is not None
 
@@ -36,17 +36,6 @@ class UserRepository:
         self._cursor.execute(
             "DELETE FROM Users where username=%s;", (username,))
         self.conn.commit()
-    
-    def get_user_by_name(self, name):
-        print(name)
-        self._cursor.execute(
-            "SELECT name, username, id FROM Users WHERE name=%s;", (name, ))
-        
-        result = self._cursor.fetchone()
-        print(result)
-
-        return User(result[0], result[1], "", result[2])
-
 
 
 user_repository = UserRepository(get_db_connection())
