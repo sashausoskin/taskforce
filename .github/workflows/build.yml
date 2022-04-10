@@ -24,9 +24,8 @@ jobs:
       - name: Configure Poetry
         run: poetry config virtualenvs.create false --local
       
-      - name: Install XCB on Ubuntu
-        if: ${{ matrix.os }} == ubuntu-latest
-        run: sudo apt install xcb libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xkb1 libxkbcommon-x11-0
+      - name: Install PyQt on Ubuntu
+        run: sudo apt-get install python3-pyqt5
         continue-on-error: true
         
       - name: Install dependencies
