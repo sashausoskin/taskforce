@@ -8,6 +8,8 @@ from shutil import move, copyfile
 from dotenv import load_dotenv
 from time import sleep
 
+class NoDatabaseUrl(Exception):
+    pass
 
 @task
 def init_db(ctx):
@@ -36,7 +38,7 @@ def build(ctx):
     load_dotenv(".env") #Hardcode the database URL into the code
     DATABASE_URL = os.getenv('DATABASE_URL')
     if not DATABASE_URL:
-        print("DATABASE_URL not found!")
+        raise NoDatabaseUrl("DATABASE_URL is not defined!")
 
     copyfile("src/database_con.py", "src/database_con_backup.py")
     with open("src/database_con_new.py", "w") as new:
