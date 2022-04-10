@@ -1,7 +1,7 @@
 import sys
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QErrorMessage, QMessageBox
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QPixmap
 from entities.notification import Notification
 from taskforce_service import taskforce_service, WrongCredentials
 import plyer
@@ -21,6 +21,9 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
         self.connectSignalSlots()
         self.setWindowTitle("TaskForce")
         self.setWindowIcon(QIcon("img/icon.ico"))
+
+        self.taskforceLogo.setPixmap(
+            QPixmap("img/icon.svg")) #Change the icon to a relative path
 
     def connectSignalSlots(self):
         self.loginButton.pressed.connect(self.login)

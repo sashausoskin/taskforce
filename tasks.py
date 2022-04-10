@@ -1,6 +1,7 @@
 from invoke import task
 import os
 import PyInstaller.__main__
+import platform
 
 
 @task
@@ -24,7 +25,22 @@ def compile_ui(ctx):
 
 @task
 def build(ctx):
+    if platform.platform()=="Windows":
+        separator=";"
+    else:
+        separator=":"
+
     PyInstaller.__main__.run([
+        "--windowed",
+        "--noconfirm",
+        "--icon=src/img/icon.ico",
+        "--name=taskforce",
+        f'--add-data=src/img/icon.ico{separator}img',
+        f'--add-data=src/img/icon.svg{separator}img',
+        f'--add-data=src/img/icon.png{separator}img',
+        "--hidden-import=plyer.platforms.linux.notification",
+        "--hidden-import=plyer.platforms.win.notification",
+        "--hidden-import=plyer.platforms.macosx.notification",
         'src/index.py',
     ])
 

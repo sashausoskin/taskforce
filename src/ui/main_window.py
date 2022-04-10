@@ -136,7 +136,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.markAsDoneButton.setEnabled(False)
 
     def markAsDone(self, task, assigned_to):
-        self.statusBar.showMessage("Marking task as done...")
+        self.statusbar.showMessage("Marking task as done...")
         taskforce_service.mark_as_done(task)
         taskforce_service.send_notification(
             assigned_to, f"User {taskforce_service.get_name()} has finished a task: {task.title}", "done")
