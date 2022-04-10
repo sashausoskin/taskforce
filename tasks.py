@@ -47,7 +47,7 @@ def build(ctx):
     os.remove("src/database_con.py")
     move("src/database_con_new.py", "src/database_con.py")
 
-    if platform.platform()=="Windows":
+    if platform.system()=="Windows":
         separator=";"
     else:
         separator=":"
