@@ -35,7 +35,7 @@ def build(ctx):
 
     load_dotenv(".env") #Hardcode the database URL into the code
     DATABASE_URL = os.getenv('DATABASE_URL')
-    if DATABASE_URL == "":
+    if not DATABASE_URL:
         print("DATABASE_URL not found!")
 
     copyfile("src/database_con.py", "src/database_con_backup.py")
