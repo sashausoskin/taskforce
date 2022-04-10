@@ -13,5 +13,6 @@
 | 7.4. | 3   | Tehtävänantojen lisääminen |
 | 8.4. | 3   | Työpöytäilmoitusten implementointi |
 | 9.4. | 3   | Uusien testien tekeminen, sekä dokumentaation päivittäminen |
+| 10.4. | 5   | PyInstallerin käyttöönotto sekä GitHub Actionin käyttöönotto |
 
-Yhteensä: 35
+Yhteensä: 40

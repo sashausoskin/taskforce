@@ -20,3 +20,5 @@
 - Lisätty työpöytäilmoitukset, kun käyttäjälle annetaan uusi tehtävä tai käyttäjä merkkaa tehtävän tehdyksi.
 - Lisätty testejä työpöytäilmoituksia sekä uusia tehtäviä varten.
 - Ohjelman perustoiminnallisuus suurin piirtein valmis.
+- Otettu PyInstaller käyttöön
+- Luotu GitHub Action, jolla saa luotua itsenäisesti suoritettavan version ohjelmasta.
