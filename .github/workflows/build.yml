@@ -20,6 +20,9 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install Poetry
         run: pip install poetry
+      
+      - name: Configure Poetry
+        run: poetry config virtualenvs.create false --local
         
       - name: Install dependencies
         run: poetry install
