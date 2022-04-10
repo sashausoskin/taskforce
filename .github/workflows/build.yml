@@ -25,5 +25,7 @@ jobs:
       - name: Install dependencies
         run: poetry install
         
-      - name: Build image
-        run: poetry build
+      - name: Build executable
+        run: poetry run invoke build
+        env: 
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
