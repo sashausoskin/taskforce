@@ -1,7 +1,12 @@
+from posixpath import abspath
 from invoke import task
 import os
 import PyInstaller.__main__
 import platform
+from tempfile import mkstemp
+from shutil import move, copyfile
+from dotenv import load_dotenv
+from time import sleep
 
 
 @task
@@ -25,6 +30,23 @@ def compile_ui(ctx):
 
 @task
 def build(ctx):
+    print("Starting build... Please let the task finish or else the program may no longer work")
+    sleep(2)
+
+    load_dotenv(".env") #Hardcode the database URL into the code
+    DATABASE_URL = os.getenv('DATABASE_URL')
+    if DATABASE_URL == "":
+        print("DATABASE_URL not found!")
+
+    copyfile("src/database_con.py", "src/database_con_backup.py")
+    with open("src/database_con_new.py", "w") as new:
+        with open("src/database_con.py", "r") as original:
+            for line in original:
+                new.write(line.replace("DATABASE_URL = os.getenv('DATABASE_URL')", f"DATABASE_URL = '{DATABASE_URL}'"))
+    
+    os.remove("src/database_con.py")
+    move("src/database_con_new.py", "src/database_con.py")
+
     if platform.platform()=="Windows":
         separator=";"
     else:
@@ -43,6 +65,10 @@ def build(ctx):
         "--hidden-import=plyer.platforms.macosx.notification",
         'src/index.py',
     ])
+
+    os.remove("src/database_con.py")
+    move("src/database_con_backup.py", "src/database_con.py")
+
 
 @task
 def coverage(ctx):
