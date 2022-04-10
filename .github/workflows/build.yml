@@ -29,3 +29,9 @@ jobs:
         run: poetry run invoke build
         env: 
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        
+      - name: Download the executable
+        uses: actions/download-artifact@v3
+        with:
+          name: taskforce-${{ matrix.os }}
+
