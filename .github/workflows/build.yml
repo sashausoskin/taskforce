@@ -27,6 +27,7 @@ jobs:
       - name: Install XCB on Ubuntu
         if: ${{ matrix.os }} == ubuntu-latest
         run: sudo apt install xcb
+        continue-on-error: true
         
       - name: Install dependencies
         run: poetry install
