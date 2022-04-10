@@ -25,7 +25,7 @@ def compile_ui(ctx):
 
 @task
 def build(ctx):
-    if platform.platform()=="Windows":
+    if platform.system()=="Windows":
         separator=";"
     else:
         separator=":"

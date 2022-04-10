@@ -14,3 +14,5 @@ login_form.spec
 .coverage
 
 __pycache__
+
+.vs/
