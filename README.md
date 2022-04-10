@@ -20,10 +20,8 @@ Tämä projekti on toteutettu Python-versiolla 3.9.7. Vanhempien Python-versioid
 Tämä projekti käyttää netissä olevaa PostgreSQL-tietokantaa, joten turvallisuussyistä linkkiä siihen ei ole sisällytetty repositoriossa. Linkki tietokantaan on sisällytetty .env-tiedostoon parametrilla ```DATABASE_URL```. Tilanteen voi korjata mm. näillä tavoilla:
 
 1. Käytä paikallista tietokantaa. Jos olet esimerkiksi käyttänyt tsohan [asennusskriptiä](https://github.com/hy-tsoha/local-pg), niin voit luoda .env-tiedoston sekä kirjoittaa sinne ´´´DATABASE_URL=postgresql+psycopg2://´´´
-2. Luo oma netissä oleva tietokanta itse (esim. [Heroku](https://www.heroku.com/postgres) ja [ElephantSQL](https://www.elephantsql.com/))
+2. Luo itse buildi repositoriossa olevasta versiosta [GitHub Actionissa](https://github.com/sonicsasha/taskforce/actions/workflows/build.yml). Se sisältää viittaukset omaan netissä olevaan tietokantaan.
 3. Kysy osoitetta Telegramissa [@sonicsasha](https://t.me/sonicsasha)
-
-Tätä ongelmaa ei toivottavasti tule olemaan lopullisessa buildissa.
 
 ### Asennus
 
@@ -71,6 +69,6 @@ Ohjelmasta voi rakentaa itsenäisesti suoritettavan komennon käyttämällä kom
 ```bash
 poetry run invoke build
 ```
-Tämä kompiloi ohjelman dist-kansioon. **Huom! Tämä toiminto ei ole vielä viimeistelty, joten toistaiseksi ohjelma ei välttämättä toimi oikein. Tämä todennäköisesti vaatii myös tietokannan osoitteen kovakoodauksen koodiin.**
+Tämä kompiloi ohjelman dist-kansioon.
 
 
