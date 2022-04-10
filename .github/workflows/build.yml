@@ -5,7 +5,7 @@ on:
   workflow_dispatch
 
 jobs:
-  ci:
+  build-taskforce:
     strategy:
       fail-fast: false
       matrix:
@@ -30,8 +30,14 @@ jobs:
         env: 
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         
-      - name: Download the executable
-        uses: actions/download-artifact@v3
+      - name: Create zip-file
+      - uses: montudor/action-zip@v1
         with:
-          name: taskforce-${{ matrix.os }}
-
+          args: zip -qq -r taskforce-${{ matrix.os }}.zip dist
+        
+      - name: Upload zip-file
+        uses: actions/upload-artifact@v3
+        with:
+          name: taskforce-${{ matrix.os }}
+          path: taskforce-${{ matrix.os }}.zip
+        
