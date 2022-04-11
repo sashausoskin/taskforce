@@ -47,7 +47,7 @@ class TaskRepository:
 
     def check_notifications(self, user_id):
         self._cursor.execute(
-            "SELECT message, type FROM Notifications WHERE user_id=%s;", (user_id, ))
+            "SELECT message, title FROM Notifications WHERE user_id=%s;", (user_id, ))
 
         notifications = []
 
@@ -60,9 +60,9 @@ class TaskRepository:
 
         return notifications
 
-    def send_notification(self, user_id, message, notification_type):
+    def send_notification(self, user_id, message, title):
         self._cursor.execute(
-            "INSERT INTO Notifications VALUES (%s, %s, %s);", (user_id, message, notification_type))
+            "INSERT INTO Notifications VALUES (%s, %s, %s);", (user_id, message, title))
         self.conn.commit()
 
     def delete_users_tasks(self, user_id):

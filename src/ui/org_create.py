@@ -29,10 +29,7 @@ class OrgCreateForm(QDialog, Ui_CreateOrg):
                     self.nameFill.text(), self.codeFill.text())
                 success("Created organization",
                         f"You have succesfully created the organization {org.name}")
-                self._parent.hide()
-                self.hide()
-                self._win = MainWindow()
-                self._win.show()
+                self.close()
 
         except OrgExists:
             error("Code already in use",

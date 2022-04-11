@@ -30,6 +30,6 @@ class NewTaskForm(QDialog, Ui_NewFormDialog):
         task = taskforce_service.assign_task(
             self.members[self.assignComboBox.currentIndex()], self.taskFill.text(), self.descFill.toPlainText())
         taskforce_service.send_notification(
-            task.assigned_to, f"A new task is available: {task.title}", "new")
+            task.assigned_to, f"A new task is available: {task.title}", "New task")
         self._parent.updateTasks()
         self.hide()

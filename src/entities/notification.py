@@ -1,8 +1,8 @@
 class Notification:
 
-    def __init__(self, message, notification_type) -> None:
+    def __init__(self, message, title) -> None:
         self.message = message
-        self.type = notification_type
+        self.title = title
 
     def __str__(self):
-        return f"Message: {self.message}, Type: {self.type}"
+        return f"Message: {self.message}, Title: {self.title}"

@@ -29,13 +29,8 @@ def notify(notification: Notification):
     elif platform.system() == "Windows":
         img_path = f"{img_path}/img/icon.ico"
 
-    if notification.type == "new":
-        title = "A new task is available"
-    elif notification.type == "done":
-        title = "A task was marked as done"
-
     plyer.notification.notify(
-        title=title,
+        title=notification.title,
         message=notification.message,
         timeout=10,
         app_name="TaskForce",

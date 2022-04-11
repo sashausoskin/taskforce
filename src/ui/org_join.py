@@ -16,6 +16,7 @@ class OrgJoinWindow(QMainWindow, Ui_OrgJoin):
         self.setWindowTitle("TaskForce")
         self.setWindowIcon(QIcon("img/icon.ico"))
         self.setUpConnection()
+        self.org_create_form = OrgCreateForm(self)
 
     def setUpConnection(self):
         self.joinButton.pressed.connect(self.joinOrg)
@@ -31,9 +32,7 @@ class OrgJoinWindow(QMainWindow, Ui_OrgJoin):
                 org = taskforce_service.join_org(self.codeFill.text())
                 success("Joined organizations",
                         f"You have succesfully joined the organization {org.name}")
-                self.hide()
-                self._win = MainWindow()
-                self._win.show()
+                self.openMainWindow()
 
         except InvalidCode:
             msg = QMessageBox()
@@ -43,5 +42,11 @@ class OrgJoinWindow(QMainWindow, Ui_OrgJoin):
             msg.exec_()
 
     def createOrg(self):
-        self._form = OrgCreateForm(self)
-        self._form.exec()
+        self.org_create_form.buttonBox.accepted.connect(self.openMainWindow)
+        self.org_create_form.exec()
+
+    def openMainWindow(self):
+        print("Opening main window")
+        self._win = MainWindow()
+        self._win.show()
+        self.close()

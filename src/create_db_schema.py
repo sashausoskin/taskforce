@@ -31,7 +31,7 @@ commands = [
     """CREATE TABLE Notifications
         (user_id INTEGER REFERENCES Users,
         message TEXT,
-        type TEXT);"""
+        title TEXT);"""
 ]
 
 for command in commands:

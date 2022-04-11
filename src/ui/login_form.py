@@ -23,7 +23,7 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
         self.setWindowIcon(QIcon("img/icon.ico"))
 
         self.taskforceLogo.setPixmap(
-            QPixmap("img/icon.svg")) #Change the icon to a relative path
+            QPixmap("img/icon.svg"))  # Change the icon to a relative path
 
     def connectSignalSlots(self):
         self.loginButton.pressed.connect(self.login)

@@ -6,7 +6,7 @@ from PyQt5.QtCore import QObject, QThread, pyqtSlot, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
 from PyQt5.QtGui import QIcon
 from taskforce_service import taskforce_service
-from ui.messages import notify
+from ui.messages import notify, success
 
 from ui.main_window_ui import Ui_MainWindow
 from ui.new_task import NewTaskForm
@@ -49,19 +49,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.thread.started.connect(self.notificationChecker.run)
         self.thread.start()
 
-        self.isAdmin = taskforce_service.is_admin()
-        self.nameLabel.setText(f"{taskforce_service.get_name()}")
-        if self.isAdmin:
-            self.orgLabel.setText(
-                f"{taskforce_service.get_orgs()[0].name} (Admin)")
-        else:
-            self.orgLabel.setText(
-                f"{taskforce_service.get_orgs()[0].name} (Member)")
-        self.selectedTaskButton = None
-        self.actionSign_out.triggered.connect(self.signOut)
-        self.actionAssign_a_new_task.triggered.connect(self.assignNewTask)
-        if self.isAdmin:
-            self.actionAssign_a_new_task.setEnabled(True)
+        self.updateOrgInformation()
         self.updateTasks()
 
     pyqtSlot()
@@ -139,12 +127,63 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.statusbar.showMessage("Marking task as done...")
         taskforce_service.mark_as_done(task)
         taskforce_service.send_notification(
-            assigned_to, f"User {taskforce_service.get_name()} has finished a task: {task.title}", "done")
+            assigned_to, f"User {taskforce_service.get_name()} has finished a task: {task.title}", "A task has been finished")
         self.updateTasks()
 
     def assignNewTask(self):
         win = NewTaskForm(self)
         win.show()
+
+    def openJoinOrgForm(self):
+        from ui.org_join import OrgJoinWindow
+
+        win = OrgJoinWindow(self)
+        win.WindowTitle.setText(
+            "Join an organization by entering a code below or create a new organization")
+        win.org_create_form.buttonBox.accepted.connect(
+            self.updateOrgInformation)
+        win.org_create_form.buttonBox.accepted.connect(
+            win.org_create_form.close)
+        win.org_create_form.buttonBox.accepted.connect(win.close)
+        win.show()
+
+    def updateOrgInformation(self):
+        # Clear the current member and organization selection
+        self.menuAssign_a_member_as_admin.clear()
+        self.menuChange_current_organization.clear()
+
+        self.current_org = taskforce_service.get_orgs()[0]
+        self.isAdmin = taskforce_service.is_admin()
+        self.nameLabel.setText(f"{taskforce_service.get_name()}")
+        if self.isAdmin:
+            self.orgLabel.setText(
+                f"{self.current_org.name} (Admin)")
+        else:
+            self.orgLabel.setText(
+                f"{self.current_org.name} (Member)")
+        self.selectedTaskButton = None
+        self.actionSign_out.triggered.connect(self.signOut)
+        self.actionAssign_a_new_task.triggered.connect(self.assignNewTask)
+        if self.isAdmin:
+            self.actionAssign_a_new_task.setEnabled(True)
+            self.menuAssign_a_member_as_admin.setEnabled(True)
+
+        self.actionJoin_organization_or_create_a_new_one.triggered.connect(
+            self.openJoinOrgForm)
+
+        for org in taskforce_service.get_orgs():
+            changeOrgTo = QtWidgets.QAction(self)
+            changeOrgTo.setObjectName(f"org_{org.id}")
+            self.menuChange_current_organization.addAction(changeOrgTo)
+            changeOrgTo.setText(org.name)
+
+        members = taskforce_service.get_all_members_in_org()
+        for member in members:
+            addAdminButton = QtWidgets.QAction(self)
+            addAdminButton.setObjectName(f"member_{member.id}")
+            self.menuAssign_a_member_as_admin.addAction(addAdminButton)
+            addAdminButton.setText(member.name)
+            addAdminButton.triggered.connect(partial(self.addAsAdmin, member))
 
     def signOut(self):
         from ui.login_form import loginWindow
@@ -154,3 +193,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.win = loginWindow()
         self.win.show()
         self.hide()
+
+    def addAsAdmin(self, member):
+        taskforce_service.make_admin_in_current_org(member.id)
+        taskforce_service.send_notification(
+            member, f"You have been promototed to an admin status over at {self.current_org.name}",
+            "You have been promoted")
+        success("Succesfully added admin",
+                f"{member.name} is now an admin in your organization! ")
+        self.updateOrgInformation()

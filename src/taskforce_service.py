@@ -106,6 +106,9 @@ class TaskforceService:
     def is_admin(self):
         return self._org_repository.is_admin(self._org.id, self._user.id)
 
+    def make_admin_in_current_org(self, user_id):
+        self._org_repository.add_as_admin(user_id, self._org.id)
+
     def assign_task(self, assigned_to, title, desc):
         task = Task(title, desc, self._user, assigned_to)
         self._task_repository.assign_task(task, self._org.id)
@@ -114,9 +117,9 @@ class TaskforceService:
     def check_notifications(self):
         return self._task_repository.check_notifications(self._user.id)
 
-    def send_notification(self, user, message, notification_type):
+    def send_notification(self, user, message, title):
         self._task_repository.send_notification(
-            user.id, message, notification_type)
+            user.id, message, title)
 
     def delete_tasks(self):
         self._task_repository.delete_users_tasks(self._user.id)
