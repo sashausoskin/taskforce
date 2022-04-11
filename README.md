@@ -21,9 +21,9 @@ Tämä projekti on toteutettu Python-versiolla 3.9.7. Vanhempien Python-versioid
 
 ### Tietokannasta
 
-Tämä projekti käyttää netissä olevaa PostgreSQL-tietokantaa, joten turvallisuussyistä linkkiä siihen ei ole sisällytetty repositoriossa. Linkki tietokantaan on sisällytetty .env-tiedostoon parametrilla ```DATABASE_URL```. Tilanteen voi korjata mm. näillä tavoilla:
+Tämä projekti käyttää netissä olevaa PostgreSQL-tietokantaa, joten turvallisuussyistä linkkiä siihen ei ole sisällytetty repositoriossa. Linkki tietokantaan on sisällytetty .env-tiedostoon parametrilla `DATABASE_URL`. Tilanteen voi korjata mm. näillä tavoilla:
 
-1. Käytä paikallista tietokantaa. Jos olet esimerkiksi käyttänyt tsohan [asennusskriptiä](https://github.com/hy-tsoha/local-pg), niin voit luoda .env-tiedoston sekä kirjoittaa sinne ´´´DATABASE_URL=postgresql+psycopg2://´´´
+1. Käytä paikallista tietokantaa. Jos olet esimerkiksi käyttänyt tsohan [asennusskriptiä](https://github.com/hy-tsoha/local-pg), niin voit luoda .env-tiedoston sekä kirjoittaa sinne `DATABASE_URL=postgresql+psycopg2://`
 2. Luo itse buildi repositoriossa olevasta versiosta [GitHub Actionissa](https://github.com/sonicsasha/taskforce/actions/workflows/build.yml). Se sisältää viittaukset omaan netissä olevaan tietokantaan.
 3. Kysy osoitetta Telegramissa [@sonicsasha](https://t.me/sonicsasha)
 
@@ -33,6 +33,7 @@ Projektin riippuvuudet saa asennettua komennolla
 ```bash
 poetry install
 ```
+**HUOM! Jos ohjelman suorittaa Linux-ympäristössä, niin PyQt5 täytyy asentaa apt:in kautta komennolla `sudo apt install python3-pyqt5`. Cubblissa tämän pitäisi olla jo asennettuna
 
 Kun tietokannalle on annettu osoite, niin tietokannan voi alustaa komennolla
 ```bash
@@ -45,6 +46,8 @@ Ohjelman voi käynnistää komennolla
 ```bash
 poetry run invoke start
 ```
+
+**HUOM! Jos yrität suorittaa ohjelmaa Linuxilla eikä se onnistu, niin asenna PyQt komennolla `sudo apt install python3-pyqt5`. Cubblissa tämän pitäisi olla valmiiksi asennettuna.**
 
 ### Komentorivikomennot
 Ohjelma käynnistetään komennolla
@@ -69,7 +72,7 @@ Pylint-testit pystyy tekemään komennolla
 poetry run invoke lint
 ```
 
-Ohjelmasta voi rakentaa itsenäisesti suoritettavan komennon käyttämällä komentoa 
+Ohjelmasta voi rakentaa itsenäisesti suoritettavan version käyttämällä komentoa 
 ```bash
 poetry run invoke build
 ```
