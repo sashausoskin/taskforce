@@ -33,7 +33,7 @@ Projektin riippuvuudet saa asennettua komennolla
 ```bash
 poetry install
 ```
-**HUOM! Jos ohjelman suorittaa Linux-ympäristössä, niin PyQt5 täytyy asentaa apt:in kautta komennolla `sudo apt install python3-pyqt5`. Cubblissa tämän pitäisi olla jo asennettuna
+**HUOM! Jos ohjelman suorittaa Linux-ympäristössä, niin PyQt5 täytyy asentaa apt:in kautta komennolla `sudo apt install python3-pyqt5`. Cubblissa tämän pitäisi olla jo valmiiksi asennettuna**
 
 Kun tietokannalle on annettu osoite, niin tietokannan voi alustaa komennolla
 ```bash
@@ -46,8 +46,6 @@ Ohjelman voi käynnistää komennolla
 ```bash
 poetry run invoke start
 ```
-
-**HUOM! Jos yrität suorittaa ohjelmaa Linuxilla eikä se onnistu, niin asenna PyQt komennolla `sudo apt install python3-pyqt5`. Cubblissa tämän pitäisi olla valmiiksi asennettuna.**
 
 ### Komentorivikomennot
 Ohjelma käynnistetään komennolla
