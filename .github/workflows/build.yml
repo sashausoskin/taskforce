@@ -2,7 +2,12 @@
 
 name: PyInstaller build
 on: 
-  workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      versionNumber:
+        description: "Version number to be added to the zip package"
+        default: "version"
+      
 
 jobs:
   build-taskforce:
@@ -40,6 +45,6 @@ jobs:
       - name: Upload executable
         uses: actions/upload-artifact@v3
         with:
-          name: taskforce-${{ matrix.os }}
+          name: taskforce_${{ github.event.inputs.versionNumber }}_${{ matrix.os }}
           path: dist
         
