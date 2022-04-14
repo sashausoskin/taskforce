@@ -1,7 +1,6 @@
 from datetime import datetime
 from functools import partial
 from time import sleep
-from typing import Any
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QObject, QThread, pyqtSlot, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
@@ -54,7 +53,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionAssign_a_new_task.triggered.connect(self.assignNewTask)
 
         self.updateOrgInformation()
-        self.updateTasks()
 
     pyqtSlot()
 
@@ -182,14 +180,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def openJoinOrgForm(self):
         from ui.org_join import OrgJoinWindow
 
-        win = OrgJoinWindow(self)
+        win = OrgJoinWindow()
+        
         win.WindowTitle.setText(
             "Join an organization by entering a code below or create a new organization")
         win.org_create_form.buttonBox.accepted.connect(
             self.updateOrgInformation)
+        win.org_create_form.buttonBox.accepted.connect(win.close)
         win.org_create_form.buttonBox.accepted.connect(
             win.org_create_form.close)
-        win.org_create_form.buttonBox.accepted.connect(win.close)
         win.show()
 
     def updateOrgInformation(self):
@@ -214,6 +213,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.isAdmin:
             self.actionAssign_a_new_task.setEnabled(True)
             self.menuAssign_a_member_as_admin.setEnabled(True)
+        
+        else:
+            self.actionAssign_a_new_task.setEnabled(False)
+            self.menuAssign_a_member_as_admin.setEnabled(False)
 
         self.actionJoin_organization_or_create_a_new_one.triggered.connect(
             self.openJoinOrgForm)
@@ -232,6 +235,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.menuAssign_a_member_as_admin.addAction(addAdminButton)
             addAdminButton.setText(member.name)
             addAdminButton.triggered.connect(partial(self.addAsAdmin, member))
+        
+        self.updateTasks()
 
     def signOut(self):
         from ui.login_form import loginWindow
@@ -254,5 +259,4 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def setCurrentOrg(self, org):
         taskforce_service.set_current_org(org)
         self.updateOrgInformation()
-        self.updateTasks()
 

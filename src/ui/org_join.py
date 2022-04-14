@@ -42,7 +42,6 @@ class OrgJoinWindow(QMainWindow, Ui_OrgJoin):
             msg.exec_()
 
     def createOrg(self):
-        self.org_create_form.buttonBox.accepted.connect(self.openMainWindow)
         self.org_create_form.exec()
 
     def openMainWindow(self):

@@ -33,6 +33,7 @@ class SignupForm(QDialog, Ui_signupDialog):
                 self.win = OrgJoinWindow()
                 self.hide()
                 self.parent.close()
+                self.win.org_create_form.buttonBox.accepted.connect(self.win.openMainWindow)
                 self.win.show()
 
             except UsernameExists:

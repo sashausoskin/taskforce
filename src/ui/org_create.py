@@ -25,7 +25,6 @@ class OrgCreateForm(QDialog, Ui_CreateOrg):
                 error("Required fields empty",
                       "Please enter all the required fields!")
             else:
-                self.buttonBox.accepted.disconnect()
                 org = taskforce_service.create_org(
                     self.nameFill.text(), self.codeFill.text())
                 success("Created organization",
