@@ -1,4 +1,5 @@
 from curses.ascii import US
+from datetime import datetime
 import unittest
 import random
 import string
@@ -105,10 +106,10 @@ class TestTaskforce(unittest.TestCase):
         taskforce_service.login(self.admin.username, self.admin.password)
         taskforce_service.assign_task(self.user, "TEST", "TEST")
         self.assertEqual(str(taskforce_service.get_tasks()[0]), str(Task("TEST", "TEST", User(
-            self.admin.name, self.admin.username, ""), User(self.name, self.username, ""))))
+            self.admin.name, self.admin.username, ""), User(self.name, self.username, ""), datetime.now())))
         taskforce_service.login(self.user.username, self.user.password)
         self.assertEqual(str(taskforce_service.get_tasks()[0]), str(Task("TEST", "TEST", User(
-            self.admin.name, self.admin.username, ""), User(self.name, self.username, ""))))
+            self.admin.name, self.admin.username, ""), User(self.name, self.username, ""), datetime.now())))
 
     def test_get_task_by_id(self):
         taskforce_service.assign_task(self.user, "TEST_ID", "TEST_ID")
@@ -124,11 +125,11 @@ class TestTaskforce(unittest.TestCase):
         taskforce_service.assign_task(self.user, "TEST_DONE", "TEST_DONE")
         taskforce_service.login(self.user.username, self.user.password)
         task = taskforce_service.get_tasks()[0]
-        self.assertEqual(task.done, False)
+        self.assertEqual(task.done_on, None)
         taskforce_service.mark_as_done(task)
         taskforce_service.login(self.admin.username, self.admin.password)
         task = taskforce_service.get_tasks()[0]
-        self.assertEqual(task.done, True)
+        self.assertNotEqual(task.done_on, None)
 
     def test_notifications(self):
         taskforce_service.send_notification(

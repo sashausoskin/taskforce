@@ -11,7 +11,7 @@ class SignupForm(QDialog, Ui_signupDialog):
         self.setupUi(self)
         self.connectSignalSlots()
         self.setWindowTitle("Sign up")
-        self._parent = parent
+        self.parent = parent
 
     def connectSignalSlots(self):
         self.buttonBox.accepted.connect(self.signup)
@@ -31,8 +31,8 @@ class SignupForm(QDialog, Ui_signupDialog):
                 taskforce_service.login(user.username, user.password)
 
                 self.win = OrgJoinWindow()
-                self._parent.hide()
                 self.hide()
+                self.parent.close()
                 self.win.show()
 
             except UsernameExists:

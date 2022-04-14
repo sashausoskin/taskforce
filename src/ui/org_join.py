@@ -46,7 +46,7 @@ class OrgJoinWindow(QMainWindow, Ui_OrgJoin):
         self.org_create_form.exec()
 
     def openMainWindow(self):
-        print("Opening main window")
+        self.joinButton.disconnect()
         self._win = MainWindow()
         self._win.show()
         self.close()
