@@ -1,16 +1,17 @@
+from datetime import datetime
+import psycopg2.extras
 from entities.notification import Notification
 from entities.task import Task
 from entities.user import User
 from database_con import get_db_connection
-import psycopg2.extras
-from datetime import datetime
 
 
 class TaskRepository:
 
     def __init__(self, conn) -> None:
         self.conn = conn
-        self._cursor = self.conn.cursor(cursor_factory=psycopg2.extras.DictCursor)
+        self._cursor = self.conn.cursor(
+            cursor_factory=psycopg2.extras.DictCursor)
 
     def fetch_tasks(self, user_id, org_id, admin):
         if not admin:
@@ -30,13 +31,14 @@ class TaskRepository:
             assigned_by_user = User(result[5], result[6], "", result[7])
             assigned_to_user = User(result[8], result[9], "", result[10])
             task_list.append(Task(
-                result[0], result[1], assigned_by_user, assigned_to_user, result[3], result[2], result[4]))
+                result[0], result[1], assigned_by_user,
+                assigned_to_user, result[3], result[2], result[4]))
 
         return task_list
 
     def mark_as_done(self, task_id):
         self._cursor.execute(
-            "UPDATE Tasks SET done_on=%s WHERE id=%s;", (datetime.now(), task_id ))
+            "UPDATE Tasks SET done_on=%s WHERE id=%s;", (datetime.now(), task_id))
         self.conn.commit()
 
     def assign_task(self, task: Task, org_id):

@@ -3,7 +3,7 @@ class Task:
 
     def __init__(self, title, description,
                  assigned_by, assigned_to,
-                 assigned_on, task_id=None, done_on = None) -> None:
+                 assigned_on, task_id=None, done_on=None) -> None:
         self.title = title
         self.desc = description
         self.assigned_by = assigned_by

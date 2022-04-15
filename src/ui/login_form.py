@@ -1,17 +1,16 @@
 import sys
 
-from PyQt5.QtWidgets import QApplication, QMainWindow, QErrorMessage, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QMessageBox
 from PyQt5.QtGui import QIcon, QPixmap
-from entities.notification import Notification
-from taskforce_service import taskforce_service, WrongCredentials
-import plyer
+from user_service import user_service, WrongCredentials
+from org_service import org_service
 
 from ui.login_window_ui import Ui_LoginScreen
 from ui.signup_form import SignupForm
 from ui.org_join import OrgJoinWindow
 from ui.main_window import MainWindow
 
-from ui.messages import notify
+from ui.messages import error, notify
 
 
 class loginWindow(QMainWindow, Ui_LoginScreen):
@@ -32,13 +31,9 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
     def login(self):
         try:
             if self.usernameFill.text().strip() == "" or self.passwordFill.text().strip() == "":
-                msg = QMessageBox()
-                msg.setIcon(QMessageBox.Critical)
-                msg.setText("Please fill all the required fields!")
-                msg.setWindowTitle("Error")
-                msg.exec_()
+                error("Error", "Please fill all the required fields!")
             else:
-                user = taskforce_service.login(
+                user = user_service.login(
                     self.usernameFill.text(), self.passwordFill.text())
 
                 if len(user.organizations) == 0:
@@ -46,18 +41,15 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
                     self.hide()
                     self._win.show()
                 else:
+                    org_service.set_current_org(user.organizations[0])
                     self.loginButton.disconnect()
                     self._win = MainWindow()
                     self.hide()
                     self._win.show()
 
         except WrongCredentials:
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Critical)
-            msg.setText(
+            error("User not found",
                 "The username couldn't be found or the password is incorrect. Please try again!")
-            msg.setWindowTitle("User not found")
-            msg.exec_()
 
     def signupForm(self):
         self._win = SignupForm(self)

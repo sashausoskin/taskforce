@@ -5,7 +5,9 @@ from PyQt5 import QtWidgets
 from PyQt5.QtCore import QObject, QThread, pyqtSlot, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
 from PyQt5.QtGui import QIcon
-from taskforce_service import taskforce_service
+from user_service import user_service
+from task_service import task_service
+from org_service import org_service
 from ui.messages import notify, success
 
 from ui.main_window_ui import Ui_MainWindow
@@ -24,7 +26,7 @@ class NotificationChecker(QObject):
     def run(self):
 
         while not self.stopNotificationCheck:
-            notifications = taskforce_service.check_notifications()
+            notifications = task_service.check_notifications()
 
             for notification in notifications:
                 notify(notification)
@@ -51,7 +53,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.actionSign_out.triggered.connect(self.signOut)
         self.actionAssign_a_new_task.triggered.connect(self.assignNewTask)
-
+        self.actionJoin_organization_or_create_a_new_one.triggered.connect(
+            self.openJoinOrgForm)
         self.updateOrgInformation()
 
     pyqtSlot()
@@ -81,7 +84,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.assignedDate.setText("")
         self.doneDate.setText("")
 
-        for task in taskforce_service.get_tasks():
+        for task in task_service.get_tasks():
             self.taskButtons.append(QPushButton())
             self.newButton = self.taskButtons[-1]
             self.newButton.setObjectName(str(task.task_id))
@@ -109,9 +112,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         clicked_button.setChecked(True)
         self.selectedTaskButton = clicked_button
 
-        selected_task = taskforce_service.get_task_by_id(task.task_id)
-        self.taskTitle.setText(selected_task.title)
-        self.taskDescription.setText(selected_task.desc)
+        self.taskTitle.setText(task.title)
+        self.taskDescription.setText(task.desc)
         self.markAsDoneButton.disconnect()
         self.markAsDoneButton.clicked.connect(
             partial(self.markAsDone, task, task.assigned_by))
@@ -122,55 +124,55 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.assignInfo.setText(f"Assigned by: {task.assigned_by.name}")
 
-        if not selected_task.done_on and self.isAdmin == False:
+        if not task.done_on and self.isAdmin == False:
             self.markAsDoneButton.setEnabled(True)
         else:
             self.markAsDoneButton.setEnabled(False)
-        
-        task_age = datetime.now()-selected_task.assigned_on
-        
-        self.assignedDate.setText(f"Assigned on: {selected_task.assigned_on.strftime('%d.%m.%Y %H:%M')} ({self.calculateAgeText(task_age)})")
 
+        task_age = datetime.now()-task.assigned_on
 
-        if selected_task.done_on:
-            done_age = datetime.now()-selected_task.done_on
-            self.doneDate.setText(f"Done on: {selected_task.done_on.strftime('%d.%m.%Y %H:%M')} ({self.calculateAgeText(done_age)})")
+        self.assignedDate.setText(
+            f"Assigned on: {task.assigned_on.strftime('%d.%m.%Y %H:%M')} ({self.calculateAgeText(task_age)})")
+
+        if task.done_on:
+            done_age = datetime.now()-task.done_on
+            self.doneDate.setText(
+                f"Done on: {task.done_on.strftime('%d.%m.%Y %H:%M')} ({self.calculateAgeText(done_age)})")
         else:
             self.doneDate.setText("")
-    
+
     def calculateAgeText(self, time):
         task_age = time
-        if task_age.total_seconds()<60:
+        if task_age.total_seconds() < 60:
             if task_age.seconds == 1:
                 return "1 second ago"
             return f"{task_age.seconds} seconds ago"
-        if task_age.total_seconds()/60<60:
+        if task_age.total_seconds()/60 < 60:
             if task_age.total_seconds()//60 == 1:
                 return "1 minute ago"
             return f"{task_age.seconds//60} minutes ago"
-        if task_age.total_seconds()/60/60<24:
-            if task_age.seconds/60//60== 1:
+        if task_age.total_seconds()/60/60 < 24:
+            if task_age.seconds/60//60 == 1:
                 return "1 hour ago"
             return f"{task_age.seconds//60//60} hours ago"
-        if task_age.total_days()<7:
+        if task_age.days<30:
             if task_age.days == 1:
                 return "1 day ago"
             return f"{task_age.days} days ago"
-        if task_age.total_months()<12:
-            if task_age.months == 1:
+        if task_age.years < 1:
+            if task_age.days//30 == 1:
                 return "1 month ago"
-            return f"{task_age.months} months ago"
+            return f"{task_age.days//30} months ago"
         else:
             if task_age.years == 1:
                 return "1 year ago"
             return f"{task_age.years} years ago"
 
-
     def markAsDone(self, task, assigned_to):
         self.statusbar.showMessage("Marking task as done...")
-        taskforce_service.mark_as_done(task)
-        taskforce_service.send_notification(
-            assigned_to, f"User {taskforce_service.get_name()} has finished a task: {task.title}", "A task has been finished")
+        task_service.mark_as_done(task)
+        task_service.send_notification(
+            assigned_to, f"User {user_service.get_current_user().name} has finished a task: {task.title}", "A task has been finished")
         self.updateTasks()
 
     def assignNewTask(self):
@@ -180,28 +182,25 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def openJoinOrgForm(self):
         from ui.org_join import OrgJoinWindow
 
-        win = OrgJoinWindow()
-        
-        win.WindowTitle.setText(
+        self.win = OrgJoinWindow()
+
+        self.win.WindowTitle.setText(
             "Join an organization by entering a code below or create a new organization")
-        win.org_create_form.buttonBox.accepted.connect(
-            self.updateOrgInformation)
-        win.org_create_form.buttonBox.accepted.connect(win.close)
-        win.org_create_form.buttonBox.accepted.connect(
-            win.org_create_form.close)
-        win.show()
+        self.win.org_create_form.buttonBox.accepted.connect(
+            self.createOrg)
+        self.win.show()
+
 
     def updateOrgInformation(self):
         # Clear the current member and organization selection
         self.menuAssign_a_member_as_admin.clear()
         self.menuChange_current_organization.clear()
 
-
-        self.current_org = taskforce_service.get_current_org()
-        self.isAdmin = taskforce_service.is_admin()
+        self.current_org = org_service.get_current_org()
+        self.isAdmin = org_service.is_admin()
 
         self.setWindowTitle(f"TaskForce - {self.current_org.name}")
-        self.nameLabel.setText(f"{taskforce_service.get_name()}")
+        self.nameLabel.setText(f"{user_service.get_current_user().name}")
         if self.isAdmin:
             self.orgLabel.setText(
                 f"{self.current_org.name} (Admin)")
@@ -213,29 +212,26 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.isAdmin:
             self.actionAssign_a_new_task.setEnabled(True)
             self.menuAssign_a_member_as_admin.setEnabled(True)
-        
+
         else:
             self.actionAssign_a_new_task.setEnabled(False)
             self.menuAssign_a_member_as_admin.setEnabled(False)
 
-        self.actionJoin_organization_or_create_a_new_one.triggered.connect(
-            self.openJoinOrgForm)
-
-        for org in taskforce_service.get_orgs():
+        for org in org_service.get_orgs():
             changeOrgTo = QtWidgets.QAction(self)
             changeOrgTo.setObjectName(f"org_{org.id}")
             changeOrgTo.triggered.connect(partial(self.setCurrentOrg, org))
             self.menuChange_current_organization.addAction(changeOrgTo)
             changeOrgTo.setText(org.name)
 
-        members = taskforce_service.get_all_members_in_org()
+        members = org_service.get_all_members_in_org()
         for member in members:
             addAdminButton = QtWidgets.QAction(self)
             addAdminButton.setObjectName(f"member_{member.id}")
             self.menuAssign_a_member_as_admin.addAction(addAdminButton)
             addAdminButton.setText(member.name)
             addAdminButton.triggered.connect(partial(self.addAsAdmin, member))
-        
+
         self.updateTasks()
 
     def signOut(self):
@@ -248,15 +244,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.hide()
 
     def addAsAdmin(self, member):
-        taskforce_service.make_admin_in_current_org(member.id)
-        taskforce_service.send_notification(
+        org_service.make_admin_in_current_org(member)
+        task_service.send_notification(
             member, f"You have been promototed to an admin status over at {self.current_org.name}",
             "You have been promoted")
         success("Succesfully added admin",
                 f"{member.name} is now an admin in your organization! ")
         self.updateOrgInformation()
-    
-    def setCurrentOrg(self, org):
-        taskforce_service.set_current_org(org)
-        self.updateOrgInformation()
 
+    def setCurrentOrg(self, org):
+        org_service.set_current_org(org)
+        self.updateOrgInformation()
+    
+    def createOrg(self):
+        if self.win.org_create_form.error == False:
+            self.win.close()
+            self.updateOrgInformation()
