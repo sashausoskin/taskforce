@@ -19,6 +19,8 @@
 - Lisätty kyky luoda tehtäviä, sekä merkata kyseisiä tehtäviä valmiiksi.
 - Lisätty työpöytäilmoitukset, kun käyttäjälle annetaan uusi tehtävä tai käyttäjä merkkaa tehtävän tehdyksi.
 - Lisätty testejä työpöytäilmoituksia sekä uusia tehtäviä varten.
-- Ohjelman perustoiminnallisuus suurin piirtein valmis.
+- Lisätty kyky liittyä useampaan organisaatioon.
+- Lisätty kyky lisätä muita käyttäjiä ylläpitäjiksi.
+- Ohjelman perustoiminnallisuus on nyt valmis.
 - Otettu PyInstaller käyttöön
 - Luotu GitHub Action, jolla saa luotua itsenäisesti suoritettavan version ohjelmasta.

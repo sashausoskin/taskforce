@@ -11,6 +11,8 @@
 
 [Versio 0.1.0 (Viikon 5 palautus)](https://github.com/sonicsasha/taskforce/releases/tag/viikko5)
 
+[Versio 0.2.0 (Voidaan periaatteessa vieläkin laskea viikon 5 palautukseksi)](https://github.com/sonicsasha/taskforce/releases/tag/viikko5-v.0.2.0)
+
 ## Projektista
 
 Tämä on tietokoneella toimiva ohjelma, jolla voi luoda tilin, kirjautua kyseiselle tilille, luoda organisaatioita sekä liittyä muihin olemassaoleviin organisaatioihin koodilla. Organisaation luoja pystyy jakamaan muille organisaation jäsenille tehtäviä, joita jäsenet voivat sitten merkata valmiiksi. Aina kun käyttäjälle jaetaan tehtävä, niin hänelle annetaan aiheesta työpöytäilmoitus. Samoin tehdään organisaation luojalle, kun tehtävä merkitään valmiiksi.
@@ -21,7 +23,7 @@ Tämä projekti on toteutettu Python-versiolla 3.9.7. Vanhempien Python-versioid
 
 ### Tietokannasta
 
-Tämä projekti käyttää netissä olevaa PostgreSQL-tietokantaa, joten turvallisuussyistä linkkiä siihen ei ole sisällytetty repositoriossa. Linkki tietokantaan on sisällytetty .env-tiedostoon parametrilla `DATABASE_URL`. Tilanteen voi korjata mm. näillä tavoilla:
+Tämä projekti käyttää netissä olevaa PostgreSQL-tietokantaa, joten turvallisuussyistä linkkiä siihen ei ole sisällytetty repositoriossa. Linkki tietokantaan merkitään .env-tiedostoon parametrilla `DATABASE_URL`. Tilanteen voi korjata mm. näillä tavoilla:
 
 1. Käytä paikallista tietokantaa. Jos olet esimerkiksi käyttänyt tsohan [asennusskriptiä](https://github.com/hy-tsoha/local-pg), niin voit luoda .env-tiedoston sekä kirjoittaa sinne `DATABASE_URL=postgresql+psycopg2://`
 2. Luo itse buildi repositoriossa olevasta versiosta [GitHub Actionissa](https://github.com/sonicsasha/taskforce/actions/workflows/build.yml). Se sisältää viittaukset omaan netissä olevaan tietokantaan.
