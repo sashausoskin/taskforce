@@ -8,12 +8,10 @@ from PyQt5.QtGui import QIcon
 from user_service import user_service
 from task_service import task_service
 from org_service import org_service
-from typing import Any
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtCore import QObject, QThread, pyqtSlot, pyqtSignal, Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QSizePolicy
 from PyQt5.QtGui import QIcon, QColor, QFontMetrics, QFont
-from taskforce_service import taskforce_service
 from ui.messages import notify, success
 
 from ui.main_window_ui import Ui_MainWindow
