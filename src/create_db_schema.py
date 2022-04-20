@@ -27,7 +27,9 @@ commands = [
         assigned_by INTEGER REFERENCES Users,
         assigned_to INTEGER REFERENCES Users,
         org INTEGER REFERENCES Organizations,
-        done BOOLEAN);""",
+        done BOOLEAN,
+        assigned_on TIMESTAMP,
+        done_on TIMESTAMP);""",
     """CREATE TABLE Notifications
         (user_id INTEGER REFERENCES Users,
         message TEXT,

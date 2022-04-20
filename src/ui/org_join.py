@@ -1,6 +1,7 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QErrorMessage, QMessageBox
+from PyQt5.QtWidgets import QMainWindow, QMessageBox
 from PyQt5.QtGui import QIcon
-from taskforce_service import taskforce_service, InvalidCode
+from user_service import user_service
+from org_service import org_service, InvalidCode
 from ui.messages import error, success
 import plyer
 
@@ -29,7 +30,7 @@ class OrgJoinWindow(QMainWindow, Ui_OrgJoin):
                 error("Required fields empty",
                       "Please enter the code for the organization you want to join.")
             else:
-                org = taskforce_service.join_org(self.codeFill.text())
+                org = org_service.join_org(self.codeFill.text())
                 success("Joined organizations",
                         f"You have succesfully joined the organization {org.name}")
                 self.openMainWindow()
@@ -37,16 +38,15 @@ class OrgJoinWindow(QMainWindow, Ui_OrgJoin):
         except InvalidCode:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
-            msg.setText("message")
-            msg.setWindowTitle("title")
+            msg.setText("Organization not found!")
+            msg.setWindowTitle("There is no organiozation with this code. Make sure that you wrote the code correctly.")
             msg.exec_()
 
     def createOrg(self):
-        self.org_create_form.buttonBox.accepted.connect(self.openMainWindow)
         self.org_create_form.exec()
 
     def openMainWindow(self):
-        print("Opening main window")
+        self.joinButton.disconnect()
         self._win = MainWindow()
         self._win.show()
         self.close()

@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMessageBox, QDialog
-from taskforce_service import taskforce_service, UsernameExists
+from user_service import user_service, UsernameExists
 from ui.org_join import OrgJoinWindow
 
 from ui.signup_form_ui import Ui_signupDialog
@@ -11,7 +11,7 @@ class SignupForm(QDialog, Ui_signupDialog):
         self.setupUi(self)
         self.connectSignalSlots()
         self.setWindowTitle("Sign up")
-        self._parent = parent
+        self.parent = parent
 
     def connectSignalSlots(self):
         self.buttonBox.accepted.connect(self.signup)
@@ -26,13 +26,15 @@ class SignupForm(QDialog, Ui_signupDialog):
 
         else:
             try:
-                user = taskforce_service.signup(self.nameFill.text(
+                user = user_service.signup(self.nameFill.text(
                 ), self.usernameFill.text(), self.passwordFill.text())
-                taskforce_service.login(user.username, user.password)
+                user_service.login(user.username, user.password)
 
                 self.win = OrgJoinWindow()
-                self._parent.hide()
                 self.hide()
+                self.parent.close()
+                self.win.org_create_form.buttonBox.accepted.connect(
+                    self.openMainWindow)
                 self.win.show()
 
             except UsernameExists:
@@ -42,3 +44,7 @@ class SignupForm(QDialog, Ui_signupDialog):
                     "The username or name is already taken. Please try again!")
                 msg.setWindowTitle("Error")
                 msg.exec_()
+    
+    def openMainWindow(self):
+        if self.win.org_create_form.error == False:
+            self.win.openMainWindow()

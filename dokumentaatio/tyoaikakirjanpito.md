@@ -14,5 +14,8 @@
 | 8.4. | 3   | Työpöytäilmoitusten implementointi |
 | 9.4. | 3   | Uusien testien tekeminen, sekä dokumentaation päivittäminen |
 | 10.4. | 5   | PyInstallerin käyttöönotto sekä GitHub Actionin käyttöönotto |
+| 11.4. | 4   | Monen adminin sekä monen organisaation tuen lisääminen |
+| 14.4. | 4   | Monen organisaation tuen sekä tehtävien aikojen lisääminen |
+| 15.4. | 5   | Koodin siistimistä ja refaktorointia, bugien korjauksia sekä uuden buildin julkaisu |
 
-Yhteensä: 40
+Yhteensä: 62
