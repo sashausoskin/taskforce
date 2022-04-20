@@ -1,10 +1,10 @@
 from functools import partial
 from time import sleep
 from typing import Any
-from PyQt5 import QtWidgets
-from PyQt5.QtCore import QObject, QThread, pyqtSlot, pyqtSignal
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
-from PyQt5.QtGui import QIcon
+from PyQt5 import QtWidgets, QtGui
+from PyQt5.QtCore import QObject, QThread, pyqtSlot, pyqtSignal, Qt
+from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QSizePolicy
+from PyQt5.QtGui import QIcon, QColor, QFontMetrics, QFont
 from taskforce_service import taskforce_service
 from ui.messages import notify, success
 
@@ -31,8 +31,12 @@ class NotificationChecker(QObject):
 
             if len(notifications) > 0:
                 self.update_signal.emit()
+            
+            self.update_signal.emit()
 
             sleep(2)
+
+            
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -44,6 +48,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setWindowIcon(QIcon("img/icon.ico"))
         self.notificationChecker = NotificationChecker()
         self.notificationChecker.update_signal.connect(self.updateTasks)
+        self.notificationChecker.update_signal.connect(partial(self.drawComment, "AGDYUAG DWYUAVJ HSUDVUA TYVDUYWV AUYDVJHG SAVUSYDV FAUYWVJHA WVJHSDV DJHAVSUDVAISBK DBASKJDBIKJAG BDIUAWBUIDBAWIUDB"))
         self.thread = QThread(self)
         self.notificationChecker.moveToThread(self.thread)
         self.thread.started.connect(self.notificationChecker.run)
@@ -129,6 +134,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         taskforce_service.send_notification(
             assigned_to, f"User {taskforce_service.get_name()} has finished a task: {task.title}", "A task has been finished")
         self.updateTasks()
+    
+    def drawComment(self, message):
+        commentLabel = QtWidgets.QLabel(message)
+        commentLabel.setWordWrap(True)
+        commentLabel.setText(message)
+        commentLabel.sizePolicy().setVerticalPolicy(QSizePolicy.Minimum)
+        commentLabel.setStyleSheet("background-color: #4287f5; border-radius: 10px;")
+
+
+        self.commentArea.addWidget(commentLabel)
+
+
 
     def assignNewTask(self):
         win = NewTaskForm(self)

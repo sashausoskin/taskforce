@@ -37,6 +37,7 @@ commands = [
 for command in commands:
     try:
         conn.cursor().execute(command)
+        conn.commit()
     except DuplicateTable:
         conn.commit()
 
