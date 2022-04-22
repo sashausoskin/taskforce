@@ -37,8 +37,6 @@ class NotificationChecker(QObject):
 
             if len(notifications) > 0:
                 self.update_signal.emit()
-            
-            self.update_signal.emit()
 
             sleep(2)
 
@@ -54,16 +52,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setWindowIcon(QIcon("img/icon.ico"))
         self.notificationChecker = NotificationChecker()
         self.notificationChecker.update_signal.connect(self.updateTasks)
-        self.notificationChecker.update_signal.connect(partial(self.drawComment, "AGDYUAG DWYUAVJ HSUDVUA TYVDUYWV AUYDVJHG SAVUSYDV FAUYWVJHA WVJHSDV DJHAVSUDVAISBK DBASKJDBIKJAG BDIUAWBUIDBAWIUDB"))
         self.thread = QThread(self)
         self.notificationChecker.moveToThread(self.thread)
         self.thread.started.connect(self.notificationChecker.run)
         self.thread.start()
 
+
         self.actionSign_out.triggered.connect(self.signOut)
         self.actionAssign_a_new_task.triggered.connect(self.assignNewTask)
         self.actionJoin_organization_or_create_a_new_one.triggered.connect(
             self.openJoinOrgForm)
+        task_service.update_comments_in_memory()
         self.updateOrgInformation()
 
     pyqtSlot()
@@ -117,9 +116,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.statusbar.clearMessage()
 
     def updateTaskInfo(self, task, clicked_button):
+        self.commentFill.setText("")
+        self.commentFill.textChanged.connect(self.check_fill_contents)
+        self.postCommentButton.setEnabled(False)
         self.selectedTaskButton.setChecked(False)
         clicked_button.setChecked(True)
         self.selectedTaskButton = clicked_button
+        while self.commentArea.itemAt(0)!=None:
+            if self.commentArea.itemAt(0).widget():
+                self.commentArea.itemAt(0).widget().setParent(None)
+            else:
+                self.commentArea.removeItem(self.commentArea.itemAt(0))
+        self.commentsLabel.setText("Comments")
 
         self.taskTitle.setText(task.title)
         self.taskDescription.setText(task.desc)
@@ -149,6 +157,33 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 f"Done on: {task.done_on.strftime('%d.%m.%Y %H:%M')} ({self.calculateAgeText(done_age)})")
         else:
             self.doneDate.setText("")
+        
+        spacerItem = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+
+        try:
+            for comment in task_service.get_comments_from_memory()[task.task_id]:
+                commentLabel = QtWidgets.QLabel(comment.message)
+                commentLabel.setWordWrap(True)
+                commentLabel.setTextFormat(Qt.TextFormat.MarkdownText)
+
+                if comment.sent_by.username == user_service.get_current_user().username:
+                    header = "### You"
+                else:
+                    header = f"### {comment.sent_by.name}"
+
+                commentLabel.setText(f"""{header}\n{comment.date.strftime('%d.%m.%Y %H:%M')} \n \n {comment.message}""")
+                commentLabel.sizePolicy().setVerticalPolicy(QSizePolicy.Minimum)
+                commentLabel.setStyleSheet("background-color: #4287f5; border-radius: 10px; padding-left: 10px; padding-top: 15px; padding-bottom: 15px; padding-right: 10px")
+                self.commentArea.addWidget(commentLabel)
+
+            self.commentArea.addItem(spacerItem)
+        except KeyError:
+            self.commentsLabel.setText("")
+            self.commentArea.addItem(spacerItem)
+
+
+
 
     def calculateAgeText(self, time):
         task_age = time
@@ -183,17 +218,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         task_service.send_notification(
             assigned_to, f"User {user_service.get_current_user().name} has finished a task: {task.title}", "A task has been finished")
         self.updateTasks()
-    
-    def drawComment(self, message):
-        commentLabel = QtWidgets.QLabel(message)
-        commentLabel.setWordWrap(True)
-        commentLabel.setText(message)
-        commentLabel.sizePolicy().setVerticalPolicy(QSizePolicy.Minimum)
-        commentLabel.setStyleSheet("background-color: #4287f5; border-radius: 10px;")
-
-
-        self.commentArea.addWidget(commentLabel)
-
 
 
     def assignNewTask(self):
@@ -281,3 +305,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.win.org_create_form.error == False:
             self.win.close()
             self.updateOrgInformation()
+        
+    def check_fill_contents(self):
+        if self.commentFill.toPlainText().strip() == "":
+            self.postCommentButton.setEnabled(False)
+        else:
+            self.postCommentButton.setEnabled(True)

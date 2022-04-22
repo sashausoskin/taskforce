@@ -33,7 +33,13 @@ commands = [
     """CREATE TABLE Notifications
         (user_id INTEGER REFERENCES Users,
         message TEXT,
-        title TEXT);"""
+        title TEXT);""",
+    """CREATE TABLE Comments
+        (id SERIAL PRIMARY KEY,
+        task_id INTEGER REFERENCES Tasks,
+        message TEXT,
+        date TIMESTAMP,
+        sent_by INTEGER REFERENCES Users);"""
 ]
 
 for command in commands:

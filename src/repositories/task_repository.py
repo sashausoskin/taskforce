@@ -3,14 +3,19 @@ import psycopg2.extras
 from entities.notification import Notification
 from entities.task import Task
 from entities.user import User
+from entities.comment import Comment
 from database_con import get_db_connection
 
 
 class TaskRepository:
 
-    def __init__(self, conn) -> None:
+    def __init__(self, conn, bg_conn) -> None:
         self.conn = conn
         self._cursor = self.conn.cursor(
+            cursor_factory=psycopg2.extras.DictCursor)
+        
+        self.bg_conn = bg_conn
+        self._bg_cursor = self.bg_conn.cursor(
             cursor_factory=psycopg2.extras.DictCursor)
 
     def fetch_tasks(self, user_id, org_id, admin):
@@ -38,7 +43,7 @@ class TaskRepository:
 
     def mark_as_done(self, task_id):
         self._cursor.execute(
-            "UPDATE Tasks SET done_on=%s WHERE id=%s;", (datetime.now(), task_id))
+            "UPDATE Tas        self.bg_conn = self.connks SET done_on=%s WHERE id=%s;", (datetime.now(), task_id))
         self.conn.commit()
 
     def assign_task(self, task: Task, org_id):
@@ -50,17 +55,18 @@ class TaskRepository:
         self.conn.commit()
 
     def check_notifications(self, user_id):
-        self._cursor.execute(
+
+        self._bg_cursor.execute(
             "SELECT message, title FROM Notifications WHERE user_id=%s;", (user_id, ))
 
         notifications = []
 
-        for result in self._cursor.fetchall():
+        for result in self._bg_cursor.fetchall():
             notifications.append(Notification(result[0], result[1]))
 
-        self._cursor.execute(
+        self._bg_cursor.execute(
             "DELETE FROM Notifications WHERE user_id=%s;", (user_id, ))
-        self.conn.commit()
+        self.bg_conn.commit()
 
         return notifications
 
@@ -74,6 +80,23 @@ class TaskRepository:
             "DELETE FROM Tasks WHERE assigned_to=%s;", (user_id, )
         )
         self.conn.commit()
+    
+    def get_comments(self):
+        self._cursor.execute(
+            "SELECT C.id, C.task_id, C.message, C.date, U.id, U.name, U.username FROM Comments C LEFT JOIN Users U ON C.sent_by=U.id;"
+        )
+
+        results=self._cursor.fetchall()
+
+        comments = {}
+
+        for result in results:
+            comments[result[1]] = []
+        
+        for result in results:
+            comments[result[1]].append(Comment(result[0], result[1], result[2], result[3], User(result[5], result[6], "", result[4])))
+        
+        return comments
 
 
-task_repository = TaskRepository(get_db_connection())
+task_repository = TaskRepository(get_db_connection(), get_db_connection())

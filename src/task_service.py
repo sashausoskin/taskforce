@@ -9,6 +9,7 @@ class TaskService:
     def __init__(self) -> None:
         self._task_repository = task_repository
         self._tasks = []
+        self._comments = {}
 
     def get_orgs(self):
         return user_service.get_current_user().organizations
@@ -40,6 +41,12 @@ class TaskService:
     def delete_tasks(self):
         self._task_repository.delete_users_tasks(
             user_service.get_current_user().id)
+    
+    def update_comments_in_memory(self):
+        self._comments = self._task_repository.get_comments()
+    
+    def get_comments_from_memory(self):
+        return self._comments
 
     def signout(self):
         self._tasks = None
