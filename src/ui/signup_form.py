@@ -27,7 +27,7 @@ class SignupForm(QDialog, Ui_signupDialog):
         else:
             try:
                 user = user_service.signup(self.nameFill.text(
-                ), self.usernameFill.text(), self.passwordFill.text())
+                ), self.usernameFill.text().strip(), self.passwordFill.text())
                 user_service.login(user.username, user.password)
 
                 self.win = OrgJoinWindow()

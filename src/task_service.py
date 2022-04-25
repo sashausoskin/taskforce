@@ -15,11 +15,12 @@ class TaskService:
     def get_orgs(self):
         return user_service.get_current_user().organizations
 
-    def get_tasks(self):
+    def get_tasks(self, filters = []):
         self._tasks = self._task_repository.fetch_tasks(
             user_service.get_current_user().id,
             org_service.get_current_org().id,
-            org_service.is_admin())
+            org_service.is_admin(),
+            filters)
         return self._tasks
 
     def mark_as_done(self, task):
@@ -47,7 +48,6 @@ class TaskService:
         self._comments = self._task_repository.get_comments()
     
     def get_comments_from_memory(self):
-        print(self._comments)
         return self._comments
     
     def post_comment(self, task, message):

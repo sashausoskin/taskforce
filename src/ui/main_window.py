@@ -49,6 +49,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None) -> None:
         super().__init__(parent)
         self.parent = parent
+        self.filters = []
         self.setupUi(self)
         self.setWindowTitle("TaskForce")
         self.setWindowIcon(QIcon("img/icon.ico"))
@@ -64,6 +65,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionAssign_a_new_task.triggered.connect(self.assignNewTask)
         self.actionJoin_organization_or_create_a_new_one.triggered.connect(
             self.openJoinOrgForm)
+        self.actionViewAssignedTasks.triggered.connect(self.updateFilters)
+        self.actionViewUndoneTasks.triggered.connect(self.updateFilters)
+
+        
         task_service.update_comments_in_memory()
         self.updateOrgInformation()
 
@@ -73,6 +78,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.statusbar.showMessage("Fetching tasks...")
         self.taskButtons = []
         selectedButtonName = None
+
+        filters = []
+        if self.actionViewAssignedTasks.isChecked() == True:
+            filters.append("user_assigned")
+        if self.actionViewUndoneTasks.isChecked() == True:
+            filters.append("undone")
 
         if self.selectedTaskButton:
             selectedButtonName = self.selectedTaskButton.objectName()
@@ -93,8 +104,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.assignInfo.setText("")
         self.assignedDate.setText("")
         self.doneDate.setText("")
+        self.postCommentButton.setEnabled(False)
+        self.commentFill.setEnabled(False)
 
-        for task in task_service.get_tasks():
+        for task in task_service.get_tasks(filters):
             self.taskButtons.append(QPushButton())
             self.newButton = self.taskButtons[-1]
             self.newButton.setObjectName(str(task.id))
@@ -118,6 +131,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.statusbar.clearMessage()
 
     def updateTaskInfo(self, task, clicked_button):
+        self.commentFill.setEnabled(True)
         self.commentFill.setText("")
         self.commentFill.textChanged.connect(self.check_fill_contents)
         self.postCommentButton.setEnabled(False)
@@ -138,7 +152,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             partial(self.markAsDone, task, task.assigned_by))
 
         if self.isAdmin:
-            self.assignInfo.setText(f"Assigned to: {task.assigned_to.name}")
+            if user_service.get_current_user().username == task.assigned_by.username:
+                self.assignInfo.setText(f"Assigned to: {task.assigned_to.name} \nAssigned by: You")
+            else:
+                self.assignInfo.setText(f"Assigned to: {task.assigned_to.name} \nAssigned by: {task.assigned_by.name}")
 
         else:
             self.assignInfo.setText(f"Assigned by: {task.assigned_by.name}")
@@ -255,9 +272,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         if self.isAdmin:
             self.orgLabel.setText(
                 f"{self.current_org.name} (Admin)")
+            self.actionViewAllTasks.setEnabled(True)
         else:
             self.orgLabel.setText(
                 f"{self.current_org.name} (Member)")
+            self.actionViewAllTasks.setEnabled(False)
         self.selectedTaskButton = None
 
         if self.isAdmin:
@@ -329,3 +348,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.postCommentButton.setEnabled(False)
         else:
             self.postCommentButton.setEnabled(True)
+    
+    def updateFilters(self):
+        self.selectedTaskButton = None
+    
+        while self.commentArea.itemAt(0)!=None:
+            if self.commentArea.itemAt(0).widget():
+                self.commentArea.itemAt(0).widget().setParent(None)
+            else:
+                self.commentArea.removeItem(self.commentArea.itemAt(0))
+        
+        self.updateTasks()

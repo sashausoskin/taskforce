@@ -19,17 +19,24 @@ class TaskRepository:
         self._bg_cursor = self.bg_conn.cursor(
             cursor_factory=psycopg2.extras.DictCursor)
 
-    def fetch_tasks(self, user_id, org_id, admin):
+    def fetch_tasks(self, user_id, org_id, admin, filters):
+        query_filters = ""
+
+        if "user_assigned" in filters:
+            query_filters += f"AND T.assigned_by = {user_id}" #Potential for injection?
+        if "undone" in filters:
+            query_filters += "AND T.done_on IS NULL"
+
         if not admin:
             self._cursor.execute("""SELECT T.title, T.description, T.id, T.assigned_on, T.done_on,
                 U_by.name, U_By.username, U_By.id, U_To.name, U_To.username, U_To.id
                 FROM Tasks T LEFT JOIN Users U_To ON T.assigned_to = U_To.id LEFT JOIN Users U_By ON T.assigned_by = U_By.id 
                 WHERE T.assigned_to = %s AND org = %s ORDER BY T.id;""", (user_id, org_id))
         else:
-            self._cursor.execute("""SELECT T.title, T.description, T.id, T.assigned_on, T.done_on,
+            self._cursor.execute(f"""SELECT T.title, T.description, T.id, T.assigned_on, T.done_on,
                 U_by.name, U_By.username, U_By.id, U_To.name, U_To.username, U_To.id
                 FROM Tasks T LEFT JOIN Users U_To ON T.assigned_to = U_To.id LEFT JOIN Users U_By ON T.assigned_by = U_By.id 
-                WHERE T.assigned_by = %s AND org = %s ORDER BY T.id;""", (user_id, org_id))
+                WHERE org = %s {query_filters} ORDER BY T.id;""", (org_id, ))
 
         results = self._cursor.fetchall()
         task_list = []
@@ -44,7 +51,7 @@ class TaskRepository:
 
     def mark_as_done(self, task_id):
         self._cursor.execute(
-            "UPDATE Tas        self.bg_conn = self.connks SET done_on=%s WHERE id=%s;", (datetime.now(), task_id))
+            "UPDATE Tasks SET done_on=%s WHERE id=%s;", (datetime.now(), task_id))
         self.conn.commit()
 
     def assign_task(self, task: Task, org_id):
