@@ -1,4 +1,5 @@
 from datetime import datetime
+from time import time
 import psycopg2.extras
 from entities.notification import Notification
 from entities.task import Task
@@ -83,7 +84,7 @@ class TaskRepository:
     
     def get_comments(self):
         self._cursor.execute(
-            "SELECT C.id, C.task_id, C.message, C.date, U.id, U.name, U.username FROM Comments C LEFT JOIN Users U ON C.sent_by=U.id;"
+            "SELECT C.id, C.task_id, C.message, C.time, U.id, U.name, U.username FROM Comments C LEFT JOIN Users U ON C.sent_by=U.id;"
         )
 
         results=self._cursor.fetchall()
@@ -94,9 +95,16 @@ class TaskRepository:
             comments[result[1]] = []
         
         for result in results:
-            comments[result[1]].append(Comment(result[0], result[1], result[2], result[3], User(result[5], result[6], "", result[4])))
+            comments[result[1]].append(Comment(result[1], result[2], result[3], User(result[5], result[6], "", result[4]), result[0]))
         
         return comments
+    
+    def post_comment(self, task_id, message, sent_by_user_id):
+        self._cursor.execute(
+            "INSERT INTO Comments (task_id, message, time, sent_by) VALUES (%s, %s, %s, %s);", (task_id, message, datetime.now(), sent_by_user_id)
+        )
+
+        self.conn.commit()
 
 
 task_repository = TaskRepository(get_db_connection(), get_db_connection())

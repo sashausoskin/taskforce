@@ -38,7 +38,7 @@ commands = [
         (id SERIAL PRIMARY KEY,
         task_id INTEGER REFERENCES Tasks,
         message TEXT,
-        date TIMESTAMP,
+        time TIMESTAMP,
         sent_by INTEGER REFERENCES Users);"""
 ]
 

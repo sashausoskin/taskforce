@@ -589,6 +589,48 @@
         </item>
         <item>
          <widget class="QPushButton" name="markAsDoneButton">
+          <property name="palette">
+           <palette>
+            <active>
+             <colorrole role="Button">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>51</red>
+                <green>209</green>
+                <blue>122</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </active>
+            <inactive>
+             <colorrole role="Button">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>51</red>
+                <green>209</green>
+                <blue>122</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </inactive>
+            <disabled>
+             <colorrole role="Button">
+              <brush brushstyle="SolidPattern">
+               <color alpha="255">
+                <red>51</red>
+                <green>209</green>
+                <blue>122</blue>
+               </color>
+              </brush>
+             </colorrole>
+            </disabled>
+           </palette>
+          </property>
+          <property name="font">
+           <font>
+            <stylestrategy>PreferAntialias</stylestrategy>
+           </font>
+          </property>
           <property name="text">
            <string>Mark as done</string>
           </property>

@@ -1,3 +1,4 @@
+from asyncio import Task
 from datetime import datetime
 from functools import partial
 from time import sleep
@@ -5,6 +6,7 @@ from PyQt5 import QtWidgets
 from PyQt5.QtCore import QObject, QThread, pyqtSlot, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
 from PyQt5.QtGui import QIcon
+from entities.notification import Notification
 from user_service import user_service
 from task_service import task_service
 from org_service import org_service
@@ -95,7 +97,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for task in task_service.get_tasks():
             self.taskButtons.append(QPushButton())
             self.newButton = self.taskButtons[-1]
-            self.newButton.setObjectName(str(task.task_id))
+            self.newButton.setObjectName(str(task.id))
             self.newButton.setText(task.title)
             self.newButton.setCheckable(True)
             if task.done_on:
@@ -162,7 +164,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
 
         try:
-            for comment in task_service.get_comments_from_memory()[task.task_id]:
+            for comment in task_service.get_comments_from_memory()[task.id]:
                 commentLabel = QtWidgets.QLabel(comment.message)
                 commentLabel.setWordWrap(True)
                 commentLabel.setTextFormat(Qt.TextFormat.MarkdownText)
@@ -172,7 +174,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 else:
                     header = f"### {comment.sent_by.name}"
 
-                commentLabel.setText(f"""{header}\n{comment.date.strftime('%d.%m.%Y %H:%M')} \n \n {comment.message}""")
+                commentLabel.setText(f"""{header}\n{comment.date.strftime('%d.%m.%Y %H:%M')} ({self.calculateAgeText(datetime.now()-comment.date)})\n \n {comment.message}""")
                 commentLabel.sizePolicy().setVerticalPolicy(QSizePolicy.Minimum)
                 commentLabel.setStyleSheet("background-color: #4287f5; border-radius: 10px; padding-left: 10px; padding-top: 15px; padding-bottom: 15px; padding-right: 10px")
                 self.commentArea.addWidget(commentLabel)
@@ -181,6 +183,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         except KeyError:
             self.commentsLabel.setText("")
             self.commentArea.addItem(spacerItem)
+        
+        self.postCommentButton.disconnect()
+        self.postCommentButton.clicked.connect(partial(self.postComment, task))
+        self.postCommentButton.clicked.connect(partial(self.updateTaskInfo, task, clicked_button))
 
 
 
@@ -278,6 +284,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             addAdminButton.triggered.connect(partial(self.addAsAdmin, member))
 
         self.updateTasks()
+    
+    def postComment(self, task : Task):
+        task_service.post_comment(task, self.commentFill.toPlainText())
+        if self.isAdmin:
+            task_service.send_notification(task.assigned_to, 
+                f"{user_service.get_current_user().name} left a new comment under your task {task.title}: \n{self.commentFill.toPlainText()}",
+                "New comment")
+        else:
+            task_service.send_notification(task.assigned_by, 
+                f"User {user_service.get_current_user().name} left a new comment under the task {task.title}: \n{self.commentFill.toPlainText()}",
+                "New comment")
+
 
     def signOut(self):
         from ui.login_form import loginWindow

@@ -8,7 +8,7 @@ class Task:
         self.desc = description
         self.assigned_by = assigned_by
         self.assigned_to = assigned_to
-        self.task_id = task_id
+        self.id = task_id
         self.assigned_on = assigned_on
         self.done_on = done_on
 

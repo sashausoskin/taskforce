@@ -1,4 +1,5 @@
 from datetime import datetime
+from entities.comment import Comment
 from entities.task import Task
 from repositories.task_repository import task_repository
 from user_service import user_service
@@ -22,7 +23,7 @@ class TaskService:
         return self._tasks
 
     def mark_as_done(self, task):
-        self._task_repository.mark_as_done(task.task_id)
+        self._task_repository.mark_as_done(task.id)
 
     def assign_task(self, assigned_to, title, desc):
         task = Task(title, desc, user_service.get_current_user(),
@@ -46,7 +47,16 @@ class TaskService:
         self._comments = self._task_repository.get_comments()
     
     def get_comments_from_memory(self):
+        print(self._comments)
         return self._comments
+    
+    def post_comment(self, task, message):
+        self._task_repository.post_comment(task.id, message, user_service.get_current_user().id)
+        
+        if task.id not in self._comments:
+            self._comments[task.id] = [Comment(task.id, message, datetime.now(), user_service.get_current_user())]
+        else:
+            self._comments[task.id].append(Comment(task.id, message, datetime.now(), user_service.get_current_user()))
 
     def signout(self):
         self._tasks = None
