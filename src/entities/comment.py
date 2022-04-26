@@ -1,8 +1,9 @@
 from entities.user import User
 
+
 class Comment:
 
-    def __init__(self, task_id, message, date, sent_by : User, comment_id = None) -> None:
+    def __init__(self, task_id, message, date, sent_by: User, comment_id=None) -> None:
         self.id = comment_id
         self.task_id = task_id
         self.message = message

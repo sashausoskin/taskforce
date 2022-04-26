@@ -22,7 +22,8 @@ class Ui_MainWindow(object):
         self.gridLayout.setContentsMargins(5, 5, 0, 0)
         self.gridLayout.setSpacing(0)
         self.gridLayout.setObjectName("gridLayout")
-        spacerItem = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(
+            20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         self.gridLayout.addItem(spacerItem, 2, 0, 1, 1)
         self.line = QtWidgets.QFrame(self.centralwidget)
         self.line.setMinimumSize(QtCore.QSize(0, 50))
@@ -31,61 +32,76 @@ class Ui_MainWindow(object):
         self.line.setObjectName("line")
         self.gridLayout.addWidget(self.line, 3, 1, 1, 1)
         self.taskInfoScrollArea = QtWidgets.QScrollArea(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(2)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.taskInfoScrollArea.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.taskInfoScrollArea.sizePolicy().hasHeightForWidth())
         self.taskInfoScrollArea.setSizePolicy(sizePolicy)
         self.taskInfoScrollArea.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.taskInfoScrollArea.setFrameShadow(QtWidgets.QFrame.Plain)
-        self.taskInfoScrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
-        self.taskInfoScrollArea.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
+        self.taskInfoScrollArea.setHorizontalScrollBarPolicy(
+            QtCore.Qt.ScrollBarAsNeeded)
+        self.taskInfoScrollArea.setSizeAdjustPolicy(
+            QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.taskInfoScrollArea.setWidgetResizable(True)
         self.taskInfoScrollArea.setObjectName("taskInfoScrollArea")
         self.taskInfoScrollContents = QtWidgets.QWidget()
         self.taskInfoScrollContents.setGeometry(QtCore.QRect(0, 0, 642, 571))
         self.taskInfoScrollContents.setObjectName("taskInfoScrollContents")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.taskInfoScrollContents)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(
+            self.taskInfoScrollContents)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.taskTitle = QtWidgets.QLabel(self.taskInfoScrollContents)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.taskTitle.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.taskTitle.sizePolicy().hasHeightForWidth())
         self.taskTitle.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setPointSize(15)
         self.taskTitle.setFont(font)
         self.taskTitle.setObjectName("taskTitle")
         self.verticalLayout_2.addWidget(self.taskTitle)
-        spacerItem1 = QtWidgets.QSpacerItem(20, 5, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            20, 5, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
         self.verticalLayout_2.addItem(spacerItem1)
         self.assignInfo = QtWidgets.QLabel(self.taskInfoScrollContents)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(50)
-        sizePolicy.setHeightForWidth(self.assignInfo.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.assignInfo.sizePolicy().hasHeightForWidth())
         self.assignInfo.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setPointSize(11)
         self.assignInfo.setFont(font)
         self.assignInfo.setObjectName("assignInfo")
         self.verticalLayout_2.addWidget(self.assignInfo)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
+        spacerItem2 = QtWidgets.QSpacerItem(
+            20, 10, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
         self.verticalLayout_2.addItem(spacerItem2)
         self.assignedDate = QtWidgets.QLabel(self.taskInfoScrollContents)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.assignedDate.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.assignedDate.sizePolicy().hasHeightForWidth())
         self.assignedDate.setSizePolicy(sizePolicy)
         self.assignedDate.setObjectName("assignedDate")
         self.verticalLayout_2.addWidget(self.assignedDate)
         self.doneDate = QtWidgets.QLabel(self.taskInfoScrollContents)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.doneDate.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.doneDate.sizePolicy().hasHeightForWidth())
         self.doneDate.setSizePolicy(sizePolicy)
         self.doneDate.setObjectName("doneDate")
         self.verticalLayout_2.addWidget(self.doneDate)
@@ -95,22 +111,28 @@ class Ui_MainWindow(object):
         self.line_2.setObjectName("line_2")
         self.verticalLayout_2.addWidget(self.line_2)
         self.taskDescription = QtWidgets.QLabel(self.taskInfoScrollContents)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.taskDescription.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.taskDescription.sizePolicy().hasHeightForWidth())
         self.taskDescription.setSizePolicy(sizePolicy)
-        self.taskDescription.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.taskDescription.setAlignment(
+            QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
         self.taskDescription.setWordWrap(True)
         self.taskDescription.setObjectName("taskDescription")
         self.verticalLayout_2.addWidget(self.taskDescription)
-        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
+        spacerItem3 = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
         self.verticalLayout_2.addItem(spacerItem3)
         self.commentsLabel = QtWidgets.QLabel(self.taskInfoScrollContents)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.commentsLabel.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.commentsLabel.sizePolicy().hasHeightForWidth())
         self.commentsLabel.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setPointSize(14)
@@ -122,10 +144,12 @@ class Ui_MainWindow(object):
         self.commentArea.setObjectName("commentArea")
         self.verticalLayout_2.addLayout(self.commentArea)
         self.postCommentLabel = QtWidgets.QLabel(self.taskInfoScrollContents)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.postCommentLabel.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.postCommentLabel.sizePolicy().hasHeightForWidth())
         self.postCommentLabel.setSizePolicy(sizePolicy)
         font = QtGui.QFont()
         font.setPointSize(11)
@@ -133,24 +157,31 @@ class Ui_MainWindow(object):
         self.postCommentLabel.setObjectName("postCommentLabel")
         self.verticalLayout_2.addWidget(self.postCommentLabel)
         self.commentFill = QtWidgets.QTextEdit(self.taskInfoScrollContents)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Maximum)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.commentFill.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.commentFill.sizePolicy().hasHeightForWidth())
         self.commentFill.setSizePolicy(sizePolicy)
-        self.commentFill.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
+        self.commentFill.setSizeAdjustPolicy(
+            QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.commentFill.setObjectName("commentFill")
         self.verticalLayout_2.addWidget(self.commentFill)
-        self.postCommentButton = QtWidgets.QPushButton(self.taskInfoScrollContents)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
+        self.postCommentButton = QtWidgets.QPushButton(
+            self.taskInfoScrollContents)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(50)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.postCommentButton.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.postCommentButton.sizePolicy().hasHeightForWidth())
         self.postCommentButton.setSizePolicy(sizePolicy)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.Active,
+                         QtGui.QPalette.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(98, 160, 234))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Button, brush)
@@ -165,13 +196,16 @@ class Ui_MainWindow(object):
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.ButtonText, brush)
+        palette.setBrush(QtGui.QPalette.Active,
+                         QtGui.QPalette.ButtonText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0, 128))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.PlaceholderText, brush)
+        palette.setBrush(QtGui.QPalette.Active,
+                         QtGui.QPalette.PlaceholderText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.Inactive,
+                         QtGui.QPalette.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(98, 160, 234))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Button, brush)
@@ -186,13 +220,16 @@ class Ui_MainWindow(object):
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.ButtonText, brush)
+        palette.setBrush(QtGui.QPalette.Inactive,
+                         QtGui.QPalette.ButtonText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0, 128))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.PlaceholderText, brush)
+        palette.setBrush(QtGui.QPalette.Inactive,
+                         QtGui.QPalette.PlaceholderText, brush)
         brush = QtGui.QBrush(QtGui.QColor(154, 153, 150))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.Disabled,
+                         QtGui.QPalette.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(98, 160, 234))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Button, brush)
@@ -207,19 +244,23 @@ class Ui_MainWindow(object):
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(154, 153, 150))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, brush)
+        palette.setBrush(QtGui.QPalette.Disabled,
+                         QtGui.QPalette.ButtonText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0, 128))
         brush.setStyle(QtCore.Qt.SolidPattern)
-        palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.PlaceholderText, brush)
+        palette.setBrush(QtGui.QPalette.Disabled,
+                         QtGui.QPalette.PlaceholderText, brush)
         self.postCommentButton.setPalette(palette)
         font = QtGui.QFont()
         font.setStyleStrategy(QtGui.QFont.PreferAntialias)
         self.postCommentButton.setFont(font)
-        self.postCommentButton.setStyleSheet("margin-left: 5em; margin-right: 5em; padding-top: 2px; padding-bottom: 2px")
+        self.postCommentButton.setStyleSheet(
+            "margin-left: 5em; margin-right: 5em; padding-top: 2px; padding-bottom: 2px")
         self.postCommentButton.setAutoRepeat(False)
         self.postCommentButton.setObjectName("postCommentButton")
         self.verticalLayout_2.addWidget(self.postCommentButton)
-        self.markAsDoneButton = QtWidgets.QPushButton(self.taskInfoScrollContents)
+        self.markAsDoneButton = QtWidgets.QPushButton(
+            self.taskInfoScrollContents)
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(51, 209, 122))
         brush.setStyle(QtCore.Qt.SolidPattern)
@@ -239,15 +280,19 @@ class Ui_MainWindow(object):
         self.taskInfoScrollArea.setWidget(self.taskInfoScrollContents)
         self.gridLayout.addWidget(self.taskInfoScrollArea, 2, 2, 2, 1)
         self.taskScrollArea = QtWidgets.QScrollArea(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.taskScrollArea.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.taskScrollArea.sizePolicy().hasHeightForWidth())
         self.taskScrollArea.setSizePolicy(sizePolicy)
         self.taskScrollArea.setMinimumSize(QtCore.QSize(175, 0))
         self.taskScrollArea.setFrameShape(QtWidgets.QFrame.NoFrame)
-        self.taskScrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
-        self.taskScrollArea.setSizeAdjustPolicy(QtWidgets.QAbstractScrollArea.AdjustToContents)
+        self.taskScrollArea.setVerticalScrollBarPolicy(
+            QtCore.Qt.ScrollBarAlwaysOn)
+        self.taskScrollArea.setSizeAdjustPolicy(
+            QtWidgets.QAbstractScrollArea.AdjustToContents)
         self.taskScrollArea.setWidgetResizable(True)
         self.taskScrollArea.setObjectName("taskScrollArea")
         self.taskScrollContents = QtWidgets.QWidget()
@@ -265,7 +310,8 @@ class Ui_MainWindow(object):
         font.setBold(True)
         font.setWeight(75)
         self.nameLabel.setFont(font)
-        self.nameLabel.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.nameLabel.setAlignment(
+            QtCore.Qt.AlignLeading | QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop)
         self.nameLabel.setObjectName("nameLabel")
         self.gridLayout.addWidget(self.nameLabel, 0, 0, 1, 1)
         self.orgLabel = QtWidgets.QLabel(self.centralwidget)
@@ -283,11 +329,15 @@ class Ui_MainWindow(object):
         self.menuFilter.setObjectName("menuFilter")
         self.menuOrganizations = QtWidgets.QMenu(self.menubar)
         self.menuOrganizations.setObjectName("menuOrganizations")
-        self.menuChange_current_organization = QtWidgets.QMenu(self.menuOrganizations)
-        self.menuChange_current_organization.setObjectName("menuChange_current_organization")
-        self.menuAssign_a_member_as_admin = QtWidgets.QMenu(self.menuOrganizations)
+        self.menuChange_current_organization = QtWidgets.QMenu(
+            self.menuOrganizations)
+        self.menuChange_current_organization.setObjectName(
+            "menuChange_current_organization")
+        self.menuAssign_a_member_as_admin = QtWidgets.QMenu(
+            self.menuOrganizations)
         self.menuAssign_a_member_as_admin.setEnabled(True)
-        self.menuAssign_a_member_as_admin.setObjectName("menuAssign_a_member_as_admin")
+        self.menuAssign_a_member_as_admin.setObjectName(
+            "menuAssign_a_member_as_admin")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -298,8 +348,10 @@ class Ui_MainWindow(object):
         self.actionAssign_a_new_task = QtWidgets.QAction(MainWindow)
         self.actionAssign_a_new_task.setEnabled(False)
         self.actionAssign_a_new_task.setObjectName("actionAssign_a_new_task")
-        self.actionJoin_organization_or_create_a_new_one = QtWidgets.QAction(MainWindow)
-        self.actionJoin_organization_or_create_a_new_one.setObjectName("actionJoin_organization_or_create_a_new_one")
+        self.actionJoin_organization_or_create_a_new_one = QtWidgets.QAction(
+            MainWindow)
+        self.actionJoin_organization_or_create_a_new_one.setObjectName(
+            "actionJoin_organization_or_create_a_new_one")
         self.actionViewAllTasks = QtWidgets.QAction(MainWindow)
         self.actionViewAllTasks.setObjectName("actionViewAllTasks")
         self.actionViewAssignedTasks = QtWidgets.QAction(MainWindow)
@@ -316,11 +368,14 @@ class Ui_MainWindow(object):
         self.menuTasks.addAction(self.actionAssign_a_new_task)
         self.menuTasks.addSeparator()
         self.menuTasks.addAction(self.menuFilter.menuAction())
-        self.menuOrganizations.addAction(self.actionJoin_organization_or_create_a_new_one)
+        self.menuOrganizations.addAction(
+            self.actionJoin_organization_or_create_a_new_one)
         self.menuOrganizations.addSeparator()
-        self.menuOrganizations.addAction(self.menuChange_current_organization.menuAction())
+        self.menuOrganizations.addAction(
+            self.menuChange_current_organization.menuAction())
         self.menuOrganizations.addSeparator()
-        self.menuOrganizations.addAction(self.menuAssign_a_member_as_admin.menuAction())
+        self.menuOrganizations.addAction(
+            self.menuAssign_a_member_as_admin.menuAction())
         self.menubar.addAction(self.menuTasks.menuAction())
         self.menubar.addAction(self.menuOrganizations.menuAction())
         self.menubar.addAction(self.menuAccount.menuAction())
@@ -337,22 +392,34 @@ class Ui_MainWindow(object):
         self.doneDate.setText(_translate("MainWindow", "DoneDate"))
         self.taskDescription.setText(_translate("MainWindow", "TextLabel"))
         self.commentsLabel.setText(_translate("MainWindow", "Comments"))
-        self.postCommentLabel.setText(_translate("MainWindow", "Post a comment"))
-        self.postCommentButton.setText(_translate("MainWindow", "Post comment"))
+        self.postCommentLabel.setText(
+            _translate("MainWindow", "Post a comment"))
+        self.postCommentButton.setText(
+            _translate("MainWindow", "Post comment"))
         self.markAsDoneButton.setText(_translate("MainWindow", "Mark as done"))
         self.nameLabel.setText(_translate("MainWindow", "Name"))
         self.orgLabel.setText(_translate("MainWindow", "Org"))
         self.menuAccount.setTitle(_translate("MainWindow", "Account"))
         self.menuTasks.setTitle(_translate("MainWindow", "Tasks"))
         self.menuFilter.setTitle(_translate("MainWindow", "Filter"))
-        self.menuOrganizations.setTitle(_translate("MainWindow", "Organizations"))
-        self.menuChange_current_organization.setTitle(_translate("MainWindow", "Change current organization"))
-        self.menuAssign_a_member_as_admin.setTitle(_translate("MainWindow", "Assign a member as admin"))
+        self.menuOrganizations.setTitle(
+            _translate("MainWindow", "Organizations"))
+        self.menuChange_current_organization.setTitle(
+            _translate("MainWindow", "Change current organization"))
+        self.menuAssign_a_member_as_admin.setTitle(
+            _translate("MainWindow", "Assign a member as admin"))
         self.actionSign_out.setText(_translate("MainWindow", "Sign out"))
-        self.actionAssign_a_new_task.setText(_translate("MainWindow", "Assign a new task"))
-        self.actionAssign_a_new_task.setShortcut(_translate("MainWindow", "Ctrl+N"))
-        self.actionJoin_organization_or_create_a_new_one.setText(_translate("MainWindow", "Join organization or create a new one"))
-        self.actionViewAllTasks.setText(_translate("MainWindow", "View all tasks"))
-        self.actionViewAssignedTasks.setText(_translate("MainWindow", "View tasks assigned by you"))
-        self.actionViewUndoneTasks.setText(_translate("MainWindow", "View undone tasks"))
-        self.actionReset_filters.setText(_translate("MainWindow", "Reset filters"))
+        self.actionAssign_a_new_task.setText(
+            _translate("MainWindow", "Assign a new task"))
+        self.actionAssign_a_new_task.setShortcut(
+            _translate("MainWindow", "Ctrl+N"))
+        self.actionJoin_organization_or_create_a_new_one.setText(
+            _translate("MainWindow", "Join organization or create a new one"))
+        self.actionViewAllTasks.setText(
+            _translate("MainWindow", "View all tasks"))
+        self.actionViewAssignedTasks.setText(_translate(
+            "MainWindow", "View tasks assigned by you"))
+        self.actionViewUndoneTasks.setText(
+            _translate("MainWindow", "View undone tasks"))
+        self.actionReset_filters.setText(
+            _translate("MainWindow", "Reset filters"))

@@ -7,9 +7,9 @@ from PyQt5.QtCore import QObject, QThread, pyqtSlot, pyqtSignal
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
 from PyQt5.QtGui import QIcon
 from entities.notification import Notification
-from user_service import user_service
-from task_service import task_service
-from org_service import org_service
+from services.user_service import user_service
+from services.task_service import task_service
+from services.org_service import org_service
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtCore import QObject, QThread, pyqtSlot, pyqtSignal, Qt
 from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QSizePolicy
@@ -42,8 +42,6 @@ class NotificationChecker(QObject):
 
             sleep(2)
 
-            
-
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None) -> None:
@@ -54,12 +52,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setWindowTitle("TaskForce")
         self.setWindowIcon(QIcon("img/icon.ico"))
         self.notificationChecker = NotificationChecker()
-        self.notificationChecker.update_signal.connect(self.updateTasks)
+        self.notificationChecker.update_signal.connect(self.notificationUpdate)
         self.thread = QThread(self)
         self.notificationChecker.moveToThread(self.thread)
         self.thread.started.connect(self.notificationChecker.run)
         self.thread.start()
-
 
         self.actionSign_out.triggered.connect(self.signOut)
         self.actionAssign_a_new_task.triggered.connect(self.assignNewTask)
@@ -68,7 +65,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.actionViewAssignedTasks.triggered.connect(self.updateFilters)
         self.actionViewUndoneTasks.triggered.connect(self.updateFilters)
 
-        
         task_service.update_comments_in_memory()
         self.updateOrgInformation()
 
@@ -101,6 +97,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.taskDescription.setText(
                 "You haven't received any tasks yet. Enjoy it while it still lasts... :)")
+        
+        self.clearComments()
+
         self.assignInfo.setText("")
         self.assignedDate.setText("")
         self.doneDate.setText("")
@@ -138,7 +137,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.selectedTaskButton.setChecked(False)
         clicked_button.setChecked(True)
         self.selectedTaskButton = clicked_button
-        while self.commentArea.itemAt(0)!=None:
+        while self.commentArea.itemAt(0) != None:
             if self.commentArea.itemAt(0).widget():
                 self.commentArea.itemAt(0).widget().setParent(None)
             else:
@@ -153,9 +152,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         if self.isAdmin:
             if user_service.get_current_user().username == task.assigned_by.username:
-                self.assignInfo.setText(f"Assigned to: {task.assigned_to.name} \nAssigned by: You")
+                self.assignInfo.setText(
+                    f"Assigned to: {task.assigned_to.name} \nAssigned by: You")
             else:
-                self.assignInfo.setText(f"Assigned to: {task.assigned_to.name} \nAssigned by: {task.assigned_by.name}")
+                self.assignInfo.setText(
+                    f"Assigned to: {task.assigned_to.name} \nAssigned by: {task.assigned_by.name}")
 
         else:
             self.assignInfo.setText(f"Assigned by: {task.assigned_by.name}")
@@ -176,7 +177,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 f"Done on: {task.done_on.strftime('%d.%m.%Y %H:%M')} ({self.calculateAgeText(done_age)})")
         else:
             self.doneDate.setText("")
-        
+
         spacerItem = QtWidgets.QSpacerItem(
             20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
 
@@ -191,22 +192,21 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 else:
                     header = f"### {comment.sent_by.name}"
 
-                commentLabel.setText(f"""{header}\n{comment.date.strftime('%d.%m.%Y %H:%M')} ({self.calculateAgeText(datetime.now()-comment.date)})\n \n {comment.message}""")
+                commentLabel.setText(
+                    f"""{header}\n{comment.date.strftime('%d.%m.%Y %H:%M')} ({self.calculateAgeText(datetime.now()-comment.date)})\n \n {comment.message}""")
                 commentLabel.sizePolicy().setVerticalPolicy(QSizePolicy.Minimum)
-                commentLabel.setStyleSheet("background-color: #4287f5; border-radius: 10px; padding-left: 10px; padding-top: 15px; padding-bottom: 15px; padding-right: 10px")
+                commentLabel.setStyleSheet(
+                    "background-color: #4287f5; border-radius: 10px; padding-left: 10px; padding-top: 15px; padding-bottom: 15px; padding-right: 10px")
                 self.commentArea.addWidget(commentLabel)
 
             self.commentArea.addItem(spacerItem)
         except KeyError:
-            self.commentsLabel.setText("")
             self.commentArea.addItem(spacerItem)
-        
+
         self.postCommentButton.disconnect()
         self.postCommentButton.clicked.connect(partial(self.postComment, task))
-        self.postCommentButton.clicked.connect(partial(self.updateTaskInfo, task, clicked_button))
-
-
-
+        self.postCommentButton.clicked.connect(
+            partial(self.updateTaskInfo, task, clicked_button))
 
     def calculateAgeText(self, time):
         task_age = time
@@ -222,7 +222,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             if task_age.seconds/60//60 == 1:
                 return "1 hour ago"
             return f"{task_age.seconds//60//60} hours ago"
-        if task_age.days<30:
+        if task_age.days < 30:
             if task_age.days == 1:
                 return "1 day ago"
             return f"{task_age.days} days ago"
@@ -242,7 +242,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             assigned_to, f"User {user_service.get_current_user().name} has finished a task: {task.title}", "A task has been finished")
         self.updateTasks()
 
-
     def assignNewTask(self):
         win = NewTaskForm(self)
         win.show()
@@ -257,7 +256,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.win.org_create_form.buttonBox.accepted.connect(
             self.createOrg)
         self.win.show()
-
 
     def updateOrgInformation(self):
         # Clear the current member and organization selection
@@ -277,6 +275,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.orgLabel.setText(
                 f"{self.current_org.name} (Member)")
             self.actionViewAllTasks.setEnabled(False)
+        
         self.selectedTaskButton = None
 
         if self.isAdmin:
@@ -301,20 +300,18 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.menuAssign_a_member_as_admin.addAction(addAdminButton)
             addAdminButton.setText(member.name)
             addAdminButton.triggered.connect(partial(self.addAsAdmin, member))
-
         self.updateTasks()
-    
-    def postComment(self, task : Task):
+
+    def postComment(self, task: Task):
         task_service.post_comment(task, self.commentFill.toPlainText())
         if self.isAdmin:
-            task_service.send_notification(task.assigned_to, 
-                f"{user_service.get_current_user().name} left a new comment under your task {task.title}: \n{self.commentFill.toPlainText()}",
-                "New comment")
+            task_service.send_notification(task.assigned_to,
+                                           f"{user_service.get_current_user().name} left a new comment under your task {task.title}: \n{self.commentFill.toPlainText()}",
+                                           "New comment")
         else:
-            task_service.send_notification(task.assigned_by, 
-                f"User {user_service.get_current_user().name} left a new comment under the task {task.title}: \n{self.commentFill.toPlainText()}",
-                "New comment")
-
+            task_service.send_notification(task.assigned_by,
+                                           f"User {user_service.get_current_user().name} left a new comment under the task {task.title}: \n{self.commentFill.toPlainText()}",
+                                           "New comment")
 
     def signOut(self):
         from ui.login_form import loginWindow
@@ -336,26 +333,39 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def setCurrentOrg(self, org):
         org_service.set_current_org(org)
+        task_service.update_comments_in_memory()
         self.updateOrgInformation()
-    
+
+
     def createOrg(self):
         if self.win.org_create_form.error == False:
             self.win.close()
             self.updateOrgInformation()
-        
+
     def check_fill_contents(self):
         if self.commentFill.toPlainText().strip() == "":
             self.postCommentButton.setEnabled(False)
         else:
             self.postCommentButton.setEnabled(True)
-    
+
     def updateFilters(self):
         self.selectedTaskButton = None
-    
-        while self.commentArea.itemAt(0)!=None:
+
+        while self.commentArea.itemAt(0) != None:
             if self.commentArea.itemAt(0).widget():
                 self.commentArea.itemAt(0).widget().setParent(None)
             else:
                 self.commentArea.removeItem(self.commentArea.itemAt(0))
-        
+
         self.updateTasks()
+    
+    def notificationUpdate(self):
+        self.updateTasks()
+        task_service.update_comments_in_memory()
+    
+    def clearComments(self):
+        while self.commentArea.itemAt(0) != None:
+            if self.commentArea.itemAt(0).widget():
+                self.commentArea.itemAt(0).widget().setParent(None)
+            else:
+                self.commentArea.removeItem(self.commentArea.itemAt(0))

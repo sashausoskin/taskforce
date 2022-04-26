@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QMainWindow, QMessageBox
 from PyQt5.QtGui import QIcon
-from user_service import user_service
-from org_service import org_service, InvalidCode
+from services.user_service import user_service
+from services.org_service import org_service, InvalidCode
 from ui.messages import error, success
 import plyer
 
@@ -39,7 +39,8 @@ class OrgJoinWindow(QMainWindow, Ui_OrgJoin):
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
             msg.setText("Organization not found!")
-            msg.setWindowTitle("There is no organiozation with this code. Make sure that you wrote the code correctly.")
+            msg.setWindowTitle(
+                "There is no organiozation with this code. Make sure that you wrote the code correctly.")
             msg.exec_()
 
     def createOrg(self):

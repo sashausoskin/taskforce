@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtGui import QIcon
-from org_service import org_service, OrgExists
+from services.org_service import org_service, OrgExists
 from ui.messages import error, success
 
 from ui.org_create_form_ui import Ui_CreateOrg

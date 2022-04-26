@@ -2,8 +2,8 @@ import sys
 
 from PyQt5.QtWidgets import QMainWindow, QMessageBox
 from PyQt5.QtGui import QIcon, QPixmap
-from user_service import user_service, WrongCredentials
-from org_service import org_service
+from services.user_service import user_service, WrongCredentials
+from services.org_service import org_service
 
 from ui.login_window_ui import Ui_LoginScreen
 from ui.signup_form import SignupForm
@@ -49,7 +49,7 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
 
         except WrongCredentials:
             error("User not found",
-                "The username couldn't be found or the password is incorrect. Please try again!")
+                  "The username couldn't be found or the password is incorrect. Please try again!")
 
     def signupForm(self):
         self._win = SignupForm(self)

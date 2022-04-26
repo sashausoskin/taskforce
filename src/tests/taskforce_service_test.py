@@ -3,20 +3,21 @@ from datetime import datetime
 import unittest
 import random
 import string
-import os
 from entities.notification import Notification
 from entities.task import Task
+from entities.comment import Comment
 from repositories.user_repository import User
-from user_service import user_service, UsernameExists, WrongCredentials
-from org_service import org_service, InvalidCode, OrgExists
-from task_service import task_service
+from services.user_service import user_service, UsernameExists, WrongCredentials
+from services.org_service import org_service, InvalidCode, OrgExists
+from services.task_service import task_service
 
 
 class TestTaskforce(unittest.TestCase):
     def setUp(self):
         self.letters = string.ascii_letters
 
-        self.admin_name = ''.join(random.choice(self.letters) for i in range(10))
+        self.admin_name = ''.join(random.choice(self.letters)
+                                  for i in range(10))
         self.admin_username = ''.join(
             random.choice(self.letters) for i in range(10))
         self.admin_password = ''.join(
@@ -44,9 +45,12 @@ class TestTaskforce(unittest.TestCase):
         user_service.login(self.user.username, self.user.password)
         task_service.check_notifications()
 
+        task_service.delete_users_comments(self.user)
+        task_service.delete_users_comments(self.admin)
         task_service.delete_tasks()
         org_service.delete_org(self.org.id)
         user_service.delete_user(self.username)
+        user_service.delete_user(self.admin_username)
         user_service.signout()
         task_service.signout()
         org_service.signout()
@@ -130,7 +134,7 @@ class TestTaskforce(unittest.TestCase):
         self.assertEqual(str(task_service.check_notifications()[0]), str(
             Notification("TEST_NOTIFICATION", "test")))
         self.assertEqual(task_service.check_notifications(), [])
-    
+
     def test_add_as_admin(self):
         user_service.login(self.username, self.password)
         org_service.join_org(self.org_code)
@@ -139,7 +143,7 @@ class TestTaskforce(unittest.TestCase):
         org_service.make_admin_in_current_org(self.user)
         user_service.login(self.username, self.password)
         self.assertEqual(org_service.is_admin(), True)
-    
+
     def test_change_org(self):
         self.assertEqual(org_service.get_current_org(), self.org)
 
@@ -155,10 +159,32 @@ class TestTaskforce(unittest.TestCase):
         self.assertEqual(org_service.get_current_org(), self.org)
 
         org_service.delete_org(new_org.id)
-    
+
     def test_get_orgs(self):
         user_service.login(self.username, self.password)
         org_service.join_org(self.org_code)
         self.assertEqual(str(org_service.get_orgs()[0]), str(self.org))
     
+    def test_filters(self):
+        user_service.login(self.username, self.password)
+        org_service.join_org(self.org_code)
+        user_service.login(self.admin_username, self.admin_password)
+        task_service.assign_task(self.user, "TEST_FILTER", "TEST_FILTER")
+        task = task_service.get_tasks()[0]
+        task_service.mark_as_done(task)
+        self.assertEqual(str(task_service.get_tasks()[0].title), task.title)
+        self.assertEqual(task_service.get_tasks(["undone"]), [])
+        self.assertEqual(task_service.get_tasks(["user_assigned"])[0].title, task.title)
+    
+    def test_comments(self):
+        user_service.login(self.username, self.password)
+        org_service.join_org(self.org_code)
+
+        user_service.login(self.admin_username, self.admin_password)
+        task_service.assign_task(self.user, "TEST_COMMENT_TASK", "TEST_COMMENT_TASK")
+        task = task_service.get_tasks()[0]
+        task_service.post_comment(task, "TEST_COMMENT_MESSAGE")
+        task_service.update_comments_in_memory()
+        self.assertEqual(str(task_service.get_comments_from_memory()[task.id][0]), str(Comment(task.id, "TEST_COMMENT_MESSAGE", None, self.admin)))
+        
 

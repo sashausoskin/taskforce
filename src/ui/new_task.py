@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QDialog
 from PyQt5.QtGui import QIcon
-from org_service import org_service
-from task_service import task_service
+from services.org_service import org_service
+from services.task_service import task_service
 from ui.messages import error
 
 from ui.new_task_form_ui import Ui_NewFormDialog
@@ -17,6 +17,9 @@ class NewTaskForm(QDialog, Ui_NewFormDialog):
         self.setUpConnection()
 
         self.members = org_service.get_all_members_in_org()
+        if len(self.members)==0:
+            self.buttonBox.setEnabled(False)
+
         for member in self.members:
             self.assignComboBox.addItem(f"{member.name} ({member.username})")
 

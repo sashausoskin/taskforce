@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QMessageBox, QDialog
-from user_service import user_service, UsernameExists
+from services.user_service import user_service, UsernameExists
 from ui.org_join import OrgJoinWindow
 
 from ui.signup_form_ui import Ui_signupDialog
@@ -44,7 +44,7 @@ class SignupForm(QDialog, Ui_signupDialog):
                     "The username or name is already taken. Please try again!")
                 msg.setWindowTitle("Error")
                 msg.exec_()
-    
+
     def openMainWindow(self):
         if self.win.org_create_form.error == False:
             self.win.openMainWindow()
