@@ -17,5 +17,9 @@
 | 11.4. | 4   | Monen adminin sekä monen organisaation tuen lisääminen |
 | 14.4. | 4   | Monen organisaation tuen sekä tehtävien aikojen lisääminen |
 | 15.4. | 5   | Koodin siistimistä ja refaktorointia, bugien korjauksia sekä uuden buildin julkaisu |
+| 20.4. | 3   | Kommenttijärjestelmän aloittaminen |
+| 22.4. | 3   | Kommenttijärjestelmän jatkaminen |
+| 25.4. | 4   | Kommenttijärjestelmän viimeistely, filteröinnin implementointi sekä DocStringin kirjoitus |
+| 26.4. | 3   | DocStringin viimeistely, dokumentaation päivitys sekä uusien testien kirjoitus |
 
-Yhteensä: 62
+Yhteensä: 66

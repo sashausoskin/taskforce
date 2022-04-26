@@ -15,7 +15,7 @@
 
 ## Projektista
 
-Tämä on tietokoneella toimiva ohjelma, jolla voi luoda tilin, kirjautua kyseiselle tilille, luoda organisaatioita sekä liittyä muihin olemassaoleviin organisaatioihin koodilla. Organisaation luoja pystyy jakamaan muille organisaation jäsenille tehtäviä, joita jäsenet voivat sitten merkata valmiiksi. Aina kun käyttäjälle jaetaan tehtävä, niin hänelle annetaan aiheesta työpöytäilmoitus. Samoin tehdään organisaation luojalle, kun tehtävä merkitään valmiiksi.
+Tämä on tietokoneella toimiva ohjelma, jolla voi luoda tilin, kirjautua kyseiselle tilille, luoda organisaatioita sekä liittyä muihin olemassaoleviin organisaatioihin koodilla. Organisaation ylläpitäjät pystyvät jakamaan muille organisaation jäsenille tehtäviä, joita jäsenet voivat sitten merkata valmiiksi. Aina kun käyttäjälle jaetaan tehtävä, niin hänelle annetaan aiheesta työpöytäilmoitus. Samoin tehdään tehtävän antajalle, kun tehtävä merkitään valmiiksi.
 
 ### Python-versio
 
@@ -61,6 +61,12 @@ poetry run invoke test
 ```
 
 **HUOM! Nämä testit suoritetaan tietokannassa, joten niiden suorittamisessa voi kestää jonkin aikaa.**
+
+Ohjelman testien kattavuusraportin voi muodostaa komennolla 
+
+```bash
+poetry run invoke coverage-report
+```
 
 QtDesignerilla tehdyt .ui-tiedostot voi muuttaa Python-koodiksi alla olevalla komennolla. Joka kerta kun käyttöliittymään tehdään muutoksia QtDesignerilla, niin tämä komento täytyy suorittaa.
 ```bash

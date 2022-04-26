@@ -20,7 +20,8 @@ Tavallinen käyttäjä:
 
 
 Kehitysideat:
-- Sekä käyttäjä että projektin luoja voivat lisätä kommentteja, joista tulee työpöytäilmoituksia.
-- Käyttäjät voivat kuulua useampaan projektiin.
-- Projektilla voi olla useampia ihmisiä, jotka jakavat tehtäviä.
+- Sekä käyttäjä että projektin luoja voivat lisätä kommentteja, joista tulee työpöytäilmoituksia. **TEHTY**
+- Käyttäjät voivat kuulua useampaan projektiin. **TEHTY**
+- Projektilla voi olla useampia ihmisiä, jotka jakavat tehtäviä. **TEHTY**
 - Automaattinen kirjautuminen.
+- Tietokannan käytön optimoiminen. Esim. parempi välimuistin käyttö.
