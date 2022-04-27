@@ -99,9 +99,9 @@ class TestTaskforce(unittest.TestCase):
     def test_get_members(self):
         user_service.login(self.user.username, self.user.password)
         org_service.join_org(self.org.code)
-        self.assertEqual(str(org_service.get_all_members_in_org()[0]), str(
+        self.assertEqual(str(org_service.get_all_members_in_current_org()[0]), str(
             User(self.user.name, self.user.username, "")))
-        self.assertEqual(len(org_service.get_all_members_in_org()), 1)
+        self.assertEqual(len(org_service.get_all_members_in_current_org()), 1)
 
     def test_assign_task(self):
         user_service.login(self.user.username, self.user.password)

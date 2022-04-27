@@ -16,7 +16,7 @@ class NewTaskForm(QDialog, Ui_NewFormDialog):
         self.setWindowIcon(QIcon("img/icon.ico"))
         self.setUpConnection()
 
-        self.members = org_service.get_all_members_in_org()
+        self.members = org_service.get_all_members_in_current_org()
         if len(self.members)==0:
             self.buttonBox.setEnabled(False)
 

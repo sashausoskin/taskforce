@@ -293,7 +293,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.menuChange_current_organization.addAction(changeOrgTo)
             changeOrgTo.setText(org.name)
 
-        members = org_service.get_all_members_in_org()
+        members = org_service.get_all_members_in_current_org()
         for member in members:
             addAdminButton = QtWidgets.QAction(self)
             addAdminButton.setObjectName(f"member_{member.id}")
