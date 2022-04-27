@@ -17,7 +17,7 @@ class OrgService:
         self._org = None
         self._org_repository = org_repository
 
-    def get_all_members_in_org(self) -> list:
+    def get_all_members_in_current_org(self) -> list:
         """Gets a list of all of the members in the current organization
 
         Returns:
