@@ -133,6 +133,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.commentFill.setEnabled(True)
         self.commentFill.setText("")
         self.commentFill.textChanged.connect(self.check_fill_contents)
+        self.commentsLabel.setText("")
         self.postCommentButton.setEnabled(False)
         self.selectedTaskButton.setChecked(False)
         clicked_button.setChecked(True)
@@ -183,6 +184,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         try:
             for comment in task_service.get_comments_from_memory()[task.id]:
+                self.commentsLabel.setText("Comments")
                 commentLabel = QtWidgets.QLabel(comment.message)
                 commentLabel.setWordWrap(True)
                 commentLabel.setTextFormat(Qt.TextFormat.MarkdownText)

@@ -38,6 +38,8 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
 
                 if len(user.organizations) == 0:
                     self._win = OrgJoinWindow()
+                    self._win.org_create_form.buttonBox.accepted.connect(
+                        self.openMainWindow)
                     self.hide()
                     self._win.show()
                 else:
@@ -54,3 +56,7 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
     def signupForm(self):
         self._win = SignupForm(self)
         self._win.exec()
+    
+    def openMainWindow(self):
+        if self._win.org_create_form.error == False:
+            self._win.openMainWindow()
