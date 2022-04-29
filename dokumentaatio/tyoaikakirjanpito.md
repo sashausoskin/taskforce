@@ -21,5 +21,7 @@
 | 22.4. | 3   | Kommenttijärjestelmän jatkaminen |
 | 25.4. | 4   | Kommenttijärjestelmän viimeistely, filteröinnin implementointi sekä DocStringin kirjoitus |
 | 26.4. | 3   | DocStringin viimeistely, dokumentaation päivitys sekä uusien testien kirjoitus |
+| 27.4. | 3   | Dokumentaation kirjoitus |
+| 29.4. | 4   | Dokumentaation viimeistely sekä uuden julkaisun teko |
 
-Yhteensä: 66
+Yhteensä: 73
