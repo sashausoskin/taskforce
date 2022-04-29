@@ -30,22 +30,31 @@ poetry run invoke start
 
 Kirjautuminen tapahtuu syöttämällä käyttäjän käyttäjänimi ja salasana kenttiin ja painamalla "login"
 
-![](https://github.com/sonicsasha/taskforce/blob/master/dokumentaatio/mov/login.mp4)
+
+https://user-images.githubusercontent.com/9552313/165907412-91abf910-0bd3-4376-917f-d54c93335e06.mp4
+
+
+
 
 ## Käyttäjän luominen
 
 Uusi käyttäjä luodaan painamalla "signup" ja täyttämällä näytölle tuleva lomake
-![](https://github.com/sonicsasha/taskforce/blob/master/dokumentaatio/mov/signup.mp4)
+
+https://user-images.githubusercontent.com/9552313/165907488-28e89c1e-3a14-4e21-9756-f26a15a6fc45.mp4
+
+
 
 ## Uuden organisaation luonti
 
 Jos käyttäjä ei ole liittynyt mihinkään organisaatioon, niin kirjautuessa tulee näkyviin liittymisikkuna. Muissa tapauksissa ikkunan saa näkyville yläpalkista "Organizations" -> "Join an organization or create a new one". Tämän jälkeen organisaation saa luotua klikkaamalla "Create a new organization" ja täyttämällä näkyvillä olevan lomakkeen.
-![](https://github.com/sonicsasha/taskforce/blob/master/dokumentaatio/mov/create_org.mp4)
+
+https://user-images.githubusercontent.com/9552313/165907570-36711ac9-aa85-42ac-ac8b-916159022789.mp4
 
 ## Organisaatioon liittyminen
 
 Kun käyttäjä pääsee samaan ikkunaan kuin organisaation luonnin vaiheessa, niin organisaatioon liittyminen tapahtuu kirjoittamalla syötteeseen organisaation liittymiskoodi ja klikkaamalla "Join organization".
-![](https://github.com/sonicsasha/taskforce/blob/master/dokumentaatio/mov/join_org.mp4)
+
+https://user-images.githubusercontent.com/9552313/165907610-472bb416-6ffd-4316-abc5-76590092053c.mp4
 
 ## Organisaation vaihtaminen
 
@@ -54,14 +63,18 @@ Jos käyttäjä on jäsenenä useammassa organisaatiossa, niin aktiivisen organi
 ## Tehtävän jakaminen
 
 Organisaation ylläpitäjä voi jakaa tehtävän valitsemalla yläpalkista "Tasks" -> "Assign a new task", ja täyttämällä tehtävän tiedot.
-![](https://github.com/sonicsasha/taskforce/blob/master/dokumentaatio/mov/assign_task.mp4)
+
+https://user-images.githubusercontent.com/9552313/165907635-04f7ffb8-2974-45fe-aecb-7dba50ed0f4a.mp4
+
 
 ## Kommentointi sekä tehtävän merkitseminen valmiiksi
 
 Kommentin voi jättää kirjoittamalla kommenttikenttään ja klikkaamalla "Post a comment". Tehtävän voi merkitä valmiiksi klikkaamalla "Mark as done".
 
+https://user-images.githubusercontent.com/9552313/165907671-f88f3b82-80c9-47d2-b708-1028aa6ca733.mp4
+
 ## Käyttäjän ylentäminen
 
 Ylläpitäjä voi ylentää muun käyttäjän ylläpitäjäksi klikkaamalla "Organizations" -> "Assign a member as admin"
 
-![](https://github.com/sonicsasha/taskforce/blob/master/dokumentaatio/mov/signup.mp4)
+https://user-images.githubusercontent.com/9552313/165907702-a2efe934-e34b-4e00-9388-3c17e21fb2ed.mp4
