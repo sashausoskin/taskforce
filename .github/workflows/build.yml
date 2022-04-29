@@ -36,6 +36,7 @@ jobs:
         
       - name: Install dependencies
         run: poetry install
+        continue-on-error: true
         
       - name: Build executable
         run: poetry run invoke build
