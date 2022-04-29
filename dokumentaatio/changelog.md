@@ -29,3 +29,4 @@
 
 - Lisätty kyky lisätä tehtäviin kommentteja.
 - Lisätty kyky lajitella tehtäviä. Tällä hetkellä kaikki käyttäjät voivat lajitella suorittamattomiin tehtäviin, ja ylläpitäjät pystyvät lajittelemaan niin, että he näkevät vain heidän antamat tehtävät. Ylläpitäjät ensisijaisesti näkevät kaikki organisaatiossa olevat tehtävät.
+- Lisätty DocString-dokumentaatio koodiin.

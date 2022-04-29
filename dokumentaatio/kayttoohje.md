@@ -12,7 +12,7 @@ Ohjelman riippuvuudet saa asennettua komennolla
 ```bash
 poetry install
 ```
-**HUOM! Paketin dbus-python asennus saattaa aiheuttaa virheen. Tämän voi jättää huomiotta. Lisäksi Linuxissa PyQt5 täytyy asentaa erikseen. Lisätietoa löytyy [README](https://github.com/sonicsasha/taskforce#readme):sta**
+**HUOM! Paketin dbus-python asennus saattaa aiheuttaa virheen. Muissa käyttöjärjestelmissä kuin Linuxissa tämän voi jättää huomiotta. Lisäksi Linuxissa PyQt5 täytyy asentaa erikseen. Lisätietoa löytyy [README](https://github.com/sonicsasha/taskforce#readme):sta**
 
 Kunhan tietokannalle on annettu osoite, niin tietokannan saa alustettua komennolla
 ```bash
