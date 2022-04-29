@@ -26,7 +26,7 @@ poetry run invoke start
 
 ## Kirjautuminen
 
-**Alla olevat videot on kuvattu versiolla 0.4.0, joten tämänhetkinen käyttöliittymä voi erota videoiden käyttöliittymästä.**
+**Alla olevat videot on kuvattu versiolla 0.3.0, joten tämänhetkinen käyttöliittymä voi erota videoiden käyttöliittymästä.**
 
 Kirjautuminen tapahtuu syöttämällä käyttäjän käyttäjänimi ja salasana kenttiin ja painamalla "login"
 
