@@ -37,6 +37,8 @@ poetry install
 ```
 **HUOM! Jos ohjelman suorittaa Linux-ympäristössä, niin PyQt5 täytyy asentaa apt:in kautta komennolla `sudo apt install python3-pyqt5`. Cubblissa tämän pitäisi olla jo valmiiksi asennettuna**
 
+**HUOM nro 2! Joissakin tilanteissa paketin dbus-python asentaminen saattaa aiheuttaa virhetilanteen. Tätä pakettia tarvitaan, jotta työpöytäilmoitukset toimisivat Linuxissa. Virhetilanteen voi turvallisesti jättää huomiotta.**
+
 Kun tietokannalle on annettu osoite, niin tietokannan voi alustaa komennolla
 ```bash
 poetry run invoke init-db

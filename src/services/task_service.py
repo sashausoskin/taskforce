@@ -1,9 +1,7 @@
 from datetime import datetime
 from entities.comment import Comment
-from entities.organization import Organization
 from entities.task import Task
 from entities.user import User
-from entities.notification import Notification
 from repositories.task_repository import task_repository
 from services.user_service import user_service
 from services.org_service import org_service
@@ -118,7 +116,7 @@ class TaskService:
         else:
             self._comments[task.id].append(
                 Comment(task.id, message, datetime.now(), user_service.get_current_user()))
-    
+
     def delete_users_comments(self, user : User):
         """Deletes all of the comments posted by a user. Mainly used for testing purposes
 
