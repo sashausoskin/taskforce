@@ -13,6 +13,8 @@
 
 [Versio 0.2.0 (Voidaan periaatteessa vieläkin laskea viikon 5 palautukseksi)](https://github.com/sonicsasha/taskforce/releases/tag/viikko5-v.0.2.0)
 
+[Versio 0.3.0 (Viikon 6 palautus)](https://github.com/sonicsasha/taskforce/releases/tag/viikko6)
+
 ## Projektista
 
 Tämä on tietokoneella toimiva ohjelma, jolla voi luoda tilin, kirjautua kyseiselle tilille, luoda organisaatioita sekä liittyä muihin olemassaoleviin organisaatioihin koodilla. Organisaation ylläpitäjät pystyvät jakamaan muille organisaation jäsenille tehtäviä, joita jäsenet voivat sitten merkata valmiiksi. Aina kun käyttäjälle jaetaan tehtävä, niin hänelle annetaan aiheesta työpöytäilmoitus. Samoin tehdään tehtävän antajalle, kun tehtävä merkitään valmiiksi.
