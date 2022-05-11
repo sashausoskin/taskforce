@@ -319,7 +319,7 @@
      <enum>Qt::RichText</enum>
     </property>
     <property name="pixmap">
-     <pixmap>../../img/icon.svg</pixmap>
+     <pixmap>../../img/icon.png</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
