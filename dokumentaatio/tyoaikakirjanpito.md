@@ -23,5 +23,6 @@
 | 26.4. | 3   | DocStringin viimeistely, dokumentaation päivitys sekä uusien testien kirjoitus |
 | 27.4. | 3   | Dokumentaation kirjoitus |
 | 29.4. | 4   | Dokumentaation viimeistely sekä uuden julkaisun teko |
+| 11.5. | 2   | Uuden logon teko sekä koodin siistiminen |
 
-Yhteensä: 73
+Yhteensä: 75

@@ -12,9 +12,9 @@ python-dotenv = "^0.19.2"
 psycopg2-binary = "^2.9.3"
 invoke = "^1.7.0"
 psycopg2 = "^2.9.3"
-dbus-python = "^1.2.18"
 wheel = "^0.37.1"
 setuptools = "^62.1.0"
+dbus-python = {version = "^1.2.18", platform = "linux"}
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.1"

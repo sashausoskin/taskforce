@@ -125,7 +125,7 @@ class TaskRepository:
             "INSERT INTO Notifications VALUES (%s, %s, %s);", (user_id, message, title))
         self.conn.commit()
 
-    def delete_users_tasks(self, user_id : int):
+    def delete_users_tasks(self, user_id: int):
         """ Deletes all of the tasks that were assigned to a user from the database.
             Mainly used for testing purposes.
 
@@ -154,7 +154,7 @@ class TaskRepository:
                 U.id, U.name, U.username
                 FROM Comments C LEFT JOIN Users U ON C.sent_by=U.id
                 LEFT JOIN Tasks T ON C.task_id = T.id WHERE T.org = %s;""",
-                (org_id, )
+            (org_id, )
         )
 
         results = self._cursor.fetchall()
@@ -185,12 +185,14 @@ class TaskRepository:
 
         self.conn.commit()
 
-    def delete_users_comments(self, user_id : int):
+    def delete_users_comments(self, user_id: int):
         """Deletes all of the comments posted by a user. Mainly used for testing purposes
 
         Args:
             user_id (int): The ID of the users whose comments will be deleted
         """
-        self._cursor.execute("DELETE FROM Comments WHERE sent_by=%s", (user_id, ))
+        self._cursor.execute(
+            "DELETE FROM Comments WHERE sent_by=%s", (user_id, ))
+
 
 task_repository = TaskRepository(get_db_connection(), get_db_connection())

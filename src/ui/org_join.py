@@ -1,9 +1,7 @@
 from PyQt5.QtWidgets import QMainWindow, QMessageBox
 from PyQt5.QtGui import QIcon
-from services.user_service import user_service
 from services.org_service import org_service, InvalidCode
 from ui.messages import error, success
-import plyer
 
 from ui.org_join_window_ui import Ui_OrgJoin
 from ui.org_create import OrgCreateForm

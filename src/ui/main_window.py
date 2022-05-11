@@ -4,16 +4,15 @@ from functools import partial
 from time import sleep
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import QObject, QThread, pyqtSlot, pyqtSignal
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton
+from PyQt5.QtWidgets import QMainWindow, QPushButton
 from PyQt5.QtGui import QIcon
-from entities.notification import Notification
 from services.user_service import user_service
 from services.task_service import task_service
 from services.org_service import org_service
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets
 from PyQt5.QtCore import QObject, QThread, pyqtSlot, pyqtSignal, Qt
-from PyQt5.QtWidgets import QApplication, QMainWindow, QPushButton, QSizePolicy
-from PyQt5.QtGui import QIcon, QColor, QFontMetrics, QFont
+from PyQt5.QtWidgets import QMainWindow, QPushButton, QSizePolicy
+from PyQt5.QtGui import QIcon
 from ui.messages import notify, success
 
 from ui.main_window_ui import Ui_MainWindow
@@ -97,7 +96,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         else:
             self.taskDescription.setText(
                 "You haven't received any tasks yet. Enjoy it while it still lasts... :)")
-        
+
         self.clearComments()
 
         self.assignInfo.setText("")
@@ -277,7 +276,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.orgLabel.setText(
                 f"{self.current_org.name} (Member)")
             self.actionViewAllTasks.setEnabled(False)
-        
+
         self.selectedTaskButton = None
 
         if self.isAdmin:
@@ -338,7 +337,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         task_service.update_comments_in_memory()
         self.updateOrgInformation()
 
-
     def createOrg(self):
         if self.win.org_create_form.error == False:
             self.win.close()
@@ -360,11 +358,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 self.commentArea.removeItem(self.commentArea.itemAt(0))
 
         self.updateTasks()
-    
+
     def notificationUpdate(self):
         self.updateTasks()
         task_service.update_comments_in_memory()
-    
+
     def clearComments(self):
         while self.commentArea.itemAt(0) != None:
             if self.commentArea.itemAt(0).widget():

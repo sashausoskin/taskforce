@@ -164,7 +164,7 @@ class TestTaskforce(unittest.TestCase):
         user_service.login(self.username, self.password)
         org_service.join_org(self.org_code)
         self.assertEqual(str(org_service.get_orgs()[0]), str(self.org))
-    
+
     def test_filters(self):
         user_service.login(self.username, self.password)
         org_service.join_org(self.org_code)
@@ -174,17 +174,18 @@ class TestTaskforce(unittest.TestCase):
         task_service.mark_as_done(task)
         self.assertEqual(str(task_service.get_tasks()[0].title), task.title)
         self.assertEqual(task_service.get_tasks(["undone"]), [])
-        self.assertEqual(task_service.get_tasks(["user_assigned"])[0].title, task.title)
-    
+        self.assertEqual(task_service.get_tasks(
+            ["user_assigned"])[0].title, task.title)
+
     def test_comments(self):
         user_service.login(self.username, self.password)
         org_service.join_org(self.org_code)
 
         user_service.login(self.admin_username, self.admin_password)
-        task_service.assign_task(self.user, "TEST_COMMENT_TASK", "TEST_COMMENT_TASK")
+        task_service.assign_task(
+            self.user, "TEST_COMMENT_TASK", "TEST_COMMENT_TASK")
         task = task_service.get_tasks()[0]
         task_service.post_comment(task, "TEST_COMMENT_MESSAGE")
         task_service.update_comments_in_memory()
-        self.assertEqual(str(task_service.get_comments_from_memory()[task.id][0]), str(Comment(task.id, "TEST_COMMENT_MESSAGE", None, self.admin)))
-        
-
+        self.assertEqual(str(task_service.get_comments_from_memory()[task.id][0]), str(
+            Comment(task.id, "TEST_COMMENT_MESSAGE", None, self.admin)))

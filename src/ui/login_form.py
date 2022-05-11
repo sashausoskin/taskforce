@@ -1,6 +1,6 @@
 import sys
 
-from PyQt5.QtWidgets import QMainWindow, QMessageBox
+from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtGui import QIcon, QPixmap
 from services.user_service import user_service, WrongCredentials
 from services.org_service import org_service
@@ -10,7 +10,7 @@ from ui.signup_form import SignupForm
 from ui.org_join import OrgJoinWindow
 from ui.main_window import MainWindow
 
-from ui.messages import error, notify
+from ui.messages import error
 
 
 class loginWindow(QMainWindow, Ui_LoginScreen):
@@ -22,7 +22,7 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
         self.setWindowIcon(QIcon("img/icon.ico"))
 
         self.taskforceLogo.setPixmap(
-            QPixmap("img/icon.svg"))  # Change the icon to a relative path
+            QPixmap("img/icon.png"))  # Change the icon to a relative path
 
     def connectSignalSlots(self):
         self.loginButton.pressed.connect(self.login)
@@ -56,7 +56,7 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
     def signupForm(self):
         self._win = SignupForm(self)
         self._win.exec()
-    
+
     def openMainWindow(self):
         if self._win.org_create_form.error == False:
             self._win.openMainWindow()

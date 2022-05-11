@@ -17,7 +17,7 @@ class NewTaskForm(QDialog, Ui_NewFormDialog):
         self.setUpConnection()
 
         self.members = org_service.get_all_members_in_current_org()
-        if len(self.members)==0:
+        if len(self.members) == 0:
             self.buttonBox.setEnabled(False)
 
         for member in self.members:

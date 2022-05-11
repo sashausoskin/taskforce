@@ -117,7 +117,7 @@ class TaskService:
             self._comments[task.id].append(
                 Comment(task.id, message, datetime.now(), user_service.get_current_user()))
 
-    def delete_users_comments(self, user : User):
+    def delete_users_comments(self, user: User):
         """Deletes all of the comments posted by a user. Mainly used for testing purposes
 
         Args:
