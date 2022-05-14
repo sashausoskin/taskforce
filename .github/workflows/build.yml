@@ -30,7 +30,7 @@ jobs:
         run: poetry config virtualenvs.create false --local
       
       - name: Install Ubuntu dependencies
-        if:  matrix.os == 'ubuntu-latest'
+        if:  matrix.os == 'ubuntu-18.04'
         run: sudo apt-get install python3-pyqt5 build-essential libpython3-dev libdbus-1-dev
         continue-on-error: true
         
