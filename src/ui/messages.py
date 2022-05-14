@@ -32,7 +32,7 @@ def notify(notification: Notification):
     plyer.notification.notify(
         title=notification.title,
         message=notification.message,
-        timeout=50,
+        timeout=20,
         app_name="TaskForce",
         app_icon=img_path
     )
