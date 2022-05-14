@@ -34,7 +34,7 @@ class UserRepository:
             if not bcrypt.checkpw(password.encode("utf-8"), result[2].encode("utf-8")):
                 return None
             return User(result[0], result[1], result[2], result[3])
-        except NotADirectoryError:
+        except TypeError:
             return None
 
     def user_exists(self, username: str):

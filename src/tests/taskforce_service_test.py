@@ -40,9 +40,9 @@ class TestTaskforce(unittest.TestCase):
 
     def tearDown(self) -> None:
         # Make sure that there are no remaining notifications
-        user_service.login(self.admin.username, self.admin.password)
+        user_service.login(self.admin_username, self.admin_password)
         task_service.check_notifications()
-        user_service.login(self.user.username, self.user.password)
+        user_service.login(self.username, self.password)
         task_service.check_notifications()
 
         task_service.delete_users_comments(self.user)
@@ -92,45 +92,45 @@ class TestTaskforce(unittest.TestCase):
 
     def test_is_admin(self):
         self.assertEqual(org_service.is_admin(), True)
-        user_service.login(self.user.username, self.user.password)
+        user_service.login(self.username, self.password)
         org_service.join_org(self.org.code)
         self.assertEqual(org_service.is_admin(), False)
 
     def test_get_members(self):
-        user_service.login(self.user.username, self.user.password)
+        user_service.login(self.username, self.password)
         org_service.join_org(self.org.code)
         self.assertEqual(str(org_service.get_all_members_in_current_org()[0]), str(
             User(self.user.name, self.user.username, "")))
         self.assertEqual(len(org_service.get_all_members_in_current_org()), 1)
 
     def test_assign_task(self):
-        user_service.login(self.user.username, self.user.password)
+        user_service.login(self.username, self.password)
         org_service.join_org(self.org.code)
-        user_service.login(self.admin.username, self.admin.password)
+        user_service.login(self.admin_username, self.admin_password)
         task_service.assign_task(self.user, "TEST", "TEST")
         self.assertEqual(str(task_service.get_tasks()[0]), str(Task("TEST", "TEST", User(
             self.admin.name, self.admin.username, ""), User(self.name, self.username, ""), datetime.now())))
-        user_service.login(self.user.username, self.user.password)
+        user_service.login(self.username, self.password)
         self.assertEqual(str(task_service.get_tasks()[0]), str(Task("TEST", "TEST", User(
-            self.admin.name, self.admin.username, ""), User(self.name, self.username, ""), datetime.now())))
+            self.admin.name, self.admin_username, ""), User(self.name, self.username, ""), datetime.now())))
 
     def test_mark_as_done(self):
-        user_service.login(self.user.username, self.user.password)
+        user_service.login(self.username, self.password)
         org_service.join_org(self.org.code)
-        user_service.login(self.admin.username, self.admin.password)
+        user_service.login(self.admin_username, self.admin_password)
         task_service.assign_task(self.user, "TEST_DONE", "TEST_DONE")
-        user_service.login(self.user.username, self.user.password)
+        user_service.login(self.username, self.password)
         task = task_service.get_tasks()[0]
         self.assertEqual(task.done_on, None)
         task_service.mark_as_done(task)
-        user_service.login(self.admin.username, self.admin.password)
+        user_service.login(self.admin_username, self.admin_password)
         task = task_service.get_tasks()[0]
         self.assertNotEqual(task.done_on, None)
 
     def test_notifications(self):
         task_service.send_notification(
             self.user, "TEST_NOTIFICATION", "test")
-        user_service.login(self.user.username, self.user.password)
+        user_service.login(self.username, self.password)
         self.assertEqual(str(task_service.check_notifications()[0]), str(
             Notification("TEST_NOTIFICATION", "test")))
         self.assertEqual(task_service.check_notifications(), [])
