@@ -39,8 +39,8 @@ poetry install
 ```
 **HUOM! Jos ohjelman suorittaa Linux-ympäristössä, niin PyQt5 täytyy asentaa apt:in kautta komennolla `sudo apt install python3-pyqt5`. Cubblissa tämän pitäisi olla jo valmiiksi asennettuna**
 
-**HUOM nro 2! Joissakin tilanteissa paketin dbus-python asentaminen saattaa aiheuttaa virhetilanteen. Tätä pakettia tarvitaan, jotta työpöytäilmoitukset toimisivat Linuxissa. Linuxissa täytyy asentaa paketteja komennolla
-`sudo apt install build-essential libpython3-dev libdbus-1-dev`. Näidenkin pakettien pitäisi Cubblissa olla jo asennettuna. Muilla käyttöjärjestelmillä paketin dbus-python asentaminen aiheuttaa virhetilanteen, jonka voi jättää huomiotta**
+**HUOM nro 2! Joissakin tilanteissa paketin dbus-python asentaminen Linuxissa saattaa aiheuttaa virhetilanteen. Tätä pakettia tarvitaan, jotta työpöytäilmoitukset toimisivat Linuxissa. Linuxissa täytyy asentaa paketteja komennolla
+`sudo apt install build-essential libpython3-dev libdbus-1-dev`. Näidenkin pakettien pitäisi Cubblissa olla jo asennettuna.**
 
 Kun tietokannalle on annettu osoite, niin tietokannan voi alustaa komennolla
 ```bash
@@ -67,7 +67,7 @@ poetry run invoke test
 
 **HUOM! Nämä testit suoritetaan tietokannassa, joten niiden suorittamisessa voi kestää jonkin aikaa.**
 
-Ohjelman testien kattavuusraportin voi muodostaa komennolla 
+Ohjelman testien kattavuusraportin voi muodostaa komennolla
 
 ```bash
 poetry run invoke coverage-report
@@ -83,10 +83,8 @@ Pylint-testit pystyy tekemään komennolla
 poetry run invoke lint
 ```
 
-Ohjelmasta voi rakentaa itsenäisesti suoritettavan version käyttämällä komentoa 
+Ohjelmasta voi rakentaa itsenäisesti suoritettavan version käyttämällä komentoa
 ```bash
 poetry run invoke build
 ```
 Tämä kompiloi ohjelman dist-kansioon.
-
-

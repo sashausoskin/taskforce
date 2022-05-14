@@ -24,5 +24,7 @@
 | 27.4. | 3   | Dokumentaation kirjoitus |
 | 29.4. | 4   | Dokumentaation viimeistely sekä uuden julkaisun teko |
 | 11.5. | 2   | Uuden logon teko sekä koodin siistiminen |
+| 12.5. | 1   | bcrypt-kirjastoon tutustuminen |
+| 14.5. | 4   | Salauksen sekä automaattikirjautumisen implementointi |
 
-Yhteensä: 75
+Yhteensä: 80

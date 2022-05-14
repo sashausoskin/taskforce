@@ -30,3 +30,10 @@
 - Lisätty kyky lisätä tehtäviin kommentteja.
 - Lisätty kyky lajitella tehtäviä. Tällä hetkellä kaikki käyttäjät voivat lajitella suorittamattomiin tehtäviin, ja ylläpitäjät pystyvät lajittelemaan niin, että he näkevät vain heidän antamat tehtävät. Ylläpitäjät ensisijaisesti näkevät kaikki organisaatiossa olevat tehtävät.
 - Lisätty DocString-dokumentaatio koodiin.
+
+## Viikko 7 (Loppupalautus)
+
+- Lisätty uusi logo.
+- Lisätty salaus salasanoihin.
+- Lisätty kyky tallentaa kirjautumistiedot, jotta niitä ei tarvitsisi joka kerta syöttää uudelleen.
+- Lisätty kyky tallentaa sillä hetkellä valittu organisaatio, jotta sitä ei tarvitsisi aina valita uuden session alussa.

@@ -23,5 +23,5 @@ Kehitysideat:
 - Sekä käyttäjä että projektin luoja voivat lisätä kommentteja, joista tulee työpöytäilmoituksia. **TEHTY**
 - Käyttäjät voivat kuulua useampaan projektiin. **TEHTY**
 - Projektilla voi olla useampia ihmisiä, jotka jakavat tehtäviä. **TEHTY**
-- Automaattinen kirjautuminen.
+- Automaattinen kirjautuminen. **TEHTY**
 - Tietokannan käytön optimoiminen. Esim. parempi välimuistin käyttö.

@@ -130,7 +130,7 @@ sequenceDiagram
   TaskService->>TaskRepository: mark_as_done(task.task_id)
   mainWindow->>UserService: get_current_user()
   UserService-->>mainWindow: user
-  mainWindow->>TaskService: send_notification(selected_task.assigned_to, "User {user.name} has finished a task", "A task has been finished") 
+  mainWindow->>TaskService: send_notification(selected_task.assigned_to, "User {user.name} has finished a task", "A task has been finished")
   TaskService->>TaskRepository: send_notification(assigned_to.id, ""User {user.name} has finished a task", "A task has been finished")
   mainWindow->>mainWindow: updateTasks()
   mainWindow-->>Member:sees the task as done
@@ -141,3 +141,5 @@ Kun käyttäjä painaa painiketta _Mark as done_, niin käyttöliittymä kutsuu 
 ### Ohjelman rakenteen heikkoudet / parannusideat
 
 Tehokkaampi tietokannan ja välimuistin käyttö. Koska käytetään verkossa olevaa tietokantaa, niin tietojen hakeminen voi olla hidasta, minkä takia ainakin osa tiedoista voisi pitää muistissa. Näin on tehty kommenttien osalta, mutta myös muidenkin asioiden osalta voisi toimia näin. Esimerkiksi nyt kun tehtävä merkitään valmiiksi, niin sovellus hakee kaikki käyttäjän tehtävät tietokannasta, vaikka tämän voisi tehdä tehokkaammin ja paikallisesti.
+
+Lisäksi automaattinen kirjautuminen on tehty tietoturvan kannalta huonosti. Tällä hetkellä kirjautumistiedot tallennetaan raakana konfiguraatiotiedostoon.
