@@ -21,7 +21,7 @@ class Ui_LoginScreen(object):
         self.centralwidget = QtWidgets.QWidget(LoginScreen)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 440, 351, 80))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 440, 351, 87))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(50, 0, 50, 0)
@@ -130,7 +130,7 @@ class Ui_LoginScreen(object):
         self.widget.setGeometry(QtCore.QRect(0, 240, 351, 111))
         self.widget.setObjectName("widget")
         self.formLayoutWidget = QtWidgets.QWidget(self.widget)
-        self.formLayoutWidget.setGeometry(QtCore.QRect(20, 10, 311, 81))
+        self.formLayoutWidget.setGeometry(QtCore.QRect(20, 10, 321, 93))
         self.formLayoutWidget.setObjectName("formLayoutWidget")
         self.formLayout = QtWidgets.QFormLayout(self.formLayoutWidget)
         self.formLayout.setContentsMargins(0, 0, 0, 0)
@@ -149,6 +149,9 @@ class Ui_LoginScreen(object):
         self.usernameFill.setObjectName("usernameFill")
         self.formLayout.setWidget(
             0, QtWidgets.QFormLayout.FieldRole, self.usernameFill)
+        spacerItem = QtWidgets.QSpacerItem(
+            28, 47, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.formLayout.setItem(1, QtWidgets.QFormLayout.LabelRole, spacerItem)
         self.label_2 = QtWidgets.QLabel(self.formLayoutWidget)
         font = QtGui.QFont()
         font.setFamily("Fira Sans")
@@ -167,9 +170,9 @@ class Ui_LoginScreen(object):
         self.passwordFill.setObjectName("passwordFill")
         self.formLayout.setWidget(
             2, QtWidgets.QFormLayout.FieldRole, self.passwordFill)
-        spacerItem = QtWidgets.QSpacerItem(
-            28, 47, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.formLayout.setItem(1, QtWidgets.QFormLayout.LabelRole, spacerItem)
+        self.autoLoginCheck = QtWidgets.QCheckBox(self.centralwidget)
+        self.autoLoginCheck.setGeometry(QtCore.QRect(80, 370, 181, 23))
+        self.autoLoginCheck.setObjectName("autoLoginCheck")
         LoginScreen.setCentralWidget(self.centralwidget)
         self.actionlogin = QtWidgets.QAction(LoginScreen)
         self.actionlogin.setObjectName("actionlogin")
@@ -186,5 +189,7 @@ class Ui_LoginScreen(object):
         self.loginTitle.setText(_translate("LoginScreen", "TaskForce"))
         self.usernameLabel.setText(_translate("LoginScreen", "Username:    "))
         self.label_2.setText(_translate("LoginScreen", "Password:"))
+        self.autoLoginCheck.setText(_translate(
+            "LoginScreen", "Save login information"))
         self.actionlogin.setText(_translate("LoginScreen", "login"))
         self.actionlogin.setShortcut(_translate("LoginScreen", "Return"))

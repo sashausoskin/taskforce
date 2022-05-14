@@ -1,5 +1,6 @@
 from entities.user import User
 from database_con import get_db_connection
+import bcrypt
 
 
 class UserRepository:
@@ -22,13 +23,15 @@ class UserRepository:
             None:   If the user is not found, return None
         """
         self._cursor.execute(
-            "SELECT name, username, password, id FROM Users WHERE username=%s AND password=%s;",
-            (username, password))
+            "SELECT name, username, password, id FROM Users WHERE username=%s;",
+            (username, ))
 
         try:
             result = self._cursor.fetchone()
+            if not bcrypt.checkpw(password.encode("utf-8"), result[2].encode("utf-8")):
+                return None
             return User(result[0], result[1], result[2], result[3])
-        except TypeError:
+        except NotADirectoryError:
             return None
 
     def user_exists(self, username: str):
@@ -56,8 +59,11 @@ class UserRepository:
             User: A User-object that was added to the database
             with the additional ID value that was generated when the user was added to the database
         """
+        pwd_encode = user.password.encode("utf-8")
+        salt = bcrypt.gensalt()
+
         self._cursor.execute("INSERT INTO Users (name, username, password) VALUES (%s, %s, %s);",
-                             (user.name, user.username, user.password))
+                             (user.name, user.username, bcrypt.hashpw(pwd_encode, salt).decode("utf-8")))
         self.conn.commit()
 
         return self.login(user.username, user.password)

@@ -36,7 +36,7 @@
       <x>0</x>
       <y>440</y>
       <width>351</width>
-      <height>80</height>
+      <height>87</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -348,8 +348,8 @@
       <rect>
        <x>20</x>
        <y>10</y>
-       <width>311</width>
-       <height>81</height>
+       <width>321</width>
+       <height>93</height>
       </rect>
      </property>
      <layout class="QFormLayout" name="formLayout">
@@ -370,6 +370,19 @@
       </item>
       <item row="0" column="1">
        <widget class="QLineEdit" name="usernameFill"/>
+      </item>
+      <item row="1" column="0">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>28</width>
+          <height>47</height>
+         </size>
+        </property>
+       </spacer>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="label_2">
@@ -399,21 +412,21 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>28</width>
-          <height>47</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
      </layout>
     </widget>
+   </widget>
+   <widget class="QCheckBox" name="autoLoginCheck">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>370</y>
+      <width>181</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Save login information</string>
+    </property>
    </widget>
   </widget>
   <action name="actionlogin">
