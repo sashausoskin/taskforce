@@ -1,6 +1,6 @@
+import bcrypt
 from entities.user import User
 from database_con import get_db_connection
-import bcrypt
 
 
 class UserRepository:
@@ -22,6 +22,9 @@ class UserRepository:
 
             None:   If the user is not found, return None
         """
+        if username == "" or password == "":
+            return None
+
         self._cursor.execute(
             "SELECT name, username, password, id FROM Users WHERE username=%s;",
             (username, ))
@@ -63,7 +66,8 @@ class UserRepository:
         salt = bcrypt.gensalt()
 
         self._cursor.execute("INSERT INTO Users (name, username, password) VALUES (%s, %s, %s);",
-                             (user.name, user.username, bcrypt.hashpw(pwd_encode, salt).decode("utf-8")))
+                             (user.name, user.username,
+                             bcrypt.hashpw(pwd_encode, salt).decode("utf-8")))
         self.conn.commit()
 
         return self.login(user.username, user.password)

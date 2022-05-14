@@ -16,3 +16,5 @@ login_form.spec
 __pycache__
 
 .vs/
+
+*.ini

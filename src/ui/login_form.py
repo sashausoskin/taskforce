@@ -1,5 +1,4 @@
-import sys
-
+import config
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtGui import QIcon, QPixmap
 from services.user_service import user_service, WrongCredentials
@@ -36,6 +35,12 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
                 user = user_service.login(
                     self.usernameFill.text(), self.passwordFill.text())
 
+                if self.autoLoginCheck.isChecked():
+                    config.get_config()[
+                        "AUTO_LOGIN"]["username"] = self.usernameFill.text().strip()
+                    config.get_config()[
+                        "AUTO_LOGIN"]["password"] = self.passwordFill.text().strip()
+                    config.save_changes()
                 if len(user.organizations) == 0:
                     self._win = OrgJoinWindow()
                     self._win.org_create_form.buttonBox.accepted.connect(
@@ -43,7 +48,13 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
                     self.hide()
                     self._win.show()
                 else:
-                    org_service.set_current_org(user.organizations[0])
+                    org_service.set_current_org(user.organizations[0], False)
+                    try:
+                        for org in user.organizations:  # Set the selected org as the one which the user selected in the previous session
+                            if org.id == int(config.config["AUTO_LOGIN"]["SELECTED_ORG"]):
+                                org_service.set_current_org(org)
+                    except:
+                        pass
                     self.loginButton.disconnect()
                     self._win = MainWindow()
                     self.hide()

@@ -1,5 +1,6 @@
 from asyncio import Task
 from datetime import datetime
+import config
 from functools import partial
 from time import sleep
 from PyQt5 import QtWidgets
@@ -318,7 +319,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         from ui.login_form import loginWindow
 
         self.notificationChecker.stopNotificationCheck = True
+        config.config.clear()
+        config.init()
+        config.save_changes()
 
+        user_service.signout()
+        org_service.signout()
         self.win = loginWindow()
         self.win.show()
         self.hide()

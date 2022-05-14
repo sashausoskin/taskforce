@@ -2,6 +2,7 @@ from entities.organization import Organization
 from entities.user import User
 from repositories.org_repository import org_repository
 from services.user_service import user_service
+import config
 
 
 class InvalidCode(Exception):
@@ -86,13 +87,21 @@ class OrgService:
         """
         return self._org
 
-    def set_current_org(self, org: Organization):
+    def set_current_org(self, org: Organization, save_selection=True):
         """Chenges the currently active organisation
 
         Args:
-            org (Organization): An organisation object that will be set as the current organisation.
+            org (Organization):                 An organisation object that will be set
+                                                as the current organisation.
+            save_selection (Bool, optional):    Should the change be saved in the config file.
+                                                Defaults to True.
+
+
         """
         self._org = org
+        if save_selection:
+            config.config["AUTO_LOGIN"]["SELECTED_ORG"] = str(org.id)
+            config.save_changes()
 
     def delete_org(self, org_id: int):
         """Deletes an organisation. Mainly used for testing purposes
