@@ -26,5 +26,6 @@
 | 11.5. | 2   | Uuden logon teko sekä koodin siistiminen |
 | 12.5. | 1   | bcrypt-kirjastoon tutustuminen |
 | 14.5. | 4   | Salauksen sekä automaattikirjautumisen implementointi |
+| 15.5. | 1   | Loppupalautuksen viimeistely |
 
-Yhteensä: 80
+Yhteensä: 81

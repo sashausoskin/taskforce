@@ -154,7 +154,7 @@ class TestTaskforce(unittest.TestCase):
 
         self.assertEqual(org_service.get_current_org(), new_org)
 
-        org_service.set_current_org(self.org)
+        org_service.set_current_org(self.org, False)
 
         self.assertEqual(org_service.get_current_org(), self.org)
 

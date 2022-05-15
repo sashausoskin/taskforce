@@ -11,6 +11,7 @@ def save_changes():
 
 def init():
     config["AUTO_LOGIN"] = {}
+    config["ORG_SELECTION"] = {}
     save_changes()
 
 config = configparser.ConfigParser()

@@ -319,8 +319,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         from ui.login_form import loginWindow
 
         self.notificationChecker.stopNotificationCheck = True
-        config.config.clear()
-        config.init()
+        config.config["AUTO_LOGIN"]["username"]=""
+        config.config["AUTO_LOGIN"]["password"]=""
         config.save_changes()
 
         user_service.signout()

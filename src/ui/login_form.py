@@ -51,7 +51,7 @@ class loginWindow(QMainWindow, Ui_LoginScreen):
                     org_service.set_current_org(user.organizations[0], False)
                     try:
                         for org in user.organizations:  # Set the selected org as the one which the user selected in the previous session
-                            if org.id == int(config.config["AUTO_LOGIN"]["SELECTED_ORG"]):
+                            if org.id == int(config.config["ORG_SELECTION"]["id"]):
                                 org_service.set_current_org(org)
                     except:
                         pass

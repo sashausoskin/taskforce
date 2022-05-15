@@ -100,7 +100,7 @@ class OrgService:
         """
         self._org = org
         if save_selection:
-            config.config["AUTO_LOGIN"]["SELECTED_ORG"] = str(org.id)
+            config.config["ORG_SELECTION"]["id"] = str(org.id)
             config.save_changes()
 
     def delete_org(self, org_id: int):
