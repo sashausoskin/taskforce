@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "taskforce"
-version = "0.1.0"
-description = "An app that allows users to create projects and to share tasks within said project"
+version = "1.0.0"
+description = "An app that allows users to create organizations and to share tasks within said organization"
 authors = ["Sasha Usoskin <sashausoskin@live.com>"]
 
 [tool.poetry.dependencies]
