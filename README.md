@@ -2,20 +2,21 @@
 
 ## Dokumentaatio
 
-[Arkkitehtuurikuvaus](https://github.com/sonicsasha/taskforce/blob/master/dokumentaatio/arkkitehtuuri.md)
-[Muutosloki](https://github.com/sonicsasha/taskforce/blob/master/dokumentaatio/changelog.md)
-[Työaikakirjanpito](https://github.com/sonicsasha/taskforce/blob/master/dokumentaatio/tyoaikakirjanpito.md)
-[Vaatimuusmäärittely](https://github.com/sonicsasha/taskforce/blob/master/dokumentaatio/vaatimuusmaarittely.md)
+- [Käyttöohje](/dokumentaatio/kayttoohje.md)
+- [Arkkitehtuurikuvaus](https://github.com/sonicsasha/taskforce/blob/master/dokumentaatio/arkkitehtuuri.md)
+- [Muutosloki](https://github.com/sonicsasha/taskforce/blob/master/dokumentaatio/changelog.md)
+- [Työaikakirjanpito](https://github.com/sonicsasha/taskforce/blob/master/dokumentaatio/tyoaikakirjanpito.md)
+- [Vaatimuusmäärittely](https://github.com/sonicsasha/taskforce/blob/master/dokumentaatio/vaatimuusmaarittely.md)
 
 ## Julkaisut
 
-[Versio 0.1.0 (Viikon 5 palautus)](https://github.com/sonicsasha/taskforce/releases/tag/viikko5)
+- [Versio 0.1.0 (Viikon 5 palautus)](https://github.com/sonicsasha/taskforce/releases/tag/viikko5)
 
-[Versio 0.2.0 (Voidaan periaatteessa vieläkin laskea viikon 5 palautukseksi)](https://github.com/sonicsasha/taskforce/releases/tag/viikko5-v.0.2.0)
+- [Versio 0.2.0 (Voidaan periaatteessa vieläkin laskea viikon 5 palautukseksi)](https://github.com/sonicsasha/taskforce/releases/tag/viikko5-v.0.2.0)
 
-[Versio 0.3.0 (Viikon 6 palautus)](https://github.com/sonicsasha/taskforce/releases/tag/viikko6)
+- [Versio 0.3.0 (Viikon 6 palautus)](https://github.com/sonicsasha/taskforce/releases/tag/viikko6)
 
-[Versio 1.0.0 (Loppupalautus)](https://github.com/sonicsasha/taskforce/releases/tag/viikko7)
+- [Versio 1.0.0 (Loppupalautus)](https://github.com/sonicsasha/taskforce/releases/tag/viikko7)
 
 ## Projektista
 
