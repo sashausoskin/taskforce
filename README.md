@@ -32,7 +32,6 @@ Tämä projekti käyttää netissä olevaa PostgreSQL-tietokantaa, joten turvall
 
 1. Käytä paikallista tietokantaa. Jos olet esimerkiksi käyttänyt tsohan [asennusskriptiä](https://github.com/hy-tsoha/local-pg), niin voit luoda .env-tiedoston sekä kirjoittaa sinne `DATABASE_URL=postgresql+psycopg2://`
 2. Luo itse buildi repositoriossa olevasta versiosta [GitHub Actionissa](https://github.com/sonicsasha/taskforce/actions/workflows/build.yml). Se sisältää viittaukset omaan netissä olevaan tietokantaan.
-3. Kysy osoitetta Telegramissa [@sonicsasha](https://t.me/sonicsasha)
 
 ### Asennus
 
